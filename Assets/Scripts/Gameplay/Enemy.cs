@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 [AddComponentMenu("Gameplay/Enemy")]
-[RequireComponent(typeof(Collider))]
 public class Enemy : RunningEntity
 {
     public Transform player;
@@ -17,7 +16,13 @@ public class Enemy : RunningEntity
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Player") GameSettings.GameResult(false);
+        if (collision.collider.tag == "Player")
+        {
+            if (collision.gameObject.GetComponent<Player>()) collision.gameObject.GetComponent<Player>().Dying();
+            GameSettings.GameResult(false);
+            // анимация поедания
+            Destroy(this);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,6 +36,8 @@ public class Enemy : RunningEntity
     public void Dying()
     {
         alive = false;
+        Destroy(GetComponent<Rigidbody>());
+        Destroy(GetComponent<Collider>());
         Destroy(gameObject, 2f);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 [AddComponentMenu("Gameplay/Game Settings")]
 public class GameSettings : MonoBehaviour
 {
@@ -16,6 +15,9 @@ public class GameSettings : MonoBehaviour
     public List<GameObject> tiles;
     public Player player;
 
+    public static UiMovement winWindow;
+    public static UiMovement loseWindow;
+
     private float counter = -10f;
     private float offset = 8f;
     private int lastIndex = -1;
@@ -23,6 +25,8 @@ public class GameSettings : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 30;
+        winWindow = GameObject.FindWithTag("Win Window").GetComponent<UiMovement>();
+        loseWindow = GameObject.FindWithTag("Lose Window").GetComponent<UiMovement>();
         speed = setSpeed;
         counter = counter - offset;
     }
@@ -49,11 +53,11 @@ public class GameSettings : MonoBehaviour
     {
         if (alive)
         {
-            //win window
+            winWindow.Translate();
         }
         else
         {
-            SceneManager.LoadScene(0);
+            loseWindow.Translate();
         }
     }
 

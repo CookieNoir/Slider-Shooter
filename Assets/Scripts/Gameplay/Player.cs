@@ -53,8 +53,6 @@ public class Player : RunningEntity
     public Text ammoText; // используется для изменения текста, отвечающего за число патронов в магазине
     public Text shootingSpeedText; // используется для изменения текста, отвечающего за время на одиночный выстрел
     public Text damageText; // используется для изменения текста, отвечающего за урон от следующего выстрела
-    public UiMovement winWindow;
-    public UiMovement loseWindow;
 
     public Color[] colors; // должен иметь 8 элементов, первые 4 - для основной полосы, вторые - для фоновой полосы
     private bool healthChanged = false;
@@ -150,7 +148,6 @@ public class Player : RunningEntity
         yield return new WaitForSeconds(2f);
         //launch win animation
         GameSettings.GameResult(true);
-        winWindow.Translate();
         Destroy(this);
     }
 
@@ -227,27 +224,21 @@ public class Player : RunningEntity
     {
         if (other.tag == "Obstacle")
         {
-            if (alive)
-            {
                 Debug.Log("Im dead");
-                Destroy(this);
-            }
+                Dying();
         }
         else if (other.tag == "Half Obstacle")
         {
-            if (alive)
-            {
                 if (stabbed)
                 {
                     Debug.Log("Im dead");
-                    Destroy(this);
+                    Dying();
                 }
                 else
                 {
                     Stabbing();
                     other.GetComponent<DynamicObstacle>().Change();
                 }
-            }
         }
         else if (other.tag == "Supply")
         {
@@ -257,6 +248,13 @@ public class Player : RunningEntity
         {
             StartCoroutine(other.GetComponent<BorderChanger>().ChangeBordersOf(this));
         }
+    }
+
+    public void Dying()
+    {
+        Destroy(GetComponent<Rigidbody>());
+        // dying animation
+        Destroy(this);
     }
 
     public void ModifyShootingCooldown(float value)

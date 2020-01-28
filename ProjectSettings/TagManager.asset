@@ -9,6 +9,8 @@ TagManager:
   - Half Obstacle
   - Supply
   - Border Changer
+  - Win Window
+  - Lose Window
   layers:
   - Default
   - TransparentFX
