@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 [AddComponentMenu("Gameplay/Enemy")]
 public class Enemy : RunningEntity
 {
@@ -38,11 +39,13 @@ public class Enemy : RunningEntity
         alive = false;
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<Collider>());
-        Destroy(gameObject, 2f);
+        StartCoroutine(Wait());
     }
 
-    private void OnDestroy()
+    private IEnumerator Wait()
     {
+        yield return new WaitForSeconds(2f);
         GameSettings.GameResult(true);
+        Destroy(this);
     }
 }
