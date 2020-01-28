@@ -4,25 +4,10 @@ using UnityEngine;
 public class TileProperties : MonoBehaviour
 {
     public float length;
-    public bool real = true;
-    public GameObject clone;
     public List<DynamicObstacle> dynamicObstacles;
     public List<SupplyBehaviour> supplies;
 
     public void SetTile(float position)
-    {
-        if (real)
-        {
-            RefreshTile(position);
-        }
-        else
-        {
-            clone.GetComponent<TileProperties>().RefreshTile(position);
-        }
-        real = !real;
-    }
-
-    public void RefreshTile(float position)
     {
         TurnOnSupplies();
         RepairDynamics();

@@ -669,14 +669,24 @@ MonoBehaviour:
   setDefaultBorders: 1.25
   setDefaultOffsetX: 0
   tiles:
-  - {fileID: 1460189212}
-  - {fileID: 1612514998}
-  - {fileID: 1903819298}
-  - {fileID: 1548267970662704333}
-  - {fileID: 3101960416851352793}
-  - {fileID: 1481883111481366056}
-  - {fileID: 6783458326801116255}
+  - firstTile: {fileID: 1460189212}
+    secondTile: {fileID: 414291564}
+  - firstTile: {fileID: 1612514998}
+    secondTile: {fileID: 799043618}
+  - firstTile: {fileID: 1903819298}
+    secondTile: {fileID: 1795400193}
+  - firstTile: {fileID: 1548267970662704333}
+    secondTile: {fileID: 1237616362}
+  - firstTile: {fileID: 3101960416851352793}
+    secondTile: {fileID: 1503899049}
+  - firstTile: {fileID: 1481883111481366056}
+    secondTile: {fileID: 345284845}
+  - firstTile: {fileID: 6783458326801116255}
+    secondTile: {fileID: 1281676372}
+  maxValue: 1000
   player: {fileID: 1619333240}
+  enemy: {fileID: 917830734}
+  camera: {fileID: 1157184997}
 --- !u!1 &145102579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +1997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &345284846
 Transform:
   m_ObjectHideFlags: 0
@@ -2030,8 +2040,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 12
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles:
   - {fileID: 1685265238}
   - {fileID: 1190045221}
@@ -2420,7 +2428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &414291565
 Transform:
   m_ObjectHideFlags: 0
@@ -2454,8 +2462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles:
   - {fileID: 1566642449}
   supplies: []
@@ -4265,7 +4271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &799043619
 Transform:
   m_ObjectHideFlags: 0
@@ -4297,8 +4303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles: []
   supplies:
   - {fileID: 1987706073}
@@ -6251,6 +6255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 849634558}
+  smooth: 1
+  moveBack: 0.02
 --- !u!4 &1157184997
 Transform:
   m_ObjectHideFlags: 0
@@ -6574,7 +6580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1237616363
 Transform:
   m_ObjectHideFlags: 0
@@ -6611,8 +6617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 7
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles:
   - {fileID: 1475462261}
   supplies:
@@ -7068,7 +7072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1281676373
 Transform:
   m_ObjectHideFlags: 0
@@ -7114,8 +7118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 18
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles:
   - {fileID: 569044389}
   supplies:
@@ -7909,7 +7911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1460189213
 Transform:
   m_ObjectHideFlags: 0
@@ -7943,8 +7945,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 1
-  clone: {fileID: 414291564}
   dynamicObstacles:
   - {fileID: 1503503072}
   supplies: []
@@ -8502,7 +8502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1503899050
 Transform:
   m_ObjectHideFlags: 0
@@ -8538,8 +8538,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 7
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles:
   - {fileID: 984370527}
   - {fileID: 997537142}
@@ -9029,7 +9027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1612514999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9043,8 +9041,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 1
-  clone: {fileID: 799043618}
   dynamicObstacles: []
   supplies:
   - {fileID: 1559070065}
@@ -9937,7 +9933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1795400194
 Transform:
   m_ObjectHideFlags: 0
@@ -9970,8 +9966,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 0
-  clone: {fileID: 0}
   dynamicObstacles: []
   supplies: []
 --- !u!1 &1799737998
@@ -10570,7 +10564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1903819299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10584,8 +10578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 10
-  real: 1
-  clone: {fileID: 1795400193}
   dynamicObstacles: []
   supplies: []
 --- !u!4 &1903819300
@@ -12459,7 +12451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1481883111481366057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12473,8 +12465,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 12
-  real: 1
-  clone: {fileID: 345284845}
   dynamicObstacles:
   - {fileID: 7757650562391409629}
   - {fileID: 6809840911719994813}
@@ -12566,7 +12556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1548267970662704334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12580,8 +12570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 7
-  real: 1
-  clone: {fileID: 1237616362}
   dynamicObstacles:
   - {fileID: 4611201707507387380}
   supplies:
@@ -13322,7 +13310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3101960416851352794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13336,8 +13324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 7
-  real: 1
-  clone: {fileID: 1503899049}
   dynamicObstacles:
   - {fileID: 725072081499051753}
   - {fileID: 5697797494015215920}
@@ -14976,7 +14962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6783458326801116256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14990,8 +14976,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   length: 18
-  real: 1
-  clone: {fileID: 1281676372}
   dynamicObstacles:
   - {fileID: 3489052324574086219}
   supplies:

@@ -86,7 +86,7 @@ public class Player : RunningEntity
 
     public void PlayerPosition(float delta)
     {
-        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX * 2 * borders, playerBody.transform.position.y, playerBody.transform.position.z);
+        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX * 30 * GameSettings.speed * borders, playerBody.transform.position.y, playerBody.transform.position.z);
         if (playerBody.transform.position.x > borders + offsetX) playerBody.transform.position = new Vector3(borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
         else if (playerBody.transform.position.x < -borders + offsetX) playerBody.transform.position = new Vector3(-borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
     }
