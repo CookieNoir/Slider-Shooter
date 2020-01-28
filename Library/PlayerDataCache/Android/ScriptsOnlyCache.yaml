@@ -1,13 +1,16 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BorderChanger
     - CameraBehaviour
     - DynamicObstacle
     - Enemy
     - GameSettings
     - Player
+    - SceneChanger
     - SupplyBehaviour
     - TileProperties
+    - UiMovement
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -18,7 +21,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
-    - UnityEngine.UI.Outline
     - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
@@ -51,35 +53,39 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9670}
+      Script: {instanceID: 9678}
     - Class: 114
-      Script: {instanceID: 9818}
+      Script: {instanceID: 9826}
     - Class: 114
-      Script: {instanceID: 9858}
+      Script: {instanceID: 9866}
     - Class: 114
-      Script: {instanceID: 10200}
+      Script: {instanceID: 9906}
     - Class: 114
-      Script: {instanceID: 10226}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 10498}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10516}
+      Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 10714}
+      Script: {instanceID: 10528}
     - Class: 114
-      Script: {instanceID: 10894}
+      Script: {instanceID: 10726}
     - Class: 114
-      Script: {instanceID: 11008}
+      Script: {instanceID: 10878}
     - Class: 114
-      Script: {instanceID: 11296}
+      Script: {instanceID: 10908}
     - Class: 114
-      Script: {instanceID: 11316}
+      Script: {instanceID: 11022}
     - Class: 114
-      Script: {instanceID: 11348}
+      Script: {instanceID: 11090}
     - Class: 114
-      Script: {instanceID: 13198}
+      Script: {instanceID: 11332}
     - Class: 114
-      Script: {instanceID: 13700}
+      Script: {instanceID: 11364}
+    - Class: 114
+      Script: {instanceID: 17276}
+    - Class: 114
+      Script: {instanceID: 79812}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -183,6 +189,12 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
+      Hash: 8bc1122e957d591a869100f57c1b0a18
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BorderChanger
+  - hash:
+      serializedVersion: 2
       Hash: 7ab0e790220bdca831fdd886b339039d
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -255,7 +267,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 2e5f949f0ac45ead1fa9fddc45a8c971
+      Hash: 26621dc4201c637089d04893abc909fe
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameSettings
@@ -321,7 +333,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: a0ddbc1c564a60237f49eb77de0511f8
+      Hash: 082f40e0a526f1d47c21fc05fd8e4e37
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -363,7 +375,7 @@ ScriptsOnlyBuild:
     className: RunningEntity
   - hash:
       serializedVersion: 2
-      Hash: b343d5a844665ac61034ec39d193ae7d
+      Hash: f29f9891ca42035fc5db07a5f3e70c92
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
@@ -417,6 +429,12 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DynamicObstacle
+  - hash:
+      serializedVersion: 2
       Hash: 0d85f4fda1e0e70cd92c084d12f05cdc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -445,6 +463,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: 25dc000c412f6a900bff1515b5b0131b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SupplyBehaviour
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -549,16 +573,16 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 25dc000c412f6a900bff1515b5b0131b
+      Hash: d70a60e5e1c3604afb62ebf01a2b491d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: SupplyBehaviour
+    className: UiMovement
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: d91fcd9ac7bd86d3d771dd6171620fad
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: DynamicObstacle
+    className: SceneChanger
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity

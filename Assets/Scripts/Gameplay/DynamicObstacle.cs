@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+[AddComponentMenu("Gameplay/Dynamic Obstacle")]
 public class DynamicObstacle : MonoBehaviour
 {
     public virtual void Refresh()

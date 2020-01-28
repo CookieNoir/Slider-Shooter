@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 public class GameSettings : MonoBehaviour
 {
     public float setSpeed;
+    public float setDefaultBorders;
+    public float setDefaultOffsetX;
+
     public static float speed;
     public static bool modifySpeed = true;
+    public static float defaultBorders;
+    public static float defaultOffsetX;
 
     public List<GameObject> tiles;
-    public Transform player;
+    public Player player;
+
     private float counter = -10f;
     private float offset = 8f;
     private int lastIndex = -1;
@@ -23,12 +29,13 @@ public class GameSettings : MonoBehaviour
 
     private void ModifySpeed()
     {
-        if (modifySpeed) { }
+        if (modifySpeed) { speed += 0.00001f; }
     }
 
     private void Update()
     {
-        if (player.position.z > counter)
+        ModifySpeed();
+        if (player && player.transform.position.z > counter)
         {
             int index = Random.Range(0, tiles.Count);
             if (index == lastIndex) index = (index + 1) % tiles.Count;
@@ -48,5 +55,19 @@ public class GameSettings : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(new Vector3(-defaultBorders + defaultOffsetX, 0, -10000), new Vector3(-defaultBorders + defaultOffsetX, 0, 10000));
+        Gizmos.DrawLine(new Vector3(defaultBorders + defaultOffsetX, 0, -10000), new Vector3(defaultBorders + defaultOffsetX, 0, 10000));
+    }
+
+    private void OnValidate()
+    {
+        player.borders = setDefaultBorders;
+        player.offsetX = setDefaultOffsetX;
+        defaultBorders = setDefaultBorders;
+        defaultOffsetX = setDefaultOffsetX;
     }
 }

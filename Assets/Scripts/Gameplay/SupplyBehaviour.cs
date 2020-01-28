@@ -2,7 +2,7 @@
 [AddComponentMenu("Gameplay/Supply Behaviour")]
 public class SupplyBehaviour : MonoBehaviour
 {
-    public enum supplyTypes {ammo, damage, shootingSpeed, weapon};
+    public enum supplyTypes { ammo, damage, shootingSpeed, weapon };
     public supplyTypes type;
 
     public float modifier; // для типов: damage, shootingSpeed
@@ -46,5 +46,32 @@ public class SupplyBehaviour : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        switch (type)
+        {
+            case supplyTypes.ammo:
+                {
+                    Gizmos.DrawIcon(transform.position + new Vector3(0, 0.5f, 0), "Ammo Icon.png", true);
+                    break;
+                }
+            case supplyTypes.damage:
+                {
+                    Gizmos.DrawIcon(transform.position + new Vector3(0, 0.5f, 0), "Damage Icon.png", true);
+                    break;
+                }
+            case supplyTypes.shootingSpeed:
+                {
+                    Gizmos.DrawIcon(transform.position + new Vector3(0, 0.5f, 0), "Shooting Speed Icon.png", true);
+                    break;
+                }
+            case supplyTypes.weapon:
+                {
+                    Gizmos.DrawIcon(transform.position + new Vector3(0, 0.5f, 0), "Weapon Icon.png", true);
+                    break;
+                }
+        }
     }
 }

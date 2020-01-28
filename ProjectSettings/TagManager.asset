@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Half Obstacle
   - Supply
+  - Border Changer
   layers:
   - Default
   - TransparentFX
