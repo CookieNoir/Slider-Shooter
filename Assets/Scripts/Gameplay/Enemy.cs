@@ -40,4 +40,9 @@ public class Enemy : RunningEntity
         Destroy(GetComponent<Collider>());
         Destroy(gameObject, 2f);
     }
+
+    private void OnDestroy()
+    {
+        GameSettings.GameResult(true);
+    }
 }

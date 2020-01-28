@@ -9098,7 +9098,7 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   endless: 0
-  healthPoints: 800
+  healthPoints: 20
   startAmmo: 3
   maxAmmo: 12
   shootingCooldown: 1

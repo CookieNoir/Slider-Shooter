@@ -147,7 +147,7 @@ public class Player : RunningEntity
         playerInterface.Translate();
         yield return new WaitForSeconds(2f);
         //launch win animation
-        GameSettings.GameResult(true);
+
         Destroy(this);
     }
 
