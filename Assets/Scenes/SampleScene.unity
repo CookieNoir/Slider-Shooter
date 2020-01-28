@@ -686,7 +686,7 @@ MonoBehaviour:
   maxValue: 1000
   player: {fileID: 1619333240}
   enemy: {fileID: 917830734}
-  camera: {fileID: 1157184997}
+  cameraPos: {fileID: 0}
 --- !u!1 &145102579
 GameObject:
   m_ObjectHideFlags: 0
@@ -5903,7 +5903,7 @@ GameObject:
   - component: {fileID: 1073062034}
   m_Layer: 0
   m_Name: Tiles
-  m_TagString: Untagged
+  m_TagString: Tiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10814,7 +10814,7 @@ GameObject:
   - component: {fileID: 1947814293}
   m_Layer: 0
   m_Name: Tiles Clones
-  m_TagString: Untagged
+  m_TagString: Tiles Clones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

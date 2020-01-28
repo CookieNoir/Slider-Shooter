@@ -35,7 +35,7 @@ public class GameSettings : MonoBehaviour
     public int maxValue;
     public Player player;
     public Transform enemy;
-    public Transform camera;
+    public Transform cameraPos;
 
     public static UiMovement winWindow;
     public static UiMovement loseWindow;
@@ -59,9 +59,6 @@ public class GameSettings : MonoBehaviour
         defaultOffsetX = setDefaultOffsetX;
         gameOver = false;
         lastTiles = new GameObject[3];
-        lastTiles[0] = tiles[0].firstTile;
-        lastTiles[1] = tiles[0].secondTile;
-        lastTiles[2] = tiles[1].firstTile;
         stepBack = new Vector3(0, 0, maxValue);
     }
 
@@ -82,7 +79,7 @@ public class GameSettings : MonoBehaviour
         {
             int index = Random.Range(0, tiles.Count);
             if (index == lastIndex) index = (index + 1) % tiles.Count;
-            lastTiles[lastTileArrayIndex].SetActive(false);
+            if (lastTiles[lastTileArrayIndex]) lastTiles[lastTileArrayIndex].SetActive(false);
             if (tiles[index].IsFirst())
             {
                 tiles[index].firstTile.SetActive(true);
@@ -106,7 +103,7 @@ public class GameSettings : MonoBehaviour
             for (int i = 0; i < 3; ++i) lastTiles[i].transform.position -= stepBack;
             player.transform.position -= stepBack;
             enemy.position -= stepBack;
-            camera.position -= stepBack;
+            cameraPos.position -= stepBack;
             counter -= maxValue;
         }
     }

@@ -11,6 +11,8 @@ TagManager:
   - Border Changer
   - Win Window
   - Lose Window
+  - Tiles
+  - Tiles Clones
   layers:
   - Default
   - TransparentFX
