@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Custom Editor\TilesUpdater.cs" />
     <Compile Include="Assets\Scripts\Gameplay\BorderChanger.cs" />
     <Compile Include="Assets\Scripts\Gameplay\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\DynamicObstacle.cs" />

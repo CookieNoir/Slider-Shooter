@@ -34,13 +34,15 @@ public class Player : RunningEntity
     [Header("Fighting")] //
     public int startAmmo; // используется только при старте игры для начального числа патронов
     public int maxAmmo; // максимальное число патронов, предусмотренное оружием
+    public float shootingDelay; //  задержка перед первым выстрелом
     public float shootingCooldown; // задержка перед следующим выстрелом
     public int damage; // базовый урон оружия
+    public float spentModifier; // дополнительный модификатор урона в зависимости от числа потраченных подряд патронов 
 
     private int ammo; // текущее число патронов в магазине (не может быть больше максимального)
     private float shootingCooldownModifier = 1f; // модификатор задержки
     private float damageModifier = 1f; // модификатор урона
-
+    private float divDelay;
     private float currentShootingCooldown; // таймер, при достижении 0 происходит стрельба
     private int spent = -1; // хранит число сделанных подряд выстрелов
     private bool ready = false;
@@ -86,7 +88,7 @@ public class Player : RunningEntity
 
     public void PlayerPosition(float delta)
     {
-        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX * 30 * GameSettings.speed * borders, playerBody.transform.position.y, playerBody.transform.position.z);
+        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX * 60 * GameSettings.speed * borders, playerBody.transform.position.y, playerBody.transform.position.z);
         if (playerBody.transform.position.x > borders + offsetX) playerBody.transform.position = new Vector3(borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
         else if (playerBody.transform.position.x < -borders + offsetX) playerBody.transform.position = new Vector3(-borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
     }
@@ -98,6 +100,7 @@ public class Player : RunningEntity
         UpdateHealthBar();
         if (startAmmo > maxAmmo) ammo = maxAmmo;
         else ammo = startAmmo;
+        divDelay = 5f / shootingDelay;
         UpdateAmmoText();
         UpdateShootingSpeedText();
         UpdateDamageText();
@@ -107,12 +110,10 @@ public class Player : RunningEntity
 
     private void Shooting()
     {
-        playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * 6f);
+        playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * divDelay);
         if (!ready)
         {
-            currentShootingCooldown = shootingCooldown
-                //* shootingCooldownModifier // убрано, чтобы оставить время на разворот
-                ;
+            currentShootingCooldown = shootingDelay;
             ready = true;
         }
         else
@@ -126,7 +127,7 @@ public class Player : RunningEntity
                 UpdateDamageText();
                 if (!endless && alive)
                 {
-                    currentHealthPoints -= (int)(Mathf.Floor(damage * (damageModifier + spent * 0.33333f)));
+                    currentHealthPoints -= (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier));
                     if (currentHealthPoints <= 0)
                     {
                         currentHealthPoints = 0;
@@ -153,7 +154,7 @@ public class Player : RunningEntity
 
     private void Running()
     {
-        playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 6f);
+        playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * divDelay);
         if (ready)
         {
             ready = false;
@@ -187,7 +188,7 @@ public class Player : RunningEntity
                     spent = -1;
                     UpdateDamageText();
                 }
-                playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 6f);
+                playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * divDelay);
             }
         }
         MakeStep();
@@ -276,6 +277,13 @@ public class Player : RunningEntity
         UpdateAmmoText();
     }
 
+    public void FillAmmo(float part)
+    {
+        ammo += (int)(Mathf.Floor(maxAmmo*part));
+        if (ammo > maxAmmo) ammo = maxAmmo;
+        UpdateAmmoText();
+    }
+
     private void UpdateAmmoText()
     {
         ammoText.text = ammo.ToString() + "\n" + "<color=#eac418ff>" + maxAmmo.ToString() + "</color>";
@@ -284,9 +292,9 @@ public class Player : RunningEntity
     private void UpdateDamageText()
     {
         if (spent < 0)
-            damageText.text = ((int)(damage * damageModifier)).ToString();
+            damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
         else
-            damageText.text = ((int)(damage*damageModifier)).ToString() + "<color=#ff8636ff> + " + Mathf.Floor(damage * (spent + 1) * 0.33333f).ToString() + "</color>";
+            damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + ((int)(Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier))).ToString() + "</color>";
     }
 
     private void UpdateShootingSpeedText()
@@ -363,14 +371,16 @@ public class Player : RunningEntity
         }
     }
 
-    public void GiveNewWeapon(GameObject newWeapon, int newMaxAmmo, float newShootingCooldown, int newDamage)
+    public void GiveNewWeapon(GameObject newWeapon, int newMaxAmmo, float newShootingCooldown, int newDamage, float newSpentModifier)
     {
         // сменить модель пушки
         maxAmmo = newMaxAmmo;
-        FillAmmo(maxAmmo);
+        FillAmmo(maxAmmo/2f);
         shootingCooldown = newShootingCooldown;
         UpdateShootingSpeedText();
         damage = newDamage;
+        spentModifier = newSpentModifier;
+        spent = -1;
         UpdateDamageText();
         // обновить иконку пушки, изменить показатели урона и скорости на интерфейсе
     }

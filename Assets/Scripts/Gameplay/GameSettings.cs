@@ -28,9 +28,16 @@ public class GameSettings : MonoBehaviour
         {
             first = !first;
         }
+        public TileDouble(GameObject first, GameObject second)
+        {
+            firstTile = first;
+            secondTile = second;
+        }
     }
     [Header("Tiles")]
+    public TilesUpdater tilesUpdater;
     public List<TileDouble> tiles;
+
     [Header("Global Moving")]
     public int maxValue;
     public Player player;
@@ -119,6 +126,17 @@ public class GameSettings : MonoBehaviour
         {
             loseWindow.Translate();
             gameOver = true;
+        }
+    }
+
+    public void FillTiles()
+    {
+        tiles.Clear();
+        tilesUpdater.RefreshTiles();
+        int count = tilesUpdater.tiles.childCount;
+        for (int i = 0; i < count; ++i)
+        {
+            tiles.Add(new TileDouble(tilesUpdater.tiles.GetChild(i).gameObject, tilesUpdater.tilesClones.GetChild(i).gameObject));
         }
     }
 
