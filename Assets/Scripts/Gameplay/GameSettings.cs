@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 [AddComponentMenu("Gameplay/Game Settings")]
 public class GameSettings : MonoBehaviour
@@ -46,6 +47,7 @@ public class GameSettings : MonoBehaviour
 
     public static UiMovement winWindow;
     public static UiMovement loseWindow;
+    public static AlphaChanger darkScreen;
 
     private float counter = -10f;
     private float offset = 8f;
@@ -54,11 +56,18 @@ public class GameSettings : MonoBehaviour
     private GameObject[] lastTiles;
     private Vector3 stepBack;
 
+    private static GameSettings instance;
+    private static IEnumerator dark;
+
     private void Start()
     {
         Application.targetFrameRate = 30;
+        instance = this as GameSettings;
         winWindow = GameObject.FindWithTag("Win Window").GetComponent<UiMovement>();
         loseWindow = GameObject.FindWithTag("Lose Window").GetComponent<UiMovement>();
+        darkScreen = GameObject.FindWithTag("Dark Screen").GetComponent<AlphaChanger>();
+        dark = darkScreen.ChangeAlpha();
+        instance.StartCoroutine(dark);
         speed = setSpeed;
         counter = counter - offset;
         modifySpeed = true;
@@ -120,13 +129,15 @@ public class GameSettings : MonoBehaviour
         if (alive)
         {
             winWindow.Translate();
-            gameOver = true;
         }
         else
         {
-            loseWindow.Translate();
-            gameOver = true;
+            loseWindow.Translate();      
         }
+        gameOver = true;
+        instance.StopCoroutine(dark);
+        dark = darkScreen.ChangeAlpha();
+        instance.StartCoroutine(dark);
     }
 
     public void FillTiles()

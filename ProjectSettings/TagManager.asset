@@ -13,6 +13,7 @@ TagManager:
   - Lose Window
   - Tiles
   - Tiles Clones
+  - Dark Screen
   layers:
   - Default
   - TransparentFX

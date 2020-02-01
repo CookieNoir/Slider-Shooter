@@ -292,6 +292,11 @@ public class Player : RunningEntity
     public void Dying()
     {
         Destroy(GetComponent<Rigidbody>());
+        if (alive)
+        {
+            healthBarHandler.Translate();
+            playerInterface.Translate();
+        }
         // dying animation
         Destroy(this);
     }

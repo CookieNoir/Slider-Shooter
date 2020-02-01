@@ -72,11 +72,13 @@
     <Compile Include="Assets\Scripts\Gameplay\RunningEntity.cs" />
     <Compile Include="Assets\Scripts\Gameplay\SupplyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\TileProperties.cs" />
+    <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
     <None Include="Assets\Shaders\Vertex Mask 3 tex.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
     <None Include="Assets\Shaders\Simple Water.shader" />
+    <None Include="Assets\Shaders\Gradient UI.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -103,6 +105,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
