@@ -8,7 +8,7 @@ public class BorderChanger : MonoBehaviour
     public float borders = 1.25f;
     public float offsetX = 0;
     public float length = 1f;
-    public enum Types { Linear, Parabolic, Root };
+    public enum Types { Linear, Parabolic, Root, Smooth };
     public Types type;
     public BorderChanger previous; // нужен для отображения связи (в игровых вычислениях не участвует)
 
@@ -44,12 +44,22 @@ public class BorderChanger : MonoBehaviour
                 q = (player.transform.position.z - transform.position.z) / length;
             }
         }
-        else
+        else if (type == Types.Root)
         {
             while (q < 1)
             {
                 player.borders = Mathf.Lerp(playerBorders, borders, Mathf.Sqrt(q));
                 player.offsetX = Mathf.Lerp(playerOffsetX, offsetX, Mathf.Sqrt(q));
+                yield return null;
+                q = (player.transform.position.z - transform.position.z) / length;
+            }
+        }
+        else
+        {
+            while (q < 1)
+            {
+                player.borders = Mathf.Lerp(playerBorders, borders, q * q * (3 - 2 * q));
+                player.offsetX = Mathf.Lerp(playerOffsetX, offsetX, q * q * (3 - 2 * q));
                 yield return null;
                 q = (player.transform.position.z - transform.position.z) / length;
             }
@@ -97,7 +107,7 @@ public class BorderChanger : MonoBehaviour
                     prevLeft = curLeft;
                 }
             }
-            else
+            else if (type == Types.Root)
             {
                 Vector3 prevRight = new Vector3(GameSettings.defaultBorders + GameSettings.defaultOffsetX + transform.position.x, transform.position.y, transform.position.z);
                 Vector3 prevLeft = new Vector3(-GameSettings.defaultBorders + GameSettings.defaultOffsetX + transform.position.x, transform.position.y, transform.position.z);
@@ -106,6 +116,23 @@ public class BorderChanger : MonoBehaviour
                 {
                     float b = Mathf.Lerp(GameSettings.defaultBorders, borders, Mathf.Sqrt(f));
                     float o = Mathf.Lerp(GameSettings.defaultOffsetX, offsetX, Mathf.Sqrt(f));
+                    curRight = new Vector3(b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
+                    curLeft = new Vector3(-b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
+                    Gizmos.DrawLine(prevRight, curRight);
+                    Gizmos.DrawLine(prevLeft, curLeft);
+                    prevRight = curRight;
+                    prevLeft = curLeft;
+                }
+            }
+            else
+            {
+                Vector3 prevRight = new Vector3(GameSettings.defaultBorders + GameSettings.defaultOffsetX + transform.position.x, transform.position.y, transform.position.z);
+                Vector3 prevLeft = new Vector3(-GameSettings.defaultBorders + GameSettings.defaultOffsetX + transform.position.x, transform.position.y, transform.position.z);
+                Vector3 curRight, curLeft;
+                for (float f = 0.04f; f <= 1.03f; f += 0.04f)
+                {
+                    float b = Mathf.Lerp(GameSettings.defaultBorders, borders, f * f * (3 - 2 * f));
+                    float o = Mathf.Lerp(GameSettings.defaultOffsetX, offsetX, f * f * (3 - 2 * f));
                     curRight = new Vector3(b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
                     curLeft = new Vector3(-b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
                     Gizmos.DrawLine(prevRight, curRight);
@@ -145,7 +172,7 @@ public class BorderChanger : MonoBehaviour
                     prevLeft = curLeft;
                 }
             }
-            else
+            else if (type == Types.Root)
             {
                 Vector3 prevRight = new Vector3(previous.borders + previous.offsetX + transform.position.x, transform.position.y, transform.position.z);
                 Vector3 prevLeft = new Vector3(-previous.borders + previous.offsetX + transform.position.x, transform.position.y, transform.position.z);
@@ -154,6 +181,23 @@ public class BorderChanger : MonoBehaviour
                 {
                     float b = Mathf.Lerp(previous.borders, borders, Mathf.Sqrt(f));
                     float o = Mathf.Lerp(previous.offsetX, offsetX, Mathf.Sqrt(f));
+                    curRight = new Vector3(b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
+                    curLeft = new Vector3(-b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
+                    Gizmos.DrawLine(prevRight, curRight);
+                    Gizmos.DrawLine(prevLeft, curLeft);
+                    prevRight = curRight;
+                    prevLeft = curLeft;
+                }
+            }
+            else
+            {
+                Vector3 prevRight = new Vector3(previous.borders + previous.offsetX + transform.position.x, transform.position.y, transform.position.z);
+                Vector3 prevLeft = new Vector3(-previous.borders + previous.offsetX + transform.position.x, transform.position.y, transform.position.z);
+                Vector3 curRight, curLeft;
+                for (float f = 0.04f; f <= 1.03f; f += 0.04f)
+                {
+                    float b = Mathf.Lerp(previous.borders, borders, f * f * (3 - 2 * f));
+                    float o = Mathf.Lerp(previous.offsetX, offsetX, f * f * (3 - 2 * f));
                     curRight = new Vector3(b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
                     curLeft = new Vector3(-b + o + transform.position.x, transform.position.y, transform.position.z + length * f);
                     Gizmos.DrawLine(prevRight, curRight);

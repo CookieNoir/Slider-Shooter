@@ -2416,7 +2416,7 @@ MonoBehaviour:
   borders: 1.25
   offsetX: 0
   length: 1
-  type: 1
+  type: 3
   previous: {fileID: 1498483907}
 --- !u!1 &397737802
 GameObject:
@@ -3703,7 +3703,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1}
+  m_Size: {x: 0, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &526081576
 MonoBehaviour:
@@ -3718,7 +3718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 1
   type: 0
@@ -4090,7 +4090,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 0.8}
+  m_Size: {x: 0, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!4 &584461548
 Transform:
@@ -6007,7 +6007,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 0.8}
+  m_Size: {x: 0, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!4 &977652824
 Transform:
@@ -8494,7 +8494,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 0.5}
+  m_Size: {x: 0, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0.25}
 --- !u!4 &1425146640
 Transform:
@@ -8771,7 +8771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1460189213
 Transform:
   m_ObjectHideFlags: 0
@@ -9089,10 +9089,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 0
-  borders: 0.75
+  borders: 0.7
   offsetX: 0
   length: 0.5
-  type: 2
+  type: 3
   previous: {fileID: 0}
 --- !u!4 &1498483908
 Transform:
@@ -9650,7 +9650,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1}
+  m_Size: {x: 0, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &1605936170
 MonoBehaviour:
@@ -9665,7 +9665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 1
   type: 1
@@ -9686,7 +9686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1612514999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11535,7 +11535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1903819299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13091,7 +13091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1481883111481366057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13196,7 +13196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1548267970662704334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13950,7 +13950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &3101960416851352794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15602,7 +15602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6783458326801116256
 MonoBehaviour:
   m_ObjectHideFlags: 0
