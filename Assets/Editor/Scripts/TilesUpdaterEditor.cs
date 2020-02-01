@@ -17,21 +17,9 @@ public class TilesUpdaterEditor : Editor
             tilesUpdater.ShowTiles(true);
         }
         GUILayout.Space(5);
-        if (GUILayout.Button("Show Clones"))
-        {
-            tilesUpdater.ShowTilesClones(true);
-        }
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Hide Tiles"))
         {
             tilesUpdater.ShowTiles(false);
-        }
-        GUILayout.Space(5);
-        if (GUILayout.Button("Hide Clones"))
-        {
-            tilesUpdater.ShowTilesClones(false);
         }
         EditorGUILayout.EndHorizontal();
 

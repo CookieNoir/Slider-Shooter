@@ -20,9 +20,9 @@ public class TilesUpdater : MonoBehaviour
         int childCount = tiles.childCount;
         for (int i = 0; i < childCount; ++i)
         {
-            Transform go = Instantiate(tiles.GetChild(i), tilesClones);
-            go.position += new Vector3(15f,0,0);
-            go.gameObject.SetActive(false);
+                Transform go = Instantiate(tiles.GetChild(i), tilesClones);
+                go.position += new Vector3(15f, 0, 0);
+                go.gameObject.SetActive(false);
         }
     }
 

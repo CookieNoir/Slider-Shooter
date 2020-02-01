@@ -136,7 +136,11 @@ public class GameSettings : MonoBehaviour
         int count = tilesUpdater.tiles.childCount;
         for (int i = 0; i < count; ++i)
         {
-            tiles.Add(new TileDouble(tilesUpdater.tiles.GetChild(i).gameObject, tilesUpdater.tilesClones.GetChild(i).gameObject));
+            if (tilesUpdater.tiles.GetChild(i).gameObject.activeSelf == true)
+            {
+                tiles.Add(new TileDouble(tilesUpdater.tiles.GetChild(i).gameObject, tilesUpdater.tilesClones.GetChild(i).gameObject));
+                tilesUpdater.tiles.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 

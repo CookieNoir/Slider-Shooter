@@ -46,6 +46,9 @@ public class Player : RunningEntity
     private float currentShootingCooldown; // таймер, при достижении 0 происходит стрельба
     private int spent = -1; // хранит число сделанных подряд выстрелов
     private bool ready = false;
+    private int reservedDamage;
+    private int reservedDamageCap;
+    private int ticksCap;
     //---------------------------------
     [Header("UI")]
     public UiMovement healthBarHandler; // используется для скрытия панели здоровья
@@ -72,14 +75,38 @@ public class Player : RunningEntity
             }
             else if (ticks > 0)
             {
-                modifiedSpeed += 0.005f; ticks--;
+                RecalculateReservedDamage();
+                if (ticks > 60)
+                {
+                    modifiedSpeed += 0.015f; ticks -= 3;
+                }
+                else if (ticks > 30)
+                {
+                    modifiedSpeed += 0.01f; ticks -= 2;
+                }
+                else
+                {
+                    modifiedSpeed += 0.005f; ticks--;
+                }
             }
         }
         else
         {
             if (ticks > 0)
             {
-                modifiedSpeed += 0.005f; ticks--;
+                RecalculateReservedDamage();
+                if (ticks > 60)
+                {
+                    modifiedSpeed += 0.015f; ticks -= 3;
+                }
+                else if (ticks > 30)
+                {
+                    modifiedSpeed += 0.01f; ticks -= 2;
+                }
+                else
+                {
+                    modifiedSpeed += 0.005f; ticks--;
+                }
             }
         }
         if (adrenaline) modifiedSpeed += 0.01f;
@@ -113,13 +140,13 @@ public class Player : RunningEntity
         playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * divDelay);
         if (!ready)
         {
-            currentShootingCooldown = shootingDelay;
+            if (currentShootingCooldown < shootingDelay)
+                currentShootingCooldown = shootingDelay;
             ready = true;
         }
         else
         {
-            if (currentShootingCooldown > 0) currentShootingCooldown -= Time.deltaTime;
-            else
+            if (currentShootingCooldown <= 0)
             {
                 ammo--;
                 UpdateAmmoText();
@@ -127,7 +154,7 @@ public class Player : RunningEntity
                 UpdateDamageText();
                 if (!endless && alive)
                 {
-                    currentHealthPoints -= (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier));
+                    currentHealthPoints -= (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
                     if (currentHealthPoints <= 0)
                     {
                         currentHealthPoints = 0;
@@ -157,9 +184,7 @@ public class Player : RunningEntity
         playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * divDelay);
         if (ready)
         {
-            ready = false;
-            spent = -1;
-            UpdateDamageText();
+            SetNotReady();
         }
         else
         {
@@ -168,8 +193,23 @@ public class Player : RunningEntity
         }
     }
 
+    private void SetNotReady()
+    {
+        ready = false;
+        reservedDamageCap = reservedDamage + (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
+        ticksCap = ticks;
+        spent = -1;
+    }
+
+    private void RecalculateReservedDamage()
+    {
+        reservedDamage = (int)Mathf.Floor(((float)ticks / ticksCap) * reservedDamageCap);
+        UpdateDamageText();
+    }
+
     private void Update()
     {
+        if (currentShootingCooldown > 0) currentShootingCooldown -= Time.deltaTime;
         if (slider)
         {
             Running();
@@ -184,9 +224,7 @@ public class Player : RunningEntity
             {
                 if (ready)
                 {
-                    ready = false;
-                    spent = -1;
-                    UpdateDamageText();
+                    SetNotReady();
                 }
                 playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * divDelay);
             }
@@ -225,21 +263,21 @@ public class Player : RunningEntity
     {
         if (other.tag == "Obstacle")
         {
-                Debug.Log("Im dead");
-                Dying();
+            Debug.Log("Im dead");
+            Dying();
         }
         else if (other.tag == "Half Obstacle")
         {
-                if (stabbed)
-                {
-                    Debug.Log("Im dead");
-                    Dying();
-                }
-                else
-                {
-                    Stabbing();
-                    other.GetComponent<DynamicObstacle>().Change();
-                }
+            if (stabbed)
+            {
+                Debug.Log("Im dead");
+                Dying();
+            }
+            else
+            {
+                Stabbing();
+                other.GetComponent<DynamicObstacle>().Change();
+            }
         }
         else if (other.tag == "Supply")
         {
@@ -267,6 +305,7 @@ public class Player : RunningEntity
     public void ModifyDamage(float value)
     {
         damageModifier *= value;
+        reservedDamage = (int)Mathf.Floor(reservedDamage * value);
         UpdateDamageText();
     }
 
@@ -279,7 +318,7 @@ public class Player : RunningEntity
 
     public void FillAmmo(float part)
     {
-        ammo += (int)(Mathf.Floor(maxAmmo*part));
+        ammo += (int)(Mathf.Floor(maxAmmo * part));
         if (ammo > maxAmmo) ammo = maxAmmo;
         UpdateAmmoText();
     }
@@ -292,14 +331,17 @@ public class Player : RunningEntity
     private void UpdateDamageText()
     {
         if (spent < 0)
-            damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
+        {
+            if (ticks <= 1 || reservedDamage == 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
+            else damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + reservedDamage.ToString() + "</color>";
+        }
         else
-            damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + ((int)(Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier))).ToString() + "</color>";
+            damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + ((int)(Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier)) + reservedDamage).ToString() + "</color>";
     }
 
     private void UpdateShootingSpeedText()
     {
-        shootingSpeedText.text = (shootingCooldown*shootingCooldownModifier).ToString();
+        shootingSpeedText.text = (shootingCooldown * shootingCooldownModifier).ToString();
     }
 
     private void UpdateHealthBar()
@@ -375,12 +417,13 @@ public class Player : RunningEntity
     {
         // сменить модель пушки
         maxAmmo = newMaxAmmo;
-        FillAmmo(maxAmmo/2f);
+        FillAmmo(maxAmmo / 2f);
         shootingCooldown = newShootingCooldown;
         UpdateShootingSpeedText();
         damage = newDamage;
         spentModifier = newSpentModifier;
         spent = -1;
+        reservedDamage = 0;
         UpdateDamageText();
         // обновить иконку пушки, изменить показатели урона и скорости на интерфейсе
     }
