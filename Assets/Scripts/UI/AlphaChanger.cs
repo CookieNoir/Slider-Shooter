@@ -8,9 +8,9 @@ public class AlphaChanger : MonoBehaviour
     public int lowerSteps = 50;
     public int higherSteps = 50;
     public float lowerAlpha = 0f;
-    public float higherAlpha = 1f;
+    public float higherAlpha = 1f;   
+    public bool increase = false; // Если Increase = false, то Альфа будет уменьшаться, иначе - увеличиваться
 
-    private bool changed = false;
     private MaskableGraphic mg;
     private float lowerStepWeight;
     private float higherStepWeight;
@@ -29,8 +29,8 @@ public class AlphaChanger : MonoBehaviour
     public IEnumerator ChangeAlpha()
     {
         Color c = mg.color;
-        changed = !changed;
-        if (changed)
+        increase = !increase;
+        if (increase)
         {
             for (int i = 1; i <= lowerSteps; ++i)
             {

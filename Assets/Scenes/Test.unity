@@ -1565,6 +1565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAtStart: 1
   startPosition: {x: -1500, y: 0}
+  fillEntireScreen: 0
   line: 1
   function: 1
   stepSize: 1500
@@ -2398,7 +2399,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1}
+  m_Size: {x: 2.5, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &396628217
 MonoBehaviour:
@@ -2413,7 +2414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 0
+  borders: 1.25
   offsetX: 0
   length: 1
   type: 3
@@ -2508,6 +2509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAtStart: 1
   startPosition: {x: 0, y: 150}
+  fillEntireScreen: 0
   line: 0
   function: 1
   stepSize: -250
@@ -3703,7 +3705,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1}
+  m_Size: {x: 2.5, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &526081576
 MonoBehaviour:
@@ -3718,7 +3720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 0
+  borders: 1.25
   offsetX: 0
   length: 1
   type: 0
@@ -4090,7 +4092,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 0.8}
+  m_Size: {x: 2.5, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!4 &584461548
 Transform:
@@ -4874,6 +4876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAtStart: 1
   startPosition: {x: 0, y: -300}
+  fillEntireScreen: 0
   line: 0
   function: 1
   stepSize: 300
@@ -6007,7 +6010,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 0.8}
+  m_Size: {x: 2.5, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!4 &977652824
 Transform:
@@ -8166,10 +8169,10 @@ RectTransform:
   m_Father: {fileID: 1858424004}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2000, y: 0}
-  m_SizeDelta: {x: 1080, y: 2160}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367225527
 MonoBehaviour:
@@ -8187,6 +8190,7 @@ MonoBehaviour:
   higherSteps: 180
   lowerAlpha: 0
   higherAlpha: 0.8
+  increase: 0
 --- !u!114 &1367225528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8201,6 +8205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAtStart: 1
   startPosition: {x: 0, y: 0}
+  fillEntireScreen: 0
   line: 0
   function: 0
   stepSize: 0
@@ -8599,7 +8604,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 0.5}
+  m_Size: {x: 2.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0.25}
 --- !u!4 &1425146640
 Transform:
@@ -9755,7 +9760,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1}
+  m_Size: {x: 2.5, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &1605936170
 MonoBehaviour:
@@ -9770,7 +9775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 0
+  borders: 1.25
   offsetX: 0
   length: 1
   type: 1
@@ -9862,7 +9867,7 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   endless: 0
-  healthPoints: 500
+  healthPoints: 2500
   startAmmo: 10
   maxAmmo: 12
   shootingDelay: 0.7
@@ -10450,6 +10455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAtStart: 1
   startPosition: {x: 1500, y: 0}
+  fillEntireScreen: 0
   line: 1
   function: 1
   stepSize: -1500

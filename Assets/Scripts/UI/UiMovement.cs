@@ -4,13 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(RectTransform))]
 public class UiMovement : MonoBehaviour
 {
-    [Header("Moving At Start")] // Необходимо, чтобы возвращать отлаженный UI элемент на необходимую позицию
+    [Header("Editing At Start")] // Необходимо, чтобы возвращать отлаженный UI элемент на необходимую позицию
     public bool moveAtStart = false;
     public Vector2 startPosition;
+    public bool fillEntireScreen = false;
+    //---------------------------------
     public enum lines { Top, Right, Local_Center, Bottom_Right, Top_Right };
     public enum functions { Linear, Square, Cubic };
     private delegate float movingFunc(float value);
-    //---------------------------------
     [Header("Translation")]
     public lines line;
     public functions function;
@@ -26,6 +27,10 @@ public class UiMovement : MonoBehaviour
     private void Awake()
     {
         if (moveAtStart) GetComponent<RectTransform>().anchoredPosition = startPosition;
+        if (fillEntireScreen)
+        {
+            GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+        }
         defaultPosition = GetComponent<RectTransform>().anchoredPosition;
         switch (line)
         {

@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AlphaChanger
     - BorderChanger
     - CameraBehaviour
     - DynamicObstacle
@@ -54,41 +55,43 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9678}
+      Script: {instanceID: 9680}
     - Class: 114
-      Script: {instanceID: 9828}
+      Script: {instanceID: 9838}
     - Class: 114
-      Script: {instanceID: 9868}
+      Script: {instanceID: 9878}
     - Class: 114
-      Script: {instanceID: 9908}
+      Script: {instanceID: 9918}
     - Class: 114
-      Script: {instanceID: 9988}
+      Script: {instanceID: 10000}
     - Class: 114
-      Script: {instanceID: 10216}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10242}
+      Script: {instanceID: 10264}
     - Class: 114
-      Script: {instanceID: 10514}
+      Script: {instanceID: 10546}
     - Class: 114
-      Script: {instanceID: 10532}
+      Script: {instanceID: 10566}
     - Class: 114
-      Script: {instanceID: 10730}
+      Script: {instanceID: 10766}
     - Class: 114
-      Script: {instanceID: 10884}
+      Script: {instanceID: 10930}
     - Class: 114
-      Script: {instanceID: 10914}
+      Script: {instanceID: 10960}
     - Class: 114
-      Script: {instanceID: 10934}
+      Script: {instanceID: 10980}
     - Class: 114
-      Script: {instanceID: 11030}
+      Script: {instanceID: 11082}
     - Class: 114
-      Script: {instanceID: 11098}
+      Script: {instanceID: 11150}
     - Class: 114
-      Script: {instanceID: 11252}
+      Script: {instanceID: 11296}
     - Class: 114
-      Script: {instanceID: 11342}
+      Script: {instanceID: 11316}
     - Class: 114
-      Script: {instanceID: 11374}
+      Script: {instanceID: 11406}
+    - Class: 114
+      Script: {instanceID: 11438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -192,7 +195,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 8bc1122e957d591a869100f57c1b0a18
+      Hash: 79d7d759181e83554f1dd8be57eeb0e2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BorderChanger
@@ -450,7 +453,7 @@ ScriptsOnlyBuild:
     className: CameraBehaviour
   - hash:
       serializedVersion: 2
-      Hash: 30c44c4fcff0f22fed276d4297110e63
+      Hash: 4109935acd09ac4b8beebd9118918df9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UiMovement
@@ -496,6 +499,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: 62d55ab149aa7dc4a987d78249a018ab
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AlphaChanger
   - hash:
       serializedVersion: 2
       Hash: d91fcd9ac7bd86d3d771dd6171620fad
