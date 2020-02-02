@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 767
-  m_MinSize: {x: 681, y: 494}
-  m_MaxSize: {x: 14004, y: 14044}
+  m_MinSize: {x: 679, y: 494}
+  m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 59
+  controlID: 56
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 60
+  controlID: 57
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 222}
   m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 61
+  controlID: 58
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -218,7 +218,7 @@ MonoBehaviour:
   - {fileID: 12}
   - {fileID: 15}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 2
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -266,8 +266,8 @@ MonoBehaviour:
     y: 0
     width: 355
     height: 767
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -384,23 +384,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 98df0000
-      m_LastClickedID: 57240
-      m_ExpandedIDs: fac1fffff8c6ffff2ac7ffffc2c7ffff46fbffffe8350000b0cf0000c4df0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 1e8cffff46fbffff3031000094310000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Player
+        m_OriginalName: Player
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 12680
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.044930905, y: 1.4129821, z: -2.5440001}
+    m_Target: {x: -0.35714412, y: 0.45872268, z: -0.09165239}
     speed: 2
-    m_Value: {x: -0.044930905, y: 1.4129821, z: -2.5440001}
+    m_Value: {x: -0.35714412, y: 0.45872268, z: -0.09165239}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -477,13 +477,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.41541582, y: -0.0013653779, z: 0.00061923754, w: 0.90963644}
+    m_Target: {x: 0.042109028, y: 0.50708544, z: -0.024818385, w: 0.8605154}
     speed: 2
-    m_Value: {x: 0.39895803, y: 0.008251698, z: -0.003594619, w: 0.9169251}
+    m_Value: {x: 0.042108785, y: 0.5070825, z: -0.024818243, w: 0.86051047}
   m_Size:
-    m_Target: 1.7816515
+    m_Target: 2.0105927
     speed: 2
-    m_Value: 1.4816515
+    m_Value: 2.0105927
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -578,20 +578,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Materials
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Materials
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Workshop\Slider-Shooter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 67}
-    m_SelectedIDs: 642f0000
-    m_LastClickedID: 12132
-    m_ExpandedIDs: 00000000fa2c00005a2d0000bc2e0000fe2f000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: fa2c0000
+    m_LastClickedID: 11514
+    m_ExpandedIDs: 00000000fa2c00005a2d0000162e0000bc2e00000430000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -619,7 +619,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa2c00005a2d0000bc2e0000fe2f0000
+    m_ExpandedIDs: 00000000fa2c00005a2d0000bc2e000004300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -724,11 +724,11 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 568
-    width: 1108
+    width: 1085
     height: 253
   m_ViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 8652
+    ID: 7370
     splitterInitialOffset: 148
     currentActiveSplitter: -1
     realSizes: 6400000089000000

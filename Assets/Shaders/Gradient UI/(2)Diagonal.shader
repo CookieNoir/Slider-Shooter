@@ -1,21 +1,20 @@
-﻿Shader "UI/Gradient"
+﻿Shader "UI/Gradient/2 Colors/Diagonal"
 {
 	Properties
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		_Color("Color 1", Color) = (1,1,1,1)
 		_Color1("Color 2", Color) = (1,1,1,1)
-		_Color2("Color 3", Color) = (1,1,1,1)
+		_Inverse("Inverse Direction (0, else)", Int) = 0
+		[HideInInspector] _StencilComp("Stencil Comparison", Float) = 8
+		[HideInInspector] _Stencil("Stencil ID", Float) = 0
+		[HideInInspector] _StencilOp("Stencil Operation", Float) = 0
+		[HideInInspector] _StencilWriteMask("Stencil Write Mask", Float) = 255
+		[HideInInspector] _StencilReadMask("Stencil Read Mask", Float) = 255
 
-		_StencilComp("Stencil Comparison", Float) = 8
-		_Stencil("Stencil ID", Float) = 0
-		_StencilOp("Stencil Operation", Float) = 0
-		_StencilWriteMask("Stencil Write Mask", Float) = 255
-		_StencilReadMask("Stencil Read Mask", Float) = 255
+		[HideInInspector] _ColorMask("Color Mask", Float) = 15
 
-		_ColorMask("Color Mask", Float) = 15
-
-		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip("Use Alpha Clip", Float) = 0
+		[HideInInspector][Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip("Use Alpha Clip", Float) = 0
 	}
 
 		SubShader
@@ -79,7 +78,7 @@
 				sampler2D _MainTex;
 				fixed4 _Color;
 				fixed4 _Color1;
-				fixed4 _Color2;
+				int _Inverse;
 				fixed4 _TextureSampleAdd;
 				float4 _ClipRect;
 				float4 _MainTex_ST;
@@ -94,7 +93,8 @@
 
 					OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 
-					OUT.color = lerp(lerp(_Color, _Color1, v.texcoord.x), lerp(_Color, _Color2, v.texcoord.y), (v.texcoord.x + v.texcoord.y) / 2.0);
+					if (!_Inverse)	OUT.color = lerp(_Color, _Color1, (v.texcoord.x + v.texcoord.y) / 2.0);
+					else OUT.color = lerp(_Color, _Color1, (1 - v.texcoord.x + v.texcoord.y) / 2.0);
 					return OUT;
 				}
 

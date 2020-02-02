@@ -76,9 +76,15 @@
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
     <None Include="Assets\Shaders\Vertex Mask 3 tex.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Vertical.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Vertical 1 Color.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Horizontal 1 Color.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Horizontal.shader" />
     <None Include="Assets\Shaders\Simple Water.shader" />
-    <None Include="Assets\Shaders\Gradient UI.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(2)Diagonal 1 Color.shader" />
+    <None Include="Assets\Shaders\Gradient UI\(3)Mixed.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

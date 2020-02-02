@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Gradient Yellow
-  m_Shader: {fileID: 4800000, guid: b250010f215ae9e4bb8d4957df0bdff3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 54d12635ecb1b064388d75351ebe9829, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,6 +64,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Inverse: 0
+    - _InverseDir: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -81,6 +83,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.03773582, g: 0.03186185, b: 0.03214634, a: 0.8509804}
-    - _Color1: {r: 0.103773594, g: 0.09181415, b: 0.06999823, a: 0.8509804}
+    - _Color1: {r: 0.11013707, g: 0.22568765, b: 0.23584908, a: 0.8509804}
     - _Color2: {r: 0.21698111, g: 0.20162868, b: 0.1709238, a: 0.8509804}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

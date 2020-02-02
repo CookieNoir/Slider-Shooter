@@ -9867,12 +9867,12 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   endless: 0
-  healthPoints: 2500
+  healthPoints: 1000
   startAmmo: 10
   maxAmmo: 12
   shootingDelay: 0.7
   shootingCooldown: 0.7
-  damage: 100
+  damage: 10
   spentModifier: 0.2
   healthBarHandler: {fileID: 397737806}
   healthBar: {fileID: 407838137}
