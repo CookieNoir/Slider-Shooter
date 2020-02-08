@@ -10,6 +10,7 @@ public class Player : RunningEntity
     private bool stabbed = false;
     private bool adrenaline = false;
     private int ticks = 0;
+    private IEnumerator stabCycle;
     //---------------------------------
     [Header("Slider")] // блок переменных, отвечающих за перемещение персонажа при помощи механики слайдера
     [Range(0f, 20)]
@@ -51,6 +52,7 @@ public class Player : RunningEntity
     private int ticksCap;
     //---------------------------------
     [Header("UI")]
+    public MaskableGraphic hurtIndicator; // изменяет прозрачность элемента, отрисовывающего ранения персонажа
     public UiMovement healthBarHandler; // используется для скрытия панели здоровья
     public Image healthBar; // используется для редактирования полоски ХП
     public Image healthBarBack; // движется за основной полоской ХП
@@ -59,7 +61,13 @@ public class Player : RunningEntity
     public Text shootingSpeedText; // используется для изменения текста, отвечающего за время на одиночный выстрел
     public Text damageText; // используется для изменения текста, отвечающего за урон от следующего выстрела
 
-    public Color[] colors; // должен иметь 8 элементов, первые 4 - для основной полосы, вторые - для фоновой полосы
+    public Color[] colors;
+    /*
+        0-3 - основная полоса здоровья,
+        4-7 - фоновая полоса здоровья,
+        8-11 - индикаторы состояния персонажа       
+    */
+    private IEnumerator colorChanger;
     private bool healthChanged = false;
     //---------------------------------
     protected override float ModifiedSpeed(float speed)
@@ -133,6 +141,9 @@ public class Player : RunningEntity
         UpdateDamageText();
         if (!endless) healthBarHandler.Translate();
         playerInterface.Translate();
+
+        stabCycle = StabCycle();
+        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
     }
 
     private void Shooting()
@@ -173,9 +184,9 @@ public class Player : RunningEntity
         alive = false;
         healthBarHandler.Translate();
         playerInterface.Translate();
+        GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         yield return new WaitForSeconds(2f);
         //launch win animation
-
         Destroy(this);
     }
 
@@ -247,16 +258,27 @@ public class Player : RunningEntity
     public void Stabbing()
     {
         stabbed = true;
-        StartCoroutine(StabCycle());
+        StopCoroutine(stabCycle);
+        stabCycle = StabCycle();
+        StartCoroutine(stabCycle);
     }
 
-    IEnumerator StabCycle()
+    private IEnumerator StabCycle()
     {
+        StopCoroutine(colorChanger);
+        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[9]);
+        StartCoroutine(colorChanger);
         yield return new WaitForSeconds(3f);
         stabbed = false;
         adrenaline = true;
+        StopCoroutine(colorChanger);
+        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[10]);
+        StartCoroutine(colorChanger);
         yield return new WaitForSeconds(1.5f);
         adrenaline = false;
+        StopCoroutine(colorChanger);
+        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
+        StartCoroutine(colorChanger);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -296,6 +318,12 @@ public class Player : RunningEntity
         {
             healthBarHandler.Translate();
             playerInterface.Translate();
+            StopCoroutine(colorChanger);
+            GameSettings.ChangeHurtIndicator(hurtIndicator, colors[11], colors[8]);
+        }
+        else
+        {
+            GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         }
         // dying animation
         Destroy(this);

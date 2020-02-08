@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 494}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 56
+  controlID: 17199
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 57
+  controlID: 17200
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 222}
   m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 58
+  controlID: 17201
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -212,13 +212,13 @@ MonoBehaviour:
     height: 495
   m_MinSize: {x: 204, y: 222}
   m_MaxSize: {x: 4004, y: 4022}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
   - {fileID: 12}
   - {fileID: 15}
-  m_Selected: 1
-  m_LastSelected: 2
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -386,21 +386,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1e8cffff46fbffff3031000094310000
+      m_ExpandedIDs: b8a0ffff16ecffff70f7ffff6efbffffd83300000636000052230100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Player
-        m_OriginalName: Player
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 12680
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.35714412, y: 0.45872268, z: -0.09165239}
+    m_Target: {x: 338.9525, y: 991.049, z: 617.5237}
     speed: 2
-    m_Value: {x: -0.35714412, y: 0.45872268, z: -0.09165239}
+    m_Value: {x: 338.9525, y: 991.049, z: 617.5237}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -477,13 +477,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.042109028, y: 0.50708544, z: -0.024818385, w: 0.8605154}
+    m_Target: {x: -0.008102225, y: -0.0029982666, z: -0.000034175835, w: 0.9999729}
     speed: 2
-    m_Value: {x: 0.042108785, y: 0.5070825, z: -0.024818243, w: 0.86051047}
+    m_Value: {x: -0.0066021904, y: -0.0029982843, z: -0.000029677914, w: 0.9999738}
   m_Size:
-    m_Target: 2.0105927
+    m_Target: 2713.3733
     speed: 2
-    m_Value: 2.0105927
+    m_Value: 2596.5295
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -578,20 +578,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Resources/Textures
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Resources/Textures
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Workshop\Slider-Shooter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: fa2c0000
-    m_LastClickedID: 11514
-    m_ExpandedIDs: 00000000fa2c00005a2d0000162e0000bc2e00000430000000ca9a3b
+    m_SelectedIDs: 182f0000
+    m_LastClickedID: 12056
+    m_ExpandedIDs: 00000000082d00006a2d0000cc2e00001630000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -619,7 +619,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fa2c00005a2d0000bc2e000004300000
+    m_ExpandedIDs: 00000000082d00006a2d0000cc2e00001630000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -646,8 +646,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300001a2c00005a340000ba380000b83b000034390000a601000000000000
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300001a2c00005a340000ba380000b83b000034390000a601000000000000386b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

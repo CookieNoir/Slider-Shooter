@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 [AddComponentMenu("Gameplay/Game Settings")]
 public class GameSettings : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class GameSettings : MonoBehaviour
 
     private static GameSettings instance;
     private static IEnumerator dark;
+    private static IEnumerator hurtIndicatorColor;
 
     private void Start()
     {
@@ -138,6 +140,7 @@ public class GameSettings : MonoBehaviour
         instance.StopCoroutine(dark);
         dark = darkScreen.ChangeAlpha();
         instance.StartCoroutine(dark);
+        instance.StartCoroutine(hurtIndicatorColor);
     }
 
     public void FillTiles()
@@ -152,6 +155,26 @@ public class GameSettings : MonoBehaviour
                 tiles.Add(new TileDouble(tilesUpdater.tiles.GetChild(i).gameObject, tilesUpdater.tilesClones.GetChild(i).gameObject));
                 tilesUpdater.tiles.GetChild(i).gameObject.SetActive(false);
             }
+        }
+    }
+
+    public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor, Color baseColor)
+    {
+        instance.StartCoroutine(ColorChanger(component, targetColor));
+        hurtIndicatorColor = ColorChanger(component, baseColor);
+    }
+    public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor)
+    {
+        hurtIndicatorColor = ColorChanger(component, targetColor);
+    }
+
+    public static IEnumerator ColorChanger(MaskableGraphic component, Color targetColor)
+    {
+        Color baseColor = component.color;
+        for (float f = 0.02f; f <= 1; f += 0.02f)
+        {
+            component.color = Vector4.Lerp(baseColor, targetColor, f * (2 - f));
+            yield return null;
         }
     }
 
