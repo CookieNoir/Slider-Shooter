@@ -7,8 +7,8 @@ public class Player : RunningEntity
     public GameObject playerBody; // ГО игрока
     public GameObject weapon; // начальная модель оружия игрока
 
-    private bool stabbed = false;
-    private bool adrenaline = false;
+    private int stabbedTicks = 0;
+    private int adrenalineTicks = 0;
     private int ticks = 0;
     private IEnumerator stabCycle;
     //---------------------------------
@@ -73,7 +73,10 @@ public class Player : RunningEntity
     protected override float ModifiedSpeed(float speed)
     {
         float modifiedSpeed = speed;
-        if (stabbed) modifiedSpeed -= 0.005f;
+        if (stabbedTicks>0)
+        {
+            modifiedSpeed -= 0.005f; stabbedTicks--;
+        }
         if (ammo > 0)
         {
             if (!slider)
@@ -117,7 +120,10 @@ public class Player : RunningEntity
                 }
             }
         }
-        if (adrenaline) modifiedSpeed += 0.01f;
+        if (adrenalineTicks > 0)
+        {
+            modifiedSpeed += 0.01f; adrenalineTicks--;
+        }
         return modifiedSpeed;
     }
 
@@ -257,7 +263,7 @@ public class Player : RunningEntity
 
     public void Stabbing()
     {
-        stabbed = true;
+        stabbedTicks = 180;
         StopCoroutine(stabCycle);
         stabCycle = StabCycle();
         StartCoroutine(stabCycle);
@@ -268,14 +274,17 @@ public class Player : RunningEntity
         StopCoroutine(colorChanger);
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[9]);
         StartCoroutine(colorChanger);
-        yield return new WaitForSeconds(3f);
-        stabbed = false;
-        adrenaline = true;
+        while (stabbedTicks > 0)
+            yield return null;
+        adrenalineTicks = 90;
         StopCoroutine(colorChanger);
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[10]);
         StartCoroutine(colorChanger);
-        yield return new WaitForSeconds(1.5f);
-        adrenaline = false;
+        while (adrenalineTicks>0)
+            yield return null; 
+
+        Debug.Log(transform.position.z - enemy.transform.position.z);
+
         StopCoroutine(colorChanger);
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
         StartCoroutine(colorChanger);
@@ -290,7 +299,7 @@ public class Player : RunningEntity
         }
         else if (other.tag == "Half Obstacle")
         {
-            if (stabbed)
+            if (stabbedTicks>0)
             {
                 Debug.Log("Im dead");
                 Dying();

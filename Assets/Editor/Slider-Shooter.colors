@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12323, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Slider-Shooter
+  m_EditorClassIdentifier: 
+  m_Presets:
+  - m_Name: Enemy Health Ram
+    m_Color: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0.8117647}
+  - m_Name: Gradient Win Color 1
+    m_Color: {r: 0.09094148, g: 0.07760769, b: 0.1509434, a: 0.8509804}
+  - m_Name: Gradient Win Color 2
+    m_Color: {r: 0.14529678, g: 0.11249555, b: 0.3018868, a: 0.8509804}
+  - m_Name: Gradient Win Color 3
+    m_Color: {r: 0.015352436, g: 0.5305157, b: 0.6509434, a: 0.8509804}
+  - m_Name: Gradient Lose Color 1
+    m_Color: {r: 0.058487326, g: 0.05179778, b: 0.11320752, a: 0.8509804}
+  - m_Name: Gradient Lose Color 2
+    m_Color: {r: 0.3773585, g: 0.080099694, b: 0.16142519, a: 0.8509804}
+  - m_Name: Gradient Lose Color 3
+    m_Color: {r: 0.254717, g: 0.14286351, b: 0.116545044, a: 0.8509804}
+  - m_Name: Active Button
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  - m_Name: Inactive Button
+    m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  - m_Name: Star Enabled
+    m_Color: {r: 1, g: 0.7902222, b: 0, a: 1}
+  - m_Name: Star Disabled
+    m_Color: {r: 0.24528301, g: 0.19300959, b: 0, a: 1}
+  - m_Name: Health Main 1
+    m_Color: {r: 0.22874257, g: 0.754717, b: 0, a: 1}
+  - m_Name: Health Main 2
+    m_Color: {r: 0.6153492, g: 0.8490566, b: 0, a: 1}
+  - m_Name: Health Main 3
+    m_Color: {r: 0.990566, g: 0.84685856, b: 0, a: 1}
+  - m_Name: Health Main 4
+    m_Color: {r: 0.8113208, g: 0.2530817, b: 0, a: 1}
+  - m_Name: Health Back 1
+    m_Color: {r: 0.10544419, g: 0.3490566, b: 0, a: 1}
+  - m_Name: Health Back 2
+    m_Color: {r: 0.3202306, g: 0.4433962, b: 0, a: 1}
+  - m_Name: Health Back 3
+    m_Color: {r: 0.5377358, g: 0.45909458, b: 0, a: 1}
+  - m_Name: Health Back 4
+    m_Color: {r: 0.41509432, g: 0.13034363, b: 0, a: 1}
+  - m_Name: Indicator Default
+    m_Color: {r: 0, g: 0, b: 0, a: 0.3019608}
+  - m_Name: Indicator Hurt
+    m_Color: {r: 0.5943396, g: 0.13900909, b: 0.12615702, a: 0.3019608}
+  - m_Name: Indicator Adrenaline
+    m_Color: {r: 1, g: 0.87208086, b: 0.495283, a: 0.3019608}
+  - m_Name: Indicator Dead
+    m_Color: {r: 1, g: 0.026395835, b: 0, a: 0.3019608}
+  - m_Name: Ammo
+    m_Color: {r: 0.91764706, g: 0.76862746, b: 0.09411765, a: 1}
+  - m_Name: Damage
+    m_Color: {r: 1, g: 0.5253223, b: 0.21226418, a: 1}
+  - m_Name: Shooting Speed
+    m_Color: {r: 0.36320752, g: 0.7510756, b: 1, a: 1}

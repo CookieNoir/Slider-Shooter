@@ -63,7 +63,7 @@ public class GameSettings : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         instance = this as GameSettings;
         winWindow = GameObject.FindWithTag("Win Window").GetComponent<UiMovement>();
         loseWindow = GameObject.FindWithTag("Lose Window").GetComponent<UiMovement>();

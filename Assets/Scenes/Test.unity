@@ -1587,7 +1587,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56626fa1cecd83d428637ba00f28ef7d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c09342d6ec3c5fa49983b480d1f428b6, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &282620188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6785,7 +6785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7902222, b: 0, a: 1}
+  m_Color: {r: 0.24528301, g: 0.19300959, b: 0, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10244,8 +10244,8 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   endless: 0
-  healthPoints: 1000
-  startAmmo: 10
+  healthPoints: 250
+  startAmmo: 0
   maxAmmo: 12
   shootingDelay: 0.7
   shootingCooldown: 0.7
@@ -10808,7 +10808,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56626fa1cecd83d428637ba00f28ef7d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f8f35838538d8d44843c5fb999dde51, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10817,7 +10817,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &1672327949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11401,7 +11401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7902222, b: 0, a: 1}
+  m_Color: {r: 0.24528301, g: 0.19300959, b: 0, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
