@@ -1,15 +1,20 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [AddComponentMenu("Gameplay/Player")]
 public class Player : RunningEntity
 {
     public GameObject playerBody; // ГО игрока
-    public GameObject weapon; // начальная модель оружия игрока
+    public List<WeaponBehaviour> weapons; // модели оружия, индекс = ID, должны быть скрыты перед стартом
+    public int startWeapon = 0; // ID начального оружия
+
+    private int currentWeapon = -1;
+    private bool gotWeapon = false; // влияет на отображение интерфейса
 
     private int stabbedTicks = 0;
     private int adrenalineTicks = 0;
-    private int ticks = 0;
+    private int shootingTicks = 0;
     private IEnumerator stabCycle;
     //---------------------------------
     [Header("Slider")] // блок переменных, отвечающих за перемещение персонажа при помощи механики слайдера
@@ -34,11 +39,12 @@ public class Player : RunningEntity
     //---------------------------------
     [Header("Fighting")] //
     public int startAmmo; // используется только при старте игры для начального числа патронов
-    public int maxAmmo; // максимальное число патронов, предусмотренное оружием
     public float shootingDelay; //  задержка перед первым выстрелом
-    public float shootingCooldown; // задержка перед следующим выстрелом
-    public int damage; // базовый урон оружия
-    public float spentModifier; // дополнительный модификатор урона в зависимости от числа потраченных подряд патронов 
+
+    private int maxAmmo = 0; // максимальное число патронов, предусмотренное оружием
+    private float shootingCooldown; // задержка перед следующим выстрелом
+    private int damage; // базовый урон оружия
+    private float spentModifier; // дополнительный модификатор урона в зависимости от числа потраченных подряд патронов 
 
     private int ammo; // текущее число патронов в магазине (не может быть больше максимального)
     private float shootingCooldownModifier = 1f; // модификатор задержки
@@ -60,6 +66,8 @@ public class Player : RunningEntity
     public Text ammoText; // используется для изменения текста, отвечающего за число патронов в магазине
     public Text shootingSpeedText; // используется для изменения текста, отвечающего за время на одиночный выстрел
     public Text damageText; // используется для изменения текста, отвечающего за урон от следующего выстрела
+    public Image weaponIcon; // объект, в который помещается иконка оружия
+    public Text weaponNameText; // отображает название оружия
 
     public Color[] colors;
     /*
@@ -73,7 +81,7 @@ public class Player : RunningEntity
     protected override float ModifiedSpeed(float speed)
     {
         float modifiedSpeed = speed;
-        if (stabbedTicks>0)
+        if (stabbedTicks > 0)
         {
             modifiedSpeed -= 0.005f; stabbedTicks--;
         }
@@ -82,41 +90,41 @@ public class Player : RunningEntity
             if (!slider)
             {
                 modifiedSpeed -= 0.005f;
-                ticks++;
+                shootingTicks++;
             }
-            else if (ticks > 0)
+            else if (shootingTicks > 0)
             {
                 RecalculateReservedDamage();
-                if (ticks > 60)
+                if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.015f; ticks -= 3;
+                    modifiedSpeed += 0.015f; shootingTicks -= 3;
                 }
-                else if (ticks > 30)
+                else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.01f; ticks -= 2;
+                    modifiedSpeed += 0.01f; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.005f; ticks--;
+                    modifiedSpeed += 0.005f; shootingTicks--;
                 }
             }
         }
         else
         {
-            if (ticks > 0)
+            if (shootingTicks > 0)
             {
                 RecalculateReservedDamage();
-                if (ticks > 60)
+                if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.015f; ticks -= 3;
+                    modifiedSpeed += 0.015f; shootingTicks -= 3;
                 }
-                else if (ticks > 30)
+                else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.01f; ticks -= 2;
+                    modifiedSpeed += 0.01f; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.005f; ticks--;
+                    modifiedSpeed += 0.005f; shootingTicks--;
                 }
             }
         }
@@ -136,6 +144,8 @@ public class Player : RunningEntity
 
     private void Start()
     {
+        GiveNewWeapon(startWeapon);
+
         sizeX = Screen.width;
         currentHealthPoints = healthPoints;
         UpdateHealthBar();
@@ -146,7 +156,6 @@ public class Player : RunningEntity
         UpdateShootingSpeedText();
         UpdateDamageText();
         if (!endless) healthBarHandler.Translate();
-        playerInterface.Translate();
 
         stabCycle = StabCycle();
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
@@ -178,6 +187,7 @@ public class Player : RunningEntity
                         StartCoroutine(MonsterDying());
                     }
                     UpdateHealthBar();
+                    if (currentWeapon!=-1) weapons[currentWeapon].Fire();
                 }
                 currentShootingCooldown = shootingCooldown * shootingCooldownModifier;
             }
@@ -189,7 +199,7 @@ public class Player : RunningEntity
         enemy.GetComponent<Enemy>().Dying();
         alive = false;
         healthBarHandler.Translate();
-        playerInterface.Translate();
+        if (gotWeapon) playerInterface.Translate();
         GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         yield return new WaitForSeconds(2f);
         //launch win animation
@@ -214,13 +224,13 @@ public class Player : RunningEntity
     {
         ready = false;
         reservedDamageCap = reservedDamage + (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
-        ticksCap = ticks;
+        ticksCap = shootingTicks;
         spent = -1;
     }
 
     private void RecalculateReservedDamage()
     {
-        reservedDamage = (int)Mathf.Floor(((float)ticks / ticksCap) * reservedDamageCap);
+        reservedDamage = (int)Mathf.Floor(((float)shootingTicks / ticksCap) * reservedDamageCap);
         UpdateDamageText();
     }
 
@@ -263,7 +273,7 @@ public class Player : RunningEntity
 
     public void Stabbing()
     {
-        stabbedTicks = 180;
+        stabbedTicks = Application.targetFrameRate / 2 * 6;
         StopCoroutine(stabCycle);
         stabCycle = StabCycle();
         StartCoroutine(stabCycle);
@@ -276,14 +286,12 @@ public class Player : RunningEntity
         StartCoroutine(colorChanger);
         while (stabbedTicks > 0)
             yield return null;
-        adrenalineTicks = 90;
+        adrenalineTicks = Application.targetFrameRate / 2 * 3;
         StopCoroutine(colorChanger);
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[10]);
         StartCoroutine(colorChanger);
-        while (adrenalineTicks>0)
-            yield return null; 
-
-        Debug.Log(transform.position.z - enemy.transform.position.z);
+        while (adrenalineTicks > 0)
+            yield return null;
 
         StopCoroutine(colorChanger);
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
@@ -299,7 +307,7 @@ public class Player : RunningEntity
         }
         else if (other.tag == "Half Obstacle")
         {
-            if (stabbedTicks>0)
+            if (stabbedTicks > 0)
             {
                 Debug.Log("Im dead");
                 Dying();
@@ -326,7 +334,7 @@ public class Player : RunningEntity
         if (alive)
         {
             healthBarHandler.Translate();
-            playerInterface.Translate();
+            if (gotWeapon) playerInterface.Translate();
             StopCoroutine(colorChanger);
             GameSettings.ChangeHurtIndicator(hurtIndicator, colors[11], colors[8]);
         }
@@ -374,7 +382,7 @@ public class Player : RunningEntity
     {
         if (spent < 0)
         {
-            if (ticks <= 1 || reservedDamage == 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
+            if (shootingTicks <= 1 || reservedDamage == 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
             else damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + reservedDamage.ToString() + "</color>";
         }
         else
@@ -455,19 +463,29 @@ public class Player : RunningEntity
         }
     }
 
-    public void GiveNewWeapon(GameObject newWeapon, int newMaxAmmo, float newShootingCooldown, int newDamage, float newSpentModifier)
+    public void GiveNewWeapon(int newWeapon)
     {
-        // сменить модель пушки
-        maxAmmo = newMaxAmmo;
-        FillAmmo(maxAmmo / 2f);
-        shootingCooldown = newShootingCooldown;
-        UpdateShootingSpeedText();
-        damage = newDamage;
-        spentModifier = newSpentModifier;
-        spent = -1;
-        reservedDamage = 0;
-        UpdateDamageText();
-        // обновить иконку пушки, изменить показатели урона и скорости на интерфейсе
+        if (currentWeapon != -1)
+        {
+            weapons[currentWeapon].gameObject.SetActive(false);
+        }
+        if (newWeapon != -1)
+        {
+            currentWeapon = newWeapon;
+            weapons[currentWeapon].gameObject.SetActive(true);
+            weapons[currentWeapon].GetProperties(ref weaponIcon, ref weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+            FillAmmo(maxAmmo / 2f);
+            UpdateShootingSpeedText();
+            spent = -1;
+            reservedDamage = 0;
+            UpdateDamageText();
+            if (!gotWeapon)
+            {
+                playerInterface.Translate();
+                gotWeapon = true;
+            }
+            //изменить анимацию под данную пушку
+        }
     }
 
     private void OnDrawGizmosSelected()

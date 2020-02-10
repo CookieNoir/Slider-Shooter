@@ -489,6 +489,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64286707}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &82531160 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+    type: 3}
+  m_PrefabInstance: {fileID: 864956093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &82531161 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+    type: 3}
+  m_PrefabInstance: {fileID: 864956093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &87297701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,11 +1252,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &238819361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1354,11 +1362,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0.96
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &278686304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1782,11 +1786,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 10
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &299979944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3257,11 +3257,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &462142278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3450,11 +3446,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0.96
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &505532695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3564,11 +3556,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &512591608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3651,10 +3639,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524130816}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_Children:
+  - {fileID: 82531160}
   m_Father: {fileID: 784939200}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3942,11 +3931,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0.96
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &570453291
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4056,11 +4041,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0.96
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &574322190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4744,11 +4725,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &665338862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5275,8 +5252,9 @@ GameObject:
   - component: {fileID: 784939200}
   - component: {fileID: 784939202}
   - component: {fileID: 784939201}
+  - component: {fileID: 784939203}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5343,6 +5321,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 784939199}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &784939203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784939199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 514c55d035ebbc54fadfe51daf3127f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: c72dc944f80a8a04f996bfd53ae5cc3a, type: 3}
+  weaponName: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442"
+  maxAmmo: 12
+  shootingCooldown: 0.7
+  damage: 10
+  spentModifier: 0.2
+  fireRenderer: {fileID: 82531161}
 --- !u!1 &848469442
 GameObject:
   m_ObjectHideFlags: 0
@@ -5508,7 +5505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849634554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 784939200}
@@ -5594,6 +5591,120 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851354539}
   m_Mesh: {fileID: -6748798779234794853, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1001 &864956093
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 524130817}
+    m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_Name
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f2d12b4f4b5adf4da01b9ba87be4ca8, type: 2}
+    - target: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 77e82dc89a12b914e83613b94b094352,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77e82dc89a12b914e83613b94b094352, type: 3}
 --- !u!1 &893176816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5816,7 +5927,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &917830732
 MeshRenderer:
@@ -5863,7 +5974,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917830730}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &917830734
 Transform:
   m_ObjectHideFlags: 0
@@ -5873,7 +5984,7 @@ Transform:
   m_GameObject: {fileID: 917830730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -3.5}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -7779,11 +7890,7 @@ MonoBehaviour:
   addType: 0
   modifier: 1.1
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1313862966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7947,7 +8054,7 @@ GameObject:
   - component: {fileID: 1334167421}
   - component: {fileID: 1334167420}
   m_Layer: 5
-  m_Name: Name
+  m_Name: Weapon Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8062,11 +8169,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1346539171
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8176,11 +8279,7 @@ MonoBehaviour:
   addType: 0
   modifier: 1.1
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1351920647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8290,11 +8389,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1356202671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8672,11 +8767,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 10
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1420696264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9047,11 +9138,7 @@ MonoBehaviour:
   addType: 0
   modifier: 1.1
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1444422857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9258,7 +9345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1460189213
 Transform:
   m_ObjectHideFlags: 0
@@ -9763,11 +9850,7 @@ MonoBehaviour:
   addType: 0
   modifier: 1.1
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1521109510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9951,11 +10034,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1559070066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10173,7 +10252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1612514999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10239,18 +10318,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 849634554}
-  weapon: {fileID: 0}
+  weapons:
+  - {fileID: 784939203}
+  startWeapon: 0
   borders: 1.25
   offsetX: 0
   enemy: {fileID: 917830730}
   endless: 0
   healthPoints: 250
   startAmmo: 0
-  maxAmmo: 12
   shootingDelay: 0.7
-  shootingCooldown: 0.7
-  damage: 10
-  spentModifier: 0.2
   hurtIndicator: {fileID: 1989951782}
   healthBarHandler: {fileID: 397737806}
   healthBar: {fileID: 407838137}
@@ -10259,6 +10336,8 @@ MonoBehaviour:
   ammoText: {fileID: 1463394044}
   shootingSpeedText: {fileID: 456932571}
   damageText: {fileID: 416870664}
+  weaponIcon: {fileID: 223091731}
+  weaponNameText: {fileID: 1334167420}
   colors:
   - {r: 0.22874257, g: 0.754717, b: 0, a: 1}
   - {r: 0.6153492, g: 0.8490566, b: 0, a: 1}
@@ -12106,7 +12185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1903819299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12296,11 +12375,7 @@ MonoBehaviour:
   addType: 0
   modifier: 0
   amount: 5
-  weapon: {fileID: 0}
-  maxAmmo: 0
-  shootingCooldown: 0
-  damage: 0
-  spentModifier: 0
+  weapon: 0
 --- !u!65 &1932344432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13735,7 +13810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1481883111481366057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13840,7 +13915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1548267970662704334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14594,7 +14669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3101960416851352794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16246,7 +16321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6783458326801116256
 MonoBehaviour:
   m_ObjectHideFlags: 0

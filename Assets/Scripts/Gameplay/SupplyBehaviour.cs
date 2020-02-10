@@ -11,11 +11,7 @@ public class SupplyBehaviour : MonoBehaviour
     public int amount; // для типов: ammo
 
     // для типов: weapon
-    public GameObject weapon; // модель оружия
-    public int maxAmmo; // максимальное число патронов
-    public float shootingCooldown; // задержка перед следующим выстрелом
-    public int damage; // базовый урон оружия
-    public float spentModifier;
+    public int weapon; // ID оружия
 
     public void GiveSuppliesTo(Player player)
     {
@@ -50,7 +46,7 @@ public class SupplyBehaviour : MonoBehaviour
                 }
             case SupplyTypes.weapon:
                 {
-                    player.GiveNewWeapon(weapon, maxAmmo, shootingCooldown, damage, spentModifier);
+                    player.GiveNewWeapon(weapon);
                     break;
                 }
         }

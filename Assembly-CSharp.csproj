@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Gameplay\RunningEntity.cs" />
     <Compile Include="Assets\Scripts\Gameplay\SupplyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\TileProperties.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\WeaponBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
@@ -79,6 +80,7 @@
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Vertical.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Vertical 1 Color.shader" />
+    <None Include="Assets\Shaders\Unlit Alpha.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal 1 Color.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal.shader" />
