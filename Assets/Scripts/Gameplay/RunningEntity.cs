@@ -9,7 +9,7 @@ public class RunningEntity : MonoBehaviour
         return speed;
     }
 
-    protected void MakeStep()
+    protected virtual void MakeStep()
     {
         currentSpeed = ModifiedSpeed(GameSettings.speed);
         transform.position += new Vector3(0, 0, currentSpeed);

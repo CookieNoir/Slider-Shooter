@@ -12,8 +12,11 @@ public class Player : RunningEntity
     private int currentWeapon = -1;
     private bool gotWeapon = false; // влияет на отображение интерфейса
 
+    private float distance = 0; // пройденная игроком дистанция
+
     private int stabbedTicks = 0;
     private int adrenalineTicks = 0;
+    private int adrenalineTicksSpent = 0; // число кадров, проведенных в режима Адреналина
     private int shootingTicks = 0;
     private IEnumerator stabCycle;
     //---------------------------------
@@ -31,7 +34,7 @@ public class Player : RunningEntity
     //---------------------------------
     [Header("Enemy")] // блок переменных, связанных с врагом и его параметрами
     public GameObject enemy; // ГО врага
-    public bool endless = false; // флаг, отвечающий за бессмертие врага: если поднят, то игрок получает только очки, иначе враг получает урон 
+    public bool invulnerable = false; // флаг, отвечающий за бессмертие врага: если поднят, то игрок получает только очки, иначе враг получает урон 
     public int healthPoints; // начальное число единиц здоровья врага
 
     private int currentHealthPoints;
@@ -130,7 +133,9 @@ public class Player : RunningEntity
         }
         if (adrenalineTicks > 0)
         {
-            modifiedSpeed += 0.01f; adrenalineTicks--;
+            modifiedSpeed += 0.01f;
+            adrenalineTicks--;
+            adrenalineTicksSpent++;
         }
         return modifiedSpeed;
     }
@@ -144,25 +149,24 @@ public class Player : RunningEntity
 
     private void Start()
     {
-        GiveNewWeapon(startWeapon);
-
         sizeX = Screen.width;
-        currentHealthPoints = healthPoints;
-        UpdateHealthBar();
-        if (startAmmo > maxAmmo) ammo = maxAmmo;
-        else ammo = startAmmo;
         divDelay = 5f / shootingDelay;
-        UpdateAmmoText();
-        UpdateShootingSpeedText();
-        UpdateDamageText();
-        if (!endless) healthBarHandler.Translate();
-
         stabCycle = StabCycle();
         colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
+
+        GiveNewWeapon(startWeapon, startAmmo);
+
+        if (!invulnerable)
+        {
+            currentHealthPoints = healthPoints;
+            UpdateHealthBar();
+            healthBarHandler.Translate();
+        }
     }
 
     private void Shooting()
     {
+        //GameOver();
         playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * divDelay);
         if (!ready)
         {
@@ -178,7 +182,7 @@ public class Player : RunningEntity
                 UpdateAmmoText();
                 spent++;
                 UpdateDamageText();
-                if (!endless && alive)
+                if (!invulnerable && alive)
                 {
                     currentHealthPoints -= (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
                     if (currentHealthPoints <= 0)
@@ -186,8 +190,8 @@ public class Player : RunningEntity
                         currentHealthPoints = 0;
                         StartCoroutine(MonsterDying());
                     }
-                    UpdateHealthBar();
-                    if (currentWeapon!=-1) weapons[currentWeapon].Fire();
+                    if (!invulnerable) UpdateHealthBar();
+                    if (currentWeapon != -1) weapons[currentWeapon].Fire();
                 }
                 currentShootingCooldown = shootingCooldown * shootingCooldownModifier;
             }
@@ -198,11 +202,25 @@ public class Player : RunningEntity
     {
         enemy.GetComponent<Enemy>().Dying();
         alive = false;
-        healthBarHandler.Translate();
+        if (!invulnerable) healthBarHandler.Translate();
         if (gotWeapon) playerInterface.Translate();
         GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         yield return new WaitForSeconds(2f);
         //launch win animation
+        GameSettings.GameResult(true);
+        Destroy(enemy);
+        Destroy(this);
+    }
+
+    private void GameOver()
+    {
+        enemy.GetComponent<Enemy>().Lost();
+        if (!invulnerable) healthBarHandler.Translate();
+        if (gotWeapon) playerInterface.Translate();
+        GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
+        //launch win animation
+        GameSettings.GameResult(true);
+        Destroy(enemy);
         Destroy(this);
     }
 
@@ -223,7 +241,10 @@ public class Player : RunningEntity
     private void SetNotReady()
     {
         ready = false;
-        reservedDamageCap = reservedDamage + (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
+        if (reservedDamage > 0)
+            reservedDamageCap = reservedDamage + (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
+        else
+            reservedDamageCap = (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
         ticksCap = shootingTicks;
         spent = -1;
     }
@@ -258,6 +279,13 @@ public class Player : RunningEntity
         }
         MakeStep();
         UpdateHealthBarBack();
+    }
+
+    protected override void MakeStep()
+    {
+        currentSpeed = ModifiedSpeed(GameSettings.speed);
+        transform.position += new Vector3(0, 0, currentSpeed);
+        distance += currentSpeed;
     }
 
     public void MouseDown()
@@ -333,7 +361,7 @@ public class Player : RunningEntity
         Destroy(GetComponent<Rigidbody>());
         if (alive)
         {
-            healthBarHandler.Translate();
+            if (!invulnerable) healthBarHandler.Translate();
             if (gotWeapon) playerInterface.Translate();
             StopCoroutine(colorChanger);
             GameSettings.ChangeHurtIndicator(hurtIndicator, colors[11], colors[8]);
@@ -382,7 +410,7 @@ public class Player : RunningEntity
     {
         if (spent < 0)
         {
-            if (shootingTicks <= 1 || reservedDamage == 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
+            if (shootingTicks <= 1 || reservedDamage <= 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
             else damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + reservedDamage.ToString() + "</color>";
         }
         else
@@ -473,8 +501,33 @@ public class Player : RunningEntity
         {
             currentWeapon = newWeapon;
             weapons[currentWeapon].gameObject.SetActive(true);
-            weapons[currentWeapon].GetProperties(ref weaponIcon, ref weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
-            FillAmmo(maxAmmo / 2f);
+            weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+            FillAmmo(weapons[currentWeapon].ammo);
+            UpdateShootingSpeedText();
+            spent = -1;
+            reservedDamage = 0;
+            UpdateDamageText();
+            if (!gotWeapon)
+            {
+                playerInterface.Translate();
+                gotWeapon = true;
+            }
+            //изменить анимацию под данную пушку
+        }
+    }
+
+    public void GiveNewWeapon(int newWeapon, int amount)
+    {
+        if (currentWeapon != -1)
+        {
+            weapons[currentWeapon].gameObject.SetActive(false);
+        }
+        if (newWeapon != -1)
+        {
+            currentWeapon = newWeapon;
+            weapons[currentWeapon].gameObject.SetActive(true);
+            weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+            FillAmmo(amount);
             UpdateShootingSpeedText();
             spent = -1;
             reservedDamage = 0;

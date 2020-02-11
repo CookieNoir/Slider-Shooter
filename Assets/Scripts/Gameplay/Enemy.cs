@@ -39,13 +39,11 @@ public class Enemy : RunningEntity
         alive = false;
         Destroy(GetComponent<Rigidbody>());
         Destroy(GetComponent<Collider>());
-        StartCoroutine(Wait());
+        // анимация смерти
     }
 
-    private IEnumerator Wait()
+    public void Lost()
     {
-        yield return new WaitForSeconds(2f);
-        GameSettings.GameResult(true);
-        Destroy(this);
+        // анимация поражения
     }
 }

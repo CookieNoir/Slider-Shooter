@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Gameplay\CameraBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\DynamicObstacle.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Gameplay\GameChallenges.cs" />
     <Compile Include="Assets\Scripts\Gameplay\GameSettings.cs" />
     <Compile Include="Assets\Scripts\Gameplay\Player.cs" />
     <Compile Include="Assets\Scripts\Gameplay\RunningEntity.cs" />

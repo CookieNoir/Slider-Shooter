@@ -778,7 +778,7 @@ GameObject:
   - component: {fileID: 136730180}
   - component: {fileID: 136730179}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: EventSystem / Game Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5259,7 +5259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &784939200
 Transform:
   m_ObjectHideFlags: 0
@@ -5335,6 +5335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c72dc944f80a8a04f996bfd53ae5cc3a, type: 3}
   weaponName: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442"
+  ammo: 0
   maxAmmo: 12
   shootingCooldown: 0.7
   damage: 10
@@ -10324,7 +10325,7 @@ MonoBehaviour:
   borders: 1.25
   offsetX: 0
   enemy: {fileID: 917830730}
-  endless: 0
+  invulnerable: 0
   healthPoints: 250
   startAmmo: 0
   shootingDelay: 0.7
