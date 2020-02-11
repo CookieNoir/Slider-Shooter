@@ -12,13 +12,24 @@ public class Player : RunningEntity
     private int currentWeapon = -1;
     private bool gotWeapon = false; // влияет на отображение интерфейса
 
-    private float distance = 0; // пройденная игроком дистанция
-
     private int stabbedTicks = 0;
     private int adrenalineTicks = 0;
-    private int adrenalineTicksSpent = 0; // число кадров, проведенных в режима Адреналина
     private int shootingTicks = 0;
+    private float scoreModifier;
     private IEnumerator stabCycle;
+    // блок переменных, которые будут записаны
+    private int score = 0; // игровой счет
+    private float timeSpent = 0; // длительность игры
+    private float millisecondsSpent = 0;
+    private int secondsSpent = 0;
+    private int minutesSpent = 0;
+    private int takenAmmo = 0; // количество патронов, полученных за игру
+    private int takenDamageModifier = 0; // количество модификаторов урона, полученных за игру
+    private int takenShootingSpeedModifier = 0; // количество модификаторов скорости стрельбы, полученных за игру
+    private int takenInjuries = 0; // количество ранений, полученных за игру
+    private int takenWeapons = 0; // количество подобранных оружий за игру
+    private float distance = 0; // пройденная игроком дистанция
+    private int adrenalineTicksSpent = 0; // число кадров, проведенных в режима Адреналина
     //---------------------------------
     [Header("Slider")] // блок переменных, отвечающих за перемещение персонажа при помощи механики слайдера
     [Range(0f, 20)]
@@ -71,7 +82,8 @@ public class Player : RunningEntity
     public Text damageText; // используется для изменения текста, отвечающего за урон от следующего выстрела
     public Image weaponIcon; // объект, в который помещается иконка оружия
     public Text weaponNameText; // отображает название оружия
-
+    public Text scoreText; // отображает игровой счёт
+    public Text timeText; // отображает время, проведенное со старта
     public Color[] colors;
     /*
         0-3 - основная полоса здоровья,
@@ -86,13 +98,13 @@ public class Player : RunningEntity
         float modifiedSpeed = speed;
         if (stabbedTicks > 0)
         {
-            modifiedSpeed -= 0.005f; stabbedTicks--;
+            modifiedSpeed -= 0.008f; stabbedTicks--;
         }
         if (ammo > 0)
         {
             if (!slider)
             {
-                modifiedSpeed -= 0.005f;
+                modifiedSpeed -= 0.008f;
                 shootingTicks++;
             }
             else if (shootingTicks > 0)
@@ -100,15 +112,15 @@ public class Player : RunningEntity
                 RecalculateReservedDamage();
                 if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.015f; shootingTicks -= 3;
+                    modifiedSpeed += 0.024f; shootingTicks -= 3;
                 }
                 else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.01f; shootingTicks -= 2;
+                    modifiedSpeed += 0.016f; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.005f; shootingTicks--;
+                    modifiedSpeed += 0.008f; shootingTicks--;
                 }
             }
         }
@@ -119,21 +131,21 @@ public class Player : RunningEntity
                 RecalculateReservedDamage();
                 if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.015f; shootingTicks -= 3;
+                    modifiedSpeed += 0.024f; shootingTicks -= 3;
                 }
                 else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.01f; shootingTicks -= 2;
+                    modifiedSpeed += 0.016f; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.005f; shootingTicks--;
+                    modifiedSpeed += 0.008f; shootingTicks--;
                 }
             }
         }
         if (adrenalineTicks > 0)
         {
-            modifiedSpeed += 0.01f;
+            modifiedSpeed += 0.016f;
             adrenalineTicks--;
             adrenalineTicksSpent++;
         }
@@ -182,15 +194,22 @@ public class Player : RunningEntity
                 UpdateAmmoText();
                 spent++;
                 UpdateDamageText();
-                if (!invulnerable && alive)
+                if (alive)
                 {
-                    currentHealthPoints -= (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
-                    if (currentHealthPoints <= 0)
+                    int currentDamage = (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
+                    score += (int)Mathf.Floor(currentDamage * scoreModifier);
+                    scoreModifier *= 1 + spentModifier;
+                    UpdateScoreText();
+                    if (!invulnerable)
                     {
-                        currentHealthPoints = 0;
-                        StartCoroutine(MonsterDying());
+                        currentHealthPoints -= currentDamage;
+                        if (currentHealthPoints <= 0)
+                        {
+                            currentHealthPoints = 0;
+                            StartCoroutine(MonsterDying());
+                        }
+                        UpdateHealthBar();
                     }
-                    if (!invulnerable) UpdateHealthBar();
                     if (currentWeapon != -1) weapons[currentWeapon].Fire();
                 }
                 currentShootingCooldown = shootingCooldown * shootingCooldownModifier;
@@ -247,6 +266,7 @@ public class Player : RunningEntity
             reservedDamageCap = (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
         ticksCap = shootingTicks;
         spent = -1;
+        scoreModifier = 1f;
     }
 
     private void RecalculateReservedDamage()
@@ -279,6 +299,7 @@ public class Player : RunningEntity
         }
         MakeStep();
         UpdateHealthBarBack();
+        if (alive) UpdateTimer();
     }
 
     protected override void MakeStep()
@@ -297,6 +318,26 @@ public class Player : RunningEntity
     public void MouseUp()
     {
         slider = false;
+    }
+
+    private void UpdateTimer()
+    {
+        timeSpent += Time.deltaTime;
+        millisecondsSpent += Time.deltaTime;
+        if (millisecondsSpent >= 1)
+        {
+            secondsSpent++;
+            millisecondsSpent--;
+        }
+        if (secondsSpent > 60)
+        {
+            minutesSpent++;
+            secondsSpent -= 60;
+        }
+        if (minutesSpent == 0)
+            timeText.text = secondsSpent.ToString() + millisecondsSpent.ToString(".##");
+        else
+            timeText.text = minutesSpent.ToString() + ':' + secondsSpent.ToString("D2") + millisecondsSpent.ToString(".##");
     }
 
     public void Stabbing()
@@ -422,6 +463,11 @@ public class Player : RunningEntity
         shootingSpeedText.text = (shootingCooldown * shootingCooldownModifier).ToString();
     }
 
+    private void UpdateScoreText()
+    {
+        scoreText.text = score.ToString();
+    }
+
     private void UpdateHealthBar()
     {
         healthBar.transform.localScale = new Vector3(currentHealthPoints * 1f / healthPoints, 1f, 1f);
@@ -505,6 +551,7 @@ public class Player : RunningEntity
             FillAmmo(weapons[currentWeapon].ammo);
             UpdateShootingSpeedText();
             spent = -1;
+            scoreModifier = 1f;
             reservedDamage = 0;
             UpdateDamageText();
             if (!gotWeapon)
@@ -530,6 +577,7 @@ public class Player : RunningEntity
             FillAmmo(amount);
             UpdateShootingSpeedText();
             spent = -1;
+            scoreModifier = 1f;
             reservedDamage = 0;
             UpdateDamageText();
             if (!gotWeapon)

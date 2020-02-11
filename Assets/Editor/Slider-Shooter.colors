@@ -65,3 +65,5 @@ MonoBehaviour:
     m_Color: {r: 1, g: 0.5253223, b: 0.21226418, a: 1}
   - m_Name: Shooting Speed
     m_Color: {r: 0.36320752, g: 0.7510756, b: 1, a: 1}
+  - m_Name: Stats Ram
+    m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
