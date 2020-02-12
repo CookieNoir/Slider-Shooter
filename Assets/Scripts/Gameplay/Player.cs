@@ -24,8 +24,8 @@ public class Player : RunningEntity
     private int secondsSpent = 0;
     private int minutesSpent = 0;
     private int takenAmmo = 0; // количество патронов, полученных за игру
-    private int takenDamageModifier = 0; // количество модификаторов урона, полученных за игру
-    private int takenShootingSpeedModifier = 0; // количество модификаторов скорости стрельбы, полученных за игру
+    private int takenDamageModifiers = 0; // количество модификаторов урона, полученных за игру
+    private int takenShootingSpeedModifiers = 0; // количество модификаторов скорости стрельбы, полученных за игру
     private int takenInjuries = 0; // количество ранений, полученных за игру
     private int takenWeapons = 0; // количество подобранных оружий за игру
     private float distance = 0; // пройденная игроком дистанция
@@ -148,6 +148,7 @@ public class Player : RunningEntity
             modifiedSpeed += 0.016f;
             adrenalineTicks--;
             adrenalineTicksSpent++;
+            GameChallenges.HandleEvent(GameChallenges.EventTypes.changedAdrenalineTime, adrenalineTicksSpent);
         }
         return modifiedSpeed;
     }
@@ -164,10 +165,11 @@ public class Player : RunningEntity
         sizeX = Screen.width;
         divDelay = 5f / shootingDelay;
         stabCycle = StabCycle();
-        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
+        colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[8]);
 
         GiveNewWeapon(startWeapon, startAmmo);
 
+        scoreText.text = score.ToString();
         if (!invulnerable)
         {
             currentHealthPoints = healthPoints;
@@ -178,7 +180,6 @@ public class Player : RunningEntity
 
     private void Shooting()
     {
-        //GameOver();
         playerBody.transform.rotation = Quaternion.Lerp(playerBody.transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * divDelay);
         if (!ready)
         {
@@ -191,15 +192,17 @@ public class Player : RunningEntity
             if (currentShootingCooldown <= 0)
             {
                 ammo--;
+                if (ammo == 0)
+                {
+                    GameChallenges.HandleEvent(GameChallenges.EventTypes.emptyAmmo);
+                }
                 UpdateAmmoText();
                 spent++;
                 UpdateDamageText();
-                if (alive)
+                //if (alive)
                 {
                     int currentDamage = (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
-                    score += (int)Mathf.Floor(currentDamage * scoreModifier);
-                    scoreModifier *= 1 + spentModifier;
-                    UpdateScoreText();
+                    UpdateScore(currentDamage);
                     if (!invulnerable)
                     {
                         currentHealthPoints -= currentDamage;
@@ -226,7 +229,7 @@ public class Player : RunningEntity
         GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         yield return new WaitForSeconds(2f);
         //launch win animation
-        GameSettings.GameResult(true);
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.enemyKilled);
         Destroy(enemy);
         Destroy(this);
     }
@@ -238,7 +241,6 @@ public class Player : RunningEntity
         if (gotWeapon) playerInterface.Translate();
         GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         //launch win animation
-        GameSettings.GameResult(true);
         Destroy(enemy);
         Destroy(this);
     }
@@ -277,6 +279,7 @@ public class Player : RunningEntity
 
     private void Update()
     {
+        if (GameSettings.gameOver) GameOver();
         if (currentShootingCooldown > 0) currentShootingCooldown -= Time.deltaTime;
         if (slider)
         {
@@ -307,6 +310,7 @@ public class Player : RunningEntity
         currentSpeed = ModifiedSpeed(GameSettings.speed);
         transform.position += new Vector3(0, 0, currentSpeed);
         distance += currentSpeed;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.changedDistance, distance);
     }
 
     public void MouseDown()
@@ -323,6 +327,7 @@ public class Player : RunningEntity
     private void UpdateTimer()
     {
         timeSpent += Time.deltaTime;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.changedTime, timeSpent);
         millisecondsSpent += Time.deltaTime;
         if (millisecondsSpent >= 1)
         {
@@ -346,24 +351,26 @@ public class Player : RunningEntity
         StopCoroutine(stabCycle);
         stabCycle = StabCycle();
         StartCoroutine(stabCycle);
+        takenInjuries++;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.tookInjury, takenInjuries);
     }
 
     private IEnumerator StabCycle()
     {
         StopCoroutine(colorChanger);
-        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[9]);
+        colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[9]);
         StartCoroutine(colorChanger);
         while (stabbedTicks > 0)
             yield return null;
         adrenalineTicks = Application.targetFrameRate / 2 * 3;
         StopCoroutine(colorChanger);
-        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[10]);
+        colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[10]);
         StartCoroutine(colorChanger);
         while (adrenalineTicks > 0)
             yield return null;
 
         StopCoroutine(colorChanger);
-        colorChanger = GameSettings.ColorChanger(hurtIndicator, colors[8]);
+        colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[8]);
         StartCoroutine(colorChanger);
     }
 
@@ -419,6 +426,8 @@ public class Player : RunningEntity
     {
         shootingCooldownModifier *= value;
         UpdateShootingSpeedText();
+        takenShootingSpeedModifiers++;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.tookShootingSpeedModifier, takenShootingSpeedModifiers);
     }
 
     public void ModifyDamage(float value)
@@ -426,20 +435,27 @@ public class Player : RunningEntity
         damageModifier *= value;
         reservedDamage = (int)Mathf.Floor(reservedDamage * value);
         UpdateDamageText();
+        takenDamageModifiers++;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.tookShootingSpeedModifier, takenDamageModifiers);
     }
 
     public void FillAmmo(int amount)
     {
         ammo += amount;
-        if (ammo > maxAmmo) ammo = maxAmmo;
+        int difference = ammo - maxAmmo;
+        if (difference > 0)
+            ammo = maxAmmo;
+        else
+            difference = 0;
         UpdateAmmoText();
+        takenAmmo+=amount - difference;
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.tookAmmo, takenAmmo);
     }
 
     public void FillAmmo(float part)
     {
-        ammo += (int)(Mathf.Floor(maxAmmo * part));
-        if (ammo > maxAmmo) ammo = maxAmmo;
-        UpdateAmmoText();
+        int amount = (int)(Mathf.Floor(maxAmmo * part));
+        FillAmmo(amount);
     }
 
     private void UpdateAmmoText()
@@ -463,9 +479,12 @@ public class Player : RunningEntity
         shootingSpeedText.text = (shootingCooldown * shootingCooldownModifier).ToString();
     }
 
-    private void UpdateScoreText()
+    private void UpdateScore(int value)
     {
+        score += (int)Mathf.Floor(value * scoreModifier);
+        scoreModifier *= 1 + spentModifier;
         scoreText.text = score.ToString();
+        GameChallenges.HandleEvent(GameChallenges.EventTypes.changedScore, score);
     }
 
     private void UpdateHealthBar()
@@ -539,53 +558,71 @@ public class Player : RunningEntity
 
     public void GiveNewWeapon(int newWeapon)
     {
-        if (currentWeapon != -1)
+        if (newWeapon != currentWeapon)
         {
-            weapons[currentWeapon].gameObject.SetActive(false);
-        }
-        if (newWeapon != -1)
-        {
-            currentWeapon = newWeapon;
-            weapons[currentWeapon].gameObject.SetActive(true);
-            weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
-            FillAmmo(weapons[currentWeapon].ammo);
-            UpdateShootingSpeedText();
-            spent = -1;
-            scoreModifier = 1f;
-            reservedDamage = 0;
-            UpdateDamageText();
-            if (!gotWeapon)
+            if (currentWeapon != -1)
             {
-                playerInterface.Translate();
-                gotWeapon = true;
+                weapons[currentWeapon].gameObject.SetActive(false);
             }
-            //изменить анимацию под данную пушку
+            if (newWeapon != -1)
+            {
+                currentWeapon = newWeapon;
+                weapons[currentWeapon].gameObject.SetActive(true);
+                weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+                FillAmmo(weapons[currentWeapon].ammo);
+                UpdateShootingSpeedText();
+                spent = -1;
+                scoreModifier = 1f;
+                reservedDamage = 0;
+                UpdateDamageText();
+                if (!gotWeapon)
+                {
+                    playerInterface.Translate();
+                    gotWeapon = true;
+                }
+                //изменить анимацию под данную пушку
+                takenWeapons++;
+                GameChallenges.HandleEvent(GameChallenges.EventTypes.tookWeapon, newWeapon);
+            }
+        }
+        else
+        {
+            FillAmmo(maxAmmo/2);
         }
     }
 
     public void GiveNewWeapon(int newWeapon, int amount)
     {
-        if (currentWeapon != -1)
+        if (newWeapon != currentWeapon)
         {
-            weapons[currentWeapon].gameObject.SetActive(false);
-        }
-        if (newWeapon != -1)
-        {
-            currentWeapon = newWeapon;
-            weapons[currentWeapon].gameObject.SetActive(true);
-            weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
-            FillAmmo(amount);
-            UpdateShootingSpeedText();
-            spent = -1;
-            scoreModifier = 1f;
-            reservedDamage = 0;
-            UpdateDamageText();
-            if (!gotWeapon)
+            if (currentWeapon != -1)
             {
-                playerInterface.Translate();
-                gotWeapon = true;
+                weapons[currentWeapon].gameObject.SetActive(false);
             }
-            //изменить анимацию под данную пушку
+            if (newWeapon != -1)
+            {
+                currentWeapon = newWeapon;
+                weapons[currentWeapon].gameObject.SetActive(true);
+                weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+                FillAmmo(amount);
+                UpdateShootingSpeedText();
+                spent = -1;
+                scoreModifier = 1f;
+                reservedDamage = 0;
+                UpdateDamageText();
+                if (!gotWeapon)
+                {
+                    playerInterface.Translate();
+                    gotWeapon = true;
+                }
+                //изменить анимацию под данную пушку
+                takenWeapons++;
+                GameChallenges.HandleEvent(GameChallenges.EventTypes.tookWeapon, newWeapon);
+            }
+        }
+        else
+        {
+            FillAmmo(amount);
         }
     }
 

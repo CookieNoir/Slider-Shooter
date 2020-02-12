@@ -61,11 +61,15 @@ public class GameSettings : MonoBehaviour
     private static IEnumerator dark;
     private static IEnumerator hurtIndicatorColor;
 
-    private void Start()
+    private void Awake()
     {
         Application.targetFrameRate = 60;
-        speedFramerateModifier = 60f / Application.targetFrameRate;
         instance = this as GameSettings;
+    }
+
+    private void Start()
+    {
+        speedFramerateModifier = 60f / Application.targetFrameRate;
         winWindow = GameObject.FindWithTag("Win Window").GetComponent<UiMovement>();
         loseWindow = GameObject.FindWithTag("Lose Window").GetComponent<UiMovement>();
         darkScreen = GameObject.FindWithTag("Dark Screen").GetComponent<AlphaChanger>();
@@ -127,9 +131,9 @@ public class GameSettings : MonoBehaviour
         }
     }
 
-    public static void GameResult(bool alive)
+    public static void GameResult(bool won)
     {
-        if (alive)
+        if (won)
         {
             winWindow.Translate();
         }
@@ -138,6 +142,7 @@ public class GameSettings : MonoBehaviour
             loseWindow.Translate();      
         }
         gameOver = true;
+        GameChallenges.VisualizeStarsAtTheEnd();
         instance.StopCoroutine(dark);
         dark = darkScreen.ChangeAlpha();
         instance.StartCoroutine(dark);
@@ -161,23 +166,14 @@ public class GameSettings : MonoBehaviour
 
     public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor, Color baseColor)
     {
-        instance.StartCoroutine(ColorChanger(component, targetColor));
-        hurtIndicatorColor = ColorChanger(component, baseColor);
+        instance.StartCoroutine(UIHelper.ColorChanger(component, targetColor));
+        hurtIndicatorColor = UIHelper.ColorChanger(component, baseColor);
     }
     public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor)
     {
-        hurtIndicatorColor = ColorChanger(component, targetColor);
+        hurtIndicatorColor = UIHelper.ColorChanger(component, targetColor);
     }
 
-    public static IEnumerator ColorChanger(MaskableGraphic component, Color targetColor)
-    {
-        Color baseColor = component.color;
-        for (float f = 0.02f; f <= 1; f += 0.02f)
-        {
-            component.color = Vector4.Lerp(baseColor, targetColor, f * (2 - f));
-            yield return null;
-        }
-    }
 
     private void OnDrawGizmos()
     {

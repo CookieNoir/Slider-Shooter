@@ -1,69 +1,615 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 [AddComponentMenu("Gameplay/Game Challenges")]
 public class GameChallenges : MonoBehaviour
 {
     public enum PrimaryChallenges
     {
-        killEnemy,
-        surviveForTime,
-        reachDistance
+        killEnemy,          //  +
+        surviveForTime,     //  +
+        reachDistance       //  +
     };
 
     public enum SecondaryChallenges
     {
-        dontTake_Ammo, // не подбирай патроны
-        dontTake_AnyWeapon, // не подбирай оружие
-        dontTake_WeaponWithID, // не подбирай особое оружие
-        dontTake_DamageModifier, // не подбирай модификаторы урона (усилители)
-        dontTake_ShootingSpeedModifier, // не подбирай модификаторы скорости стрельбы (ускорители)
-        dontTake_Injury, // не получай повреждений
+        dontTakeAmmo,                           // не подбирай патроны                                                  +
+        dontTakeAnyWeapon,                      // не подбирай оружие                                                   +
+        dontTakeWeaponWithID,                   // не подбирай особое оружие                                            +
+        dontTakeDamageModifier,                 // не подбирай модификаторы урона (усилители)                           +
+        dontTakeShootingSpeedModifier,          // не подбирай модификаторы скорости стрельбы (ускорители)              +
+        dontTakeInjury,                         // не получай повреждений                                               +
 
-        collect_LessEqual_Ammo, // подбери не более N патронов
-        collect_LessEqual_DamageModifier, // подбери не более N  модификаторов урона (усилителей)
-        collect_LessEqual_ShootingSpeedModifier, // подбери не более N модификаторов скорости стрельбы (ускорителей)
+        collectLessEqualAmmo,                   // подбери не более N патронов                                          +
+        collectLessEqualDamageModifier,         // подбери не более N  модификаторов урона (усилителей)                 +
+        collectLessEqualShootingSpeedModifier,  // подбери не более N модификаторов скорости стрельбы (ускорителей)     +
 
-        collect_MoreEqual_Ammo, // подбери не менее N патронов
-        collect_MoreEqual_DamageModifier, // подбери не менее N модификаторов урона (усилителей)
-        collect_MoreEqual_ShootingSpeedModifier, // подбери не менее N модификаторов скорости стрельбы (ускорителей)
+        collectMoreEqualAmmo,                   // подбери не менее N патронов                                          +
+        collectMoreEqualDamageModifier,         // подбери не менее N модификаторов урона (усилителей)                  +
+        collectMoreEqualShootingSpeedModifier,  // подбери не менее N модификаторов скорости стрельбы (ускорителей)     +
 
-        time_LessEqual, // пройди меньше, чем за N секунд
-        time_MoreEqual, // проживи не менее N секунд
+        timeLessEqual,                          // пройди меньше, чем за N секунд                                       +
+        timeMoreEqual,                          // проживи не менее N секунд                                            +
 
-        score_MoreEqual, // набери N очков
+        reachedLessEqualDistance,               // закончи игру, преодолев не более N метров                            +
+        reachedMoreEqualDistance,               // закончи игру, преодолев не менее N метров                            +
 
-        adrenalineTime_MoreEqual, // проведи в режиме адреналина не менее N секунд
-        dontEmptyAmmo // не опустошай боезапас
+        scoreMoreEqual,                         // набери N очков                                                       +
+
+        adrenalineTimeMoreEqual,                // проведи в режиме адреналина не менее N секунд                        +
+        dontEmptyAmmo                           // не опустошай боезапас                                                +
     };
 
-    public enum EventTypes {
-        // инкрементные события
-        took_Ammo,
-        took_Weapon,
-        tookDamage_Modifier,
-        took_ShootingSpeedModifier,
-        took_Injury,
-        // сравнительные события
-        changed_Time,
-        changed_Score,
-        changed_AdrenalineTime,
-        changed_Distance,
-        // констатирующие события
-        emptyAmmo,
-        enemyKilled
+    public enum EventTypes
+    {
+        tookAmmo,                   //int
+        tookWeapon,                 //int(Weapon ID)
+        tookDamageModifier,         //int
+        tookShootingSpeedModifier,  //int
+        tookInjury,                 //int
+
+        changedTime,                //float
+        changedScore,               //int
+        changedAdrenalineTime,      //int(Ticks Spent)
+        changedDistance,            //float
+
+        emptyAmmo,                  //bool
+        enemyKilled                 //bool
     };
 
-
+    //---------------------------------
+    [Header("Left Star Variables")]
     public SecondaryChallenges challengeLeft;
-    public SecondaryChallenges challengeRight;
-
     public float floatValueLeft;
-    public float floatValueRight;
     public int intValueLeft;
+    public MaskableGraphic inGameStarIconLeft;
+    public MaskableGraphic endGameStarIconLeft;
+    //---------------------------------
+    [Header("Middle Star Variables")]
+    public PrimaryChallenges challengeMiddle;
+    public float floatValueMiddle;
+    public MaskableGraphic endGameStarIconMiddle;
+    //---------------------------------
+    [Header("Right Star Variables")]
+    public SecondaryChallenges challengeRight;
+    public float floatValueRight;
     public int intValueRight;
+    public MaskableGraphic inGameStarIconRight;
+    public MaskableGraphic endGameStarIconRight;
+    //---------------------------------
+    [Header("Other")]
+    public Color colorEnabled;
+    public Color colorDisabled;
 
-    public bool earnedPrimary;
-    public bool earnedLeft;
-    public bool earnedRight;
+    private bool earnedLeft;
+    private bool earnedRight;
+    private static GameChallenges instance;
+
+    private void Awake()
+    {
+        instance = this as GameChallenges;
+    }
+
+    public static void HandleEvent(EventTypes type)
+    {
+        bool left = instance.earnedLeft, right = instance.earnedRight;
+        switch (type)
+        {
+            case EventTypes.emptyAmmo:
+                {
+                    if (instance.challengeLeft == SecondaryChallenges.dontEmptyAmmo)
+                    {
+                        instance.earnedLeft = false;
+                    }
+                    if (instance.challengeRight == SecondaryChallenges.dontEmptyAmmo)
+                    {
+                        instance.earnedRight = false;
+                    }
+                    break;
+                }
+            case EventTypes.enemyKilled:
+                {
+                    if (instance.challengeMiddle == PrimaryChallenges.killEnemy)
+                    {
+                        GameSettings.GameResult(true);
+                    }
+                    break;
+                }
+        }
+        VisualizeChanges(left, right);
+    }
+
+    public static void HandleEvent(EventTypes type, int value)
+    {
+        bool left = instance.earnedLeft, right = instance.earnedRight;
+        switch (type)
+        {
+            case EventTypes.tookAmmo:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.dontTakeAmmo:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualAmmo: {
+                                if (value <= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualAmmo: {
+                                if (value >= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.dontTakeAmmo:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualAmmo:
+                            {
+                                if (value <= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualAmmo:
+                            {
+                                if (value >= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case EventTypes.tookWeapon:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.dontTakeAnyWeapon:
+                            {
+                                instance.earnedLeft = false;
+                                break;
+                            }
+                        case SecondaryChallenges.dontTakeWeaponWithID:
+                            {
+                                if (value == instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.dontTakeAnyWeapon:
+                            {
+                                instance.earnedRight = false;
+                                break;
+                            }
+                        case SecondaryChallenges.dontTakeWeaponWithID:
+                            {
+                                if (value == instance.intValueRight)
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case EventTypes.tookDamageModifier:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.dontTakeDamageModifier:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualDamageModifier:
+                            {
+                                if (value <= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualDamageModifier:
+                            {
+                                if (value >= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.dontTakeDamageModifier:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualDamageModifier:
+                            {
+                                if (value <= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualDamageModifier:
+                            {
+                                if (value >= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case EventTypes.tookShootingSpeedModifier:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.dontTakeShootingSpeedModifier:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
+                            {
+                                if (value <= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
+                            {
+                                if (value >= instance.intValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.dontTakeShootingSpeedModifier:
+                            {
+                                if (value > 0)
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
+                            {
+                                if (value <= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
+                            {
+                                if (value >= instance.intValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    break;
+                }
+            case EventTypes.tookInjury:
+                {
+                    if (instance.challengeLeft == SecondaryChallenges.dontTakeInjury)
+                    {
+                        instance.earnedLeft = false;
+                    }
+                    if (instance.challengeRight == SecondaryChallenges.dontTakeInjury)
+                    {
+                        instance.earnedRight = false;
+                    }
+                    break;
+                }
+            case EventTypes.changedScore:
+                {
+                    if (instance.challengeLeft == SecondaryChallenges.scoreMoreEqual)
+                    {
+                        if (value >= instance.intValueLeft)
+                        {
+                            instance.earnedLeft = true;
+                        }
+                        else
+                        {
+                            instance.earnedLeft = false;
+                        }
+                    }
+                    if (instance.challengeRight == SecondaryChallenges.scoreMoreEqual)
+                    {
+                        if (value >= instance.intValueRight)
+                        {
+                            instance.earnedRight = true;
+                        }
+                        else
+                        {
+                            instance.earnedRight = false;
+                        }
+                    }
+                    break;
+                }
+            case EventTypes.changedAdrenalineTime:
+                {
+                    if (instance.challengeLeft == SecondaryChallenges.adrenalineTimeMoreEqual)
+                    {
+                        if (value >= (int)Mathf.Floor(instance.floatValueLeft * Application.targetFrameRate))
+                        {
+                            instance.earnedLeft = true;
+                        }
+                        else
+                        {
+                            instance.earnedLeft = false;
+                        }
+                    }
+                    if (instance.challengeRight == SecondaryChallenges.adrenalineTimeMoreEqual)
+                    {
+                        if (value >= (int)Mathf.Floor(instance.floatValueRight * Application.targetFrameRate))
+                        {
+                            instance.earnedRight = true;
+                        }
+                        else
+                        {
+                            instance.earnedRight = false;
+                        }
+                    }
+                    break;
+                }
+        }
+        VisualizeChanges(left, right);
+    }
+
+    public static void HandleEvent(EventTypes type, float value)
+    {
+        bool left = instance.earnedLeft, right = instance.earnedRight;
+        switch (type)
+        {
+            case EventTypes.changedTime:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.timeLessEqual:
+                            {
+                                if (value <= instance.floatValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.timeMoreEqual:
+                            {
+                                if (value >= instance.floatValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.timeLessEqual:
+                            {
+                                if (value <= instance.floatValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.timeMoreEqual:
+                            {
+                                if (value >= instance.floatValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    if (instance.challengeMiddle == PrimaryChallenges.surviveForTime)
+                    {
+                        if (value >= instance.floatValueMiddle)
+                        {
+                            GameSettings.GameResult(true);
+                        }
+                    }
+                    break;
+                }
+            case EventTypes.changedDistance:
+                {
+                    switch (instance.challengeLeft)
+                    {
+                        case SecondaryChallenges.reachedLessEqualDistance:
+                            {
+                                if (value <= instance.floatValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.reachedMoreEqualDistance:
+                            {
+                                if (value >= instance.floatValueLeft)
+                                {
+                                    instance.earnedLeft = true;
+                                }
+                                else
+                                {
+                                    instance.earnedLeft = false;
+                                }
+                                break;
+                            }
+                    }
+                    switch (instance.challengeRight)
+                    {
+                        case SecondaryChallenges.reachedLessEqualDistance:
+                            {
+                                if (value <= instance.floatValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                        case SecondaryChallenges.reachedMoreEqualDistance:
+                            {
+                                if (value >= instance.floatValueRight)
+                                {
+                                    instance.earnedRight = true;
+                                }
+                                else
+                                {
+                                    instance.earnedRight = false;
+                                }
+                                break;
+                            }
+                    }
+                    if (instance.challengeMiddle == PrimaryChallenges.reachDistance)
+                    {
+                        GameSettings.GameResult(true);
+                    }
+                    break;
+                }
+        }
+        VisualizeChanges(left, right);
+    }
+
+    private static void VisualizeChanges(bool left, bool right)
+    {
+
+        if (left != instance.earnedLeft)
+        {
+            if (instance.earnedLeft)
+                instance.StartCoroutine(UIHelper.ColorChanger(instance.inGameStarIconLeft, instance.colorEnabled));
+            else
+                instance.StartCoroutine(UIHelper.ColorChanger(instance.inGameStarIconLeft, instance.colorDisabled));
+        }
+        if (right != instance.earnedRight)
+        {
+            if (instance.earnedRight)
+                instance.StartCoroutine(UIHelper.ColorChanger(instance.inGameStarIconRight, instance.colorEnabled));
+            else
+                instance.StartCoroutine(UIHelper.ColorChanger(instance.inGameStarIconRight, instance.colorDisabled));
+        }
+    }
+
+    public static void VisualizeStarsAtTheEnd()
+    {
+        if (instance.earnedLeft)
+            instance.StartCoroutine(UIHelper.ColorChanger(instance.endGameStarIconLeft, instance.colorEnabled));
+
+        instance.StartCoroutine(UIHelper.ColorChanger(instance.endGameStarIconMiddle, instance.colorEnabled));
+
+        if (instance.earnedRight)
+            instance.StartCoroutine(UIHelper.ColorChanger(instance.endGameStarIconRight, instance.colorEnabled));
+    }
 }

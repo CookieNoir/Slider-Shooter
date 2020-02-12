@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Gameplay\WeaponBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\UI\UIHelper.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
     <None Include="Assets\Shaders\Vertex Mask 3 tex.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />
