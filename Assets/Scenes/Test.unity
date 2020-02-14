@@ -10429,7 +10429,7 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   invulnerable: 0
-  healthPoints: 750
+  healthPoints: 1
   startAmmo: 0
   shootingDelay: 0.7
   hurtIndicator: {fileID: 1989951782}

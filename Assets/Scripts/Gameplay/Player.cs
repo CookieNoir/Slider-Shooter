@@ -417,6 +417,8 @@ public class Player : RunningEntity
         else
         {
             GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
+            GameChallenges.HandleEvent(GameChallenges.EventTypes.enemyKilled);
+            Destroy(enemy);
         }
         // dying animation
         Destroy(this);
