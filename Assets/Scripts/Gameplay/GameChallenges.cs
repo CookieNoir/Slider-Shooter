@@ -19,13 +19,13 @@ public class GameChallenges : MonoBehaviour
         dontTakeShootingSpeedModifier,          // не подбирай модификаторы скорости стрельбы (ускорители)              +
         dontTakeInjury,                         // не получай повреждений                                               +
 
-        collectLessEqualAmmo,                   // подбери не более N патронов                                          +
-        collectLessEqualDamageModifier,         // подбери не более N  модификаторов урона (усилителей)                 +
-        collectLessEqualShootingSpeedModifier,  // подбери не более N модификаторов скорости стрельбы (ускорителей)     +
+        takeLessEqualAmmo,                      // подбери не более N патронов                                          +
+        takeLessEqualDamageModifier,            // подбери не более N  модификаторов урона (усилителей)                 +
+        takeLessEqualShootingSpeedModifier,     // подбери не более N модификаторов скорости стрельбы (ускорителей)     +
 
-        collectMoreEqualAmmo,                   // подбери не менее N патронов                                          +
-        collectMoreEqualDamageModifier,         // подбери не менее N модификаторов урона (усилителей)                  +
-        collectMoreEqualShootingSpeedModifier,  // подбери не менее N модификаторов скорости стрельбы (ускорителей)     +
+        takeMoreEqualAmmo,                      // подбери не менее N патронов                                          +
+        takeMoreEqualDamageModifier,            // подбери не менее N модификаторов урона (усилителей)                  +
+        takeMoreEqualShootingSpeedModifier,     // подбери не менее N модификаторов скорости стрельбы (ускорителей)     +
 
         timeLessEqual,                          // пройди меньше, чем за N секунд                                       +
         timeMoreEqual,                          // проживи не менее N секунд                                            +
@@ -132,12 +132,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedLeft = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualAmmo:
+                        case SecondaryChallenges.takeLessEqualAmmo:
                             {
                                 instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualAmmo:
+                        case SecondaryChallenges.takeMoreEqualAmmo:
                             {
                                 instance.earnedLeft = (value >= instance.intValueLeft);
                                 break;
@@ -150,12 +150,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedRight = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualAmmo:
+                        case SecondaryChallenges.takeLessEqualAmmo:
                             {
                                 instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualAmmo:
+                        case SecondaryChallenges.takeMoreEqualAmmo:
                             {
                                 instance.earnedRight = (value >= instance.intValueRight);
                                 break;
@@ -202,12 +202,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedLeft = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualDamageModifier:
+                        case SecondaryChallenges.takeLessEqualDamageModifier:
                             {
                                 instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualDamageModifier:
+                        case SecondaryChallenges.takeMoreEqualDamageModifier:
                             {
                                 instance.earnedLeft = (value >= instance.intValueLeft);
                                 break;
@@ -220,12 +220,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedRight = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualDamageModifier:
+                        case SecondaryChallenges.takeLessEqualDamageModifier:
                             {
                                 instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualDamageModifier:
+                        case SecondaryChallenges.takeMoreEqualDamageModifier:
                             {
                                 instance.earnedRight = (value <= instance.intValueRight);
                                 break;
@@ -242,12 +242,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedLeft = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
+                        case SecondaryChallenges.takeLessEqualShootingSpeedModifier:
                             {
                                 instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
+                        case SecondaryChallenges.takeMoreEqualShootingSpeedModifier:
                             {
                                 instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
@@ -260,12 +260,12 @@ public class GameChallenges : MonoBehaviour
                                 instance.earnedRight = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
+                        case SecondaryChallenges.takeLessEqualShootingSpeedModifier:
                             {
                                 instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
+                        case SecondaryChallenges.takeMoreEqualShootingSpeedModifier:
                             {
                                 instance.earnedRight = (value <= instance.intValueRight);
                                 break;

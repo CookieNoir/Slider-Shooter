@@ -1,0 +1,33 @@
+Russian Русский
+Score Счет
+Time Время
+ScoreAtLeast Наберите не менее
+points очков
+CompleteIn Успейте за
+seconds секунд
+TheMonsterIsDefeated# Чудовище повержено.\nПоздравляем!
+ToTheMainMenu В главное меню
+TryAgain Попробовать снова
+TheNextLevel Следующий уровень
+YouDied# Вы погибли.\nНе желаете попробовать снова?
+PickUp Подберите
+DontPickUp Не подбирайте
+ammo боеприпасы
+theWeapon оружие:
+weapon оружие
+weapons оружие
+_bullets патронов
+damageModifier модификатор урона
+enhancer усилитель
+shootingSpeedModifier модификатор скорости стрельбы
+accelerator ускоритель
+OrMore или более
+NoMoreThan не более
+DontTakeInjury Не получайте повреждений
+Spend Проведите
+inAdrenalineMode под всплеском адреналина
+HoldOutForMoreThan Продержитесь более
+DontEmptyTheAmmo Не опустошайте боезапас
+OvercomeTheDistanceOf Преодолейте дистанцию
+_meters метров
+CompleteThelevelByOvercomingLessThan Завершите уровень, преодолев менее
