@@ -129,32 +129,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeAmmo:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= 0);
                                 break;
                             }
-                        case SecondaryChallenges.collectLessEqualAmmo: {
-                                if (value <= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                        case SecondaryChallenges.collectLessEqualAmmo:
+                            {
+                                instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.collectMoreEqualAmmo: {
-                                if (value >= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                        case SecondaryChallenges.collectMoreEqualAmmo:
+                            {
+                                instance.earnedLeft = (value >= instance.intValueLeft);
                                 break;
                             }
                     }
@@ -162,34 +147,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeAmmo:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= 0);
                                 break;
                             }
                         case SecondaryChallenges.collectLessEqualAmmo:
                             {
-                                if (value <= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
                         case SecondaryChallenges.collectMoreEqualAmmo:
                             {
-                                if (value >= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value >= instance.intValueRight);
                                 break;
                             }
                     }
@@ -206,10 +174,7 @@ public class GameChallenges : MonoBehaviour
                             }
                         case SecondaryChallenges.dontTakeWeaponWithID:
                             {
-                                if (value == instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value != instance.intValueLeft);
                                 break;
                             }
                     }
@@ -222,10 +187,7 @@ public class GameChallenges : MonoBehaviour
                             }
                         case SecondaryChallenges.dontTakeWeaponWithID:
                             {
-                                if (value == instance.intValueRight)
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value != instance.intValueRight);
                                 break;
                             }
                     }
@@ -237,34 +199,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeDamageModifier:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= 0);
                                 break;
                             }
                         case SecondaryChallenges.collectLessEqualDamageModifier:
                             {
-                                if (value <= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
                         case SecondaryChallenges.collectMoreEqualDamageModifier:
                             {
-                                if (value >= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value >= instance.intValueLeft);
                                 break;
                             }
                     }
@@ -272,34 +217,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeDamageModifier:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= 0);
                                 break;
                             }
                         case SecondaryChallenges.collectLessEqualDamageModifier:
                             {
-                                if (value <= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
                         case SecondaryChallenges.collectMoreEqualDamageModifier:
                             {
-                                if (value >= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
                     }
@@ -311,34 +239,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeShootingSpeedModifier:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= 0);
                                 break;
                             }
                         case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
                             {
-                                if (value <= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
                         case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
                             {
-                                if (value >= instance.intValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= instance.intValueLeft);
                                 break;
                             }
                     }
@@ -346,34 +257,17 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.dontTakeShootingSpeedModifier:
                             {
-                                if (value > 0)
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= 0);
                                 break;
                             }
                         case SecondaryChallenges.collectLessEqualShootingSpeedModifier:
                             {
-                                if (value <= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
                         case SecondaryChallenges.collectMoreEqualShootingSpeedModifier:
                             {
-                                if (value >= instance.intValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= instance.intValueRight);
                                 break;
                             }
                     }
@@ -395,25 +289,11 @@ public class GameChallenges : MonoBehaviour
                 {
                     if (instance.challengeLeft == SecondaryChallenges.scoreMoreEqual)
                     {
-                        if (value >= instance.intValueLeft)
-                        {
-                            instance.earnedLeft = true;
-                        }
-                        else
-                        {
-                            instance.earnedLeft = false;
-                        }
+                        instance.earnedLeft = (value >= instance.intValueLeft);
                     }
                     if (instance.challengeRight == SecondaryChallenges.scoreMoreEqual)
                     {
-                        if (value >= instance.intValueRight)
-                        {
-                            instance.earnedRight = true;
-                        }
-                        else
-                        {
-                            instance.earnedRight = false;
-                        }
+                        instance.earnedRight = (value >= instance.intValueRight);
                     }
                     break;
                 }
@@ -421,25 +301,11 @@ public class GameChallenges : MonoBehaviour
                 {
                     if (instance.challengeLeft == SecondaryChallenges.adrenalineTimeMoreEqual)
                     {
-                        if (value >= (int)Mathf.Floor(instance.floatValueLeft * Application.targetFrameRate))
-                        {
-                            instance.earnedLeft = true;
-                        }
-                        else
-                        {
-                            instance.earnedLeft = false;
-                        }
+                        instance.earnedLeft = (value >= (int)Mathf.Floor(instance.floatValueLeft * Application.targetFrameRate));
                     }
                     if (instance.challengeRight == SecondaryChallenges.adrenalineTimeMoreEqual)
                     {
-                        if (value >= (int)Mathf.Floor(instance.floatValueRight * Application.targetFrameRate))
-                        {
-                            instance.earnedRight = true;
-                        }
-                        else
-                        {
-                            instance.earnedRight = false;
-                        }
+                        instance.earnedRight = (value >= (int)Mathf.Floor(instance.floatValueRight * Application.targetFrameRate));
                     }
                     break;
                 }
@@ -458,26 +324,12 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.timeLessEqual:
                             {
-                                if (value <= instance.floatValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= instance.floatValueLeft);
                                 break;
                             }
                         case SecondaryChallenges.timeMoreEqual:
                             {
-                                if (value >= instance.floatValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value >= instance.floatValueLeft);
                                 break;
                             }
                     }
@@ -485,26 +337,12 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.timeLessEqual:
                             {
-                                if (value <= instance.floatValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= instance.floatValueRight);
                                 break;
                             }
                         case SecondaryChallenges.timeMoreEqual:
                             {
-                                if (value >= instance.floatValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value >= instance.floatValueRight);
                                 break;
                             }
                     }
@@ -523,26 +361,12 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.reachedLessEqualDistance:
                             {
-                                if (value <= instance.floatValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value <= instance.floatValueLeft);
                                 break;
                             }
                         case SecondaryChallenges.reachedMoreEqualDistance:
                             {
-                                if (value >= instance.floatValueLeft)
-                                {
-                                    instance.earnedLeft = true;
-                                }
-                                else
-                                {
-                                    instance.earnedLeft = false;
-                                }
+                                instance.earnedLeft = (value >= instance.floatValueLeft);
                                 break;
                             }
                     }
@@ -550,26 +374,12 @@ public class GameChallenges : MonoBehaviour
                     {
                         case SecondaryChallenges.reachedLessEqualDistance:
                             {
-                                if (value <= instance.floatValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value <= instance.floatValueRight);
                                 break;
                             }
                         case SecondaryChallenges.reachedMoreEqualDistance:
                             {
-                                if (value >= instance.floatValueRight)
-                                {
-                                    instance.earnedRight = true;
-                                }
-                                else
-                                {
-                                    instance.earnedRight = false;
-                                }
+                                instance.earnedRight = (value >= instance.floatValueRight);
                                 break;
                             }
                     }
