@@ -28,7 +28,7 @@ public class WeaponBehaviour : MonoBehaviour
     public void GetProperties(Image Icon, Text WeaponName, ref int MaxAmmo, ref float ShootingCooldown, ref int Damage, ref float SpentModifier)
     {
         Icon.sprite = icon;
-        WeaponName.text = weaponName; 
+        WeaponName.text = Translation.wordDictionary[weaponName]; 
         MaxAmmo = maxAmmo;
         ShootingCooldown = shootingCooldown;
         Damage = damage;
@@ -37,7 +37,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     public void Fire()
     {
-        switch (turn)
+        switch (turn) // Расчитано на 4 кадра; если понадобится больше, расширю
         {
             case 0: fireRenderer.material.mainTextureOffset = new Vector2(0, 0); break;
             case 1: fireRenderer.material.mainTextureOffset = new Vector2(0.5f, 0); break;

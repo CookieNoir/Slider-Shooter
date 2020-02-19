@@ -31,3 +31,4 @@ DontEmptyTheAmmo Не опустошайте боезапас
 OvercomeTheDistanceOf Преодолейте дистанцию
 _meters метров
 CompleteThelevelByOvercomingLessThan Завершите уровень, преодолев менее
+RustyPistol Ржавый пистолет

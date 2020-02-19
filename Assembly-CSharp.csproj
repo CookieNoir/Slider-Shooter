@@ -76,6 +76,8 @@
     <Compile Include="Assets\Scripts\Gameplay\WeaponBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\TranslatableDynamic.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\TranslatableStatic.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\TranslatableText.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translation.cs" />
     <Compile Include="Assets\Scripts\UI\UIHelper.cs" />

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class TranslatableText : MonoBehaviour
 {
-    private Text textComponent;
-    public List<string> translatableWords;
-    private List<string> outputText;
+    protected Text textComponent;
+    public List<string> staticTranslatableWords;
+    protected List<string> outputText;
 
-    protected virtual void Start()
+    protected void Start()
     {
         textComponent = GetComponent<Text>();
         outputText = new List<string>();
@@ -21,12 +21,12 @@ public class TranslatableText : MonoBehaviour
     protected virtual void TranslateWords()
     {
         string output = "";
-        foreach (string word in translatableWords)
+        foreach (string word in staticTranslatableWords)
         {
             output += Translation.wordDictionary[word]+' ';
         }
-        outputText.Add(output);
-        
+        if (outputText.Count < 1) outputText.Add(output);
+        else outputText[0] = output;
     }
 
     protected virtual void RefreshText()
@@ -34,7 +34,7 @@ public class TranslatableText : MonoBehaviour
         textComponent.text = outputText[0];
     }
 
-    protected virtual void OnLanguageChange()
+    protected void OnLanguageChange()
     {
         TranslateWords();
         RefreshText();
