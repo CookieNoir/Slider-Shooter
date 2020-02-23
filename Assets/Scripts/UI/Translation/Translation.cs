@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 [AddComponentMenu("Game UI/Translation")]
 public class Translation : MonoBehaviour
 {
+    public static Dictionary<string, string> sentenceDictionary;
     public static Dictionary<string, string> wordDictionary;
 
     public delegate void OnLanguageChange();
@@ -16,8 +17,12 @@ public class Translation : MonoBehaviour
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
+
+            sentenceDictionary = new Dictionary<string, string>();
             wordDictionary = new Dictionary<string, string>();
+
             SetLanguage(PlayerPrefs.GetString("Language", "Localization/Russian"));
+
             instance = this as Translation;
         }
         else Destroy(this);
@@ -26,19 +31,81 @@ public class Translation : MonoBehaviour
     public static void SetLanguage(string path)
     {
         TextAsset textAsset = Resources.Load<TextAsset>(path);
-        string text = textAsset.text;
-        string[] textLines = Regex.Split(text, "\n|\r|\r\n");
+        string fileText = textAsset.text;
 
-        for (int i = 2; i < textLines.Length; i += 2)
+        int index = 0, endIndex = 0, length = fileText.Length;
+        string keyString, textString;
+        while (index < length)
         {
-            int index = textLines[i].IndexOf(' ');
-            string id = textLines[i].Substring(0, index);
-            string word = textLines[i].Substring(index + 1, textLines[i].Length - index - 1);
-            wordDictionary[id] = word;
+            switch (fileText[index])
+            {
+                case '#':   // Метка предложения
+                    {
+                        index++;
+                        endIndex = fileText.IndexOf(' ', index);
+                        if (endIndex != -1)
+                        {
+                            keyString = fileText.Substring(index, endIndex - index);
+                            index = endIndex + 1;
+                            endIndex = IndexOfNewLine(fileText, index);
+                            if (endIndex == -1)
+                                endIndex = length;
+                            textString = fileText.Substring(index, endIndex - index);
+
+                            sentenceDictionary[keyString] = textString;
+                            //Debug.Log("Sentence added: " + keyString + " = " + textString);
+                            index = endIndex;
+                        }
+                        else
+                            index = length;
+                        break;
+                    }
+                case '@':   // Метка стандартного слова
+                case '$':   // Метка дополнительного слова
+                    {
+                        index++;
+                        endIndex = fileText.IndexOf(' ', index);
+                        if (endIndex != -1)
+                        {
+                            keyString = fileText.Substring(index, endIndex - index);
+                            index = endIndex + 1;
+                            endIndex = IndexOfNewLine(fileText, index);
+                            textString = fileText.Substring(index, endIndex - index);
+
+                            wordDictionary[keyString] = textString;
+                            //Debug.Log("Word added: "+keyString+" = "+textString);
+                            index = endIndex;
+                        }
+                        else
+                            index = length;
+                        break;
+                    }
+                case '\r':
+                case '\n':
+                    {
+                        index++;
+                        break;
+                    }
+                default:
+                    {
+                        index = IndexOfNewLine(fileText, index);
+                        break;
+                    }
+            }
         }
 
         PlayerPrefs.SetString("Language", path);
 
         LanguageChange?.Invoke();
+    }
+
+    private static int IndexOfNewLine(string textString, int startIndex)
+    {
+        int i = startIndex, length = textString.Length;
+        while (i < length && textString[i] != '\r' && textString[i] != '\n')
+        {
+            i++;
+        }
+        return i;
     }
 }

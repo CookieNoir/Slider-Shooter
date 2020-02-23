@@ -13,6 +13,7 @@ public class GameChallenges : MonoBehaviour
     public enum SecondaryChallenges
     {
         dontTakeAmmo,                           // не подбирай патроны                                                  +
+        dontEmptyAmmo,                          // не опустошай боезапас                                                +
         dontTakeAnyWeapon,                      // не подбирай оружие                                                   +
         dontTakeWeaponWithID,                   // не подбирай особое оружие                                            +
         dontTakeDamageModifier,                 // не подбирай модификаторы урона (усилители)                           +
@@ -27,16 +28,15 @@ public class GameChallenges : MonoBehaviour
         takeMoreEqualDamageModifier,            // подбери не менее N модификаторов урона (усилителей)                  +
         takeMoreEqualShootingSpeedModifier,     // подбери не менее N модификаторов скорости стрельбы (ускорителей)     +
 
-        timeLessEqual,                          // пройди меньше, чем за N секунд                                       +
-        timeMoreEqual,                          // проживи не менее N секунд                                            +
+        endWithTimeLessEqual,                   // пройди меньше, чем за N секунд                                       +
+        endWithTimeMoreEqual,                   // проживи не менее N секунд                                            +
 
-        reachedLessEqualDistance,               // закончи игру, преодолев не более N метров                            +
-        reachedMoreEqualDistance,               // закончи игру, преодолев не менее N метров                            +
+        reachLessEqualDistance,                 // закончи игру, преодолев не более N метров                            +
+        reachMoreEqualDistance,                 // закончи игру, преодолев не менее N метров                            +
 
         scoreMoreEqual,                         // набери N очков                                                       +
 
-        adrenalineTimeMoreEqual,                // проведи в режиме адреналина не менее N секунд                        +
-        dontEmptyAmmo                           // не опустошай боезапас                                                +
+        beInAdrenalineModeMoreEqual             // проведи в режиме адреналина не менее N секунд                        +
     };
 
     public enum EventTypes
@@ -299,11 +299,11 @@ public class GameChallenges : MonoBehaviour
                 }
             case EventTypes.changedAdrenalineTime:
                 {
-                    if (instance.challengeLeft == SecondaryChallenges.adrenalineTimeMoreEqual)
+                    if (instance.challengeLeft == SecondaryChallenges.beInAdrenalineModeMoreEqual)
                     {
                         instance.earnedLeft = (value >= (int)Mathf.Floor(instance.floatValueLeft * Application.targetFrameRate));
                     }
-                    if (instance.challengeRight == SecondaryChallenges.adrenalineTimeMoreEqual)
+                    if (instance.challengeRight == SecondaryChallenges.beInAdrenalineModeMoreEqual)
                     {
                         instance.earnedRight = (value >= (int)Mathf.Floor(instance.floatValueRight * Application.targetFrameRate));
                     }
@@ -322,12 +322,12 @@ public class GameChallenges : MonoBehaviour
                 {
                     switch (instance.challengeLeft)
                     {
-                        case SecondaryChallenges.timeLessEqual:
+                        case SecondaryChallenges.endWithTimeLessEqual:
                             {
                                 instance.earnedLeft = (value <= instance.floatValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.timeMoreEqual:
+                        case SecondaryChallenges.endWithTimeMoreEqual:
                             {
                                 instance.earnedLeft = (value >= instance.floatValueLeft);
                                 break;
@@ -335,12 +335,12 @@ public class GameChallenges : MonoBehaviour
                     }
                     switch (instance.challengeRight)
                     {
-                        case SecondaryChallenges.timeLessEqual:
+                        case SecondaryChallenges.endWithTimeLessEqual:
                             {
                                 instance.earnedRight = (value <= instance.floatValueRight);
                                 break;
                             }
-                        case SecondaryChallenges.timeMoreEqual:
+                        case SecondaryChallenges.endWithTimeMoreEqual:
                             {
                                 instance.earnedRight = (value >= instance.floatValueRight);
                                 break;
@@ -359,12 +359,12 @@ public class GameChallenges : MonoBehaviour
                 {
                     switch (instance.challengeLeft)
                     {
-                        case SecondaryChallenges.reachedLessEqualDistance:
+                        case SecondaryChallenges.reachLessEqualDistance:
                             {
                                 instance.earnedLeft = (value <= instance.floatValueLeft);
                                 break;
                             }
-                        case SecondaryChallenges.reachedMoreEqualDistance:
+                        case SecondaryChallenges.reachMoreEqualDistance:
                             {
                                 instance.earnedLeft = (value >= instance.floatValueLeft);
                                 break;
@@ -372,12 +372,12 @@ public class GameChallenges : MonoBehaviour
                     }
                     switch (instance.challengeRight)
                     {
-                        case SecondaryChallenges.reachedLessEqualDistance:
+                        case SecondaryChallenges.reachLessEqualDistance:
                             {
                                 instance.earnedRight = (value <= instance.floatValueRight);
                                 break;
                             }
-                        case SecondaryChallenges.reachedMoreEqualDistance:
+                        case SecondaryChallenges.reachMoreEqualDistance:
                             {
                                 instance.earnedRight = (value >= instance.floatValueRight);
                                 break;

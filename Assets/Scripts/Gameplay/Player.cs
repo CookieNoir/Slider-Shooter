@@ -199,7 +199,6 @@ public class Player : RunningEntity
                 UpdateAmmoText();
                 spent++;
                 UpdateDamageText();
-                //if (alive)
                 {
                     int currentDamage = (int)(Mathf.Floor(damage * damageModifier)) + (int)(Mathf.Floor(damage * damageModifier * spent * spentModifier)) + reservedDamage;
                     UpdateScore(currentDamage);
@@ -209,7 +208,7 @@ public class Player : RunningEntity
                         if (currentHealthPoints <= 0)
                         {
                             currentHealthPoints = 0;
-                            StartCoroutine(MonsterDying());
+                            if (alive) StartCoroutine(MonsterDying());
                         }
                         UpdateHealthBar();
                     }
