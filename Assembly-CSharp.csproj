@@ -76,9 +76,10 @@
     <Compile Include="Assets\Scripts\Gameplay\WeaponBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
-    <Compile Include="Assets\Scripts\UI\Translation\TranslatableDynamic.cs" />
-    <Compile Include="Assets\Scripts\UI\Translation\TranslatableStatic.cs" />
-    <Compile Include="Assets\Scripts\UI\Translation\TranslatableText.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableSentence.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableText.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableWord.cs" />
+    <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableWords.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translation.cs" />
     <Compile Include="Assets\Scripts\UI\UIHelper.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
@@ -91,6 +92,7 @@
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal 1 Color.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal.shader" />
+    <None Include="Assets\Resources\Localization\Правила локализации.txt" />
     <None Include="Assets\Shaders\Simple Water.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal 1 Color.shader" />
     <None Include="Assets\Shaders\Gradient UI\(3)Mixed.shader" />

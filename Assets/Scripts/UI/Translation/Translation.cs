@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Text.RegularExpressions;
 [AddComponentMenu("Game UI/Translation")]
 public class Translation : MonoBehaviour
 {
@@ -41,8 +40,8 @@ public class Translation : MonoBehaviour
             {
                 case '#':   // Метка предложения
                     {
-                        index++;
                         endIndex = fileText.IndexOf(' ', index);
+                        index++;
                         if (endIndex != -1)
                         {
                             keyString = fileText.Substring(index, endIndex - index);
@@ -63,8 +62,8 @@ public class Translation : MonoBehaviour
                 case '@':   // Метка стандартного слова
                 case '$':   // Метка дополнительного слова
                     {
-                        index++;
                         endIndex = fileText.IndexOf(' ', index);
+                        index++;
                         if (endIndex != -1)
                         {
                             keyString = fileText.Substring(index, endIndex - index);
@@ -73,7 +72,7 @@ public class Translation : MonoBehaviour
                             textString = fileText.Substring(index, endIndex - index);
 
                             wordDictionary[keyString] = textString;
-                            //Debug.Log("Word added: "+keyString+" = "+textString);
+                            //Debug.Log("Word added: " + keyString + " = " + textString);
                             index = endIndex;
                         }
                         else

@@ -54,9 +54,9 @@ MonoBehaviour:
   - m_Name: Indicator Default
     m_Color: {r: 0, g: 0, b: 0, a: 0.3019608}
   - m_Name: Indicator Hurt
-    m_Color: {r: 0.5943396, g: 0.13900909, b: 0.12615702, a: 0.3019608}
+    m_Color: {r: 0.6509434, g: 0.1929034, b: 0.18115878, a: 0.5019608}
   - m_Name: Indicator Adrenaline
-    m_Color: {r: 1, g: 0.87208086, b: 0.495283, a: 0.3019608}
+    m_Color: {r: 1, g: 0.9687613, b: 0.5235849, a: 0.49803922}
   - m_Name: Indicator Dead
     m_Color: {r: 1, g: 0.026395835, b: 0, a: 0.3019608}
   - m_Name: Ammo

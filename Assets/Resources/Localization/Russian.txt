@@ -1,17 +1,3 @@
-----------------------Предложения----------------------
-Символом # обозначены ключи предложений.
-Каждое предложение может состоять из
-	ключей слов (начинающихся с @ и $);
-	произвольных строк;
-	символов * - позиций подстрок, изменяемых во время игры;
-	других предложений.
-Если после ключа предложения стоят символы *, то в текст предложения
-следует добавить столько символов *, сколько указано после ключа.
-	Каждое из представленных предложений присутствут в игре.
-Однако вы можете добавить дополнительные предложения, которые будут
-отображаться лишь в том случае, если будут добавлены в основные.
-
-
 		Испытания
 #DontTakeAmmo @DontPickUp @ammo
 #DontEmptyAmmo @DontEmptyTheAmmo
@@ -24,44 +10,35 @@
 #TakeLessEqualAmmo* @PickUp @NoMoreThan * @_bullets
 #TakeLessEqualDamageModifier* @PickUp @NoMoreThan * $_enhancers
 #TakeLessEqualShootingSpeedModifier* @PickUp @NoMoreThan * $_accelerators
-
 #TakeMoreEqualAmmo* @PickUp * @_bullets @OrMore
 #TakeMoreEqualDamageModifie* @PickUp * $_enhancers @OrMore
 #TakeMoreEqualShootingSpeedModifier* @PickUp * $_accelerators @OrMore
 
 #EndWithTimeLessEqual* @CompleteIn * $_seconds
 #EndWithTimeMoreEqual* @HoldOutForMoreThan * $_seconds
-
 #ReachLessEqualDistance* @CompleteThelevelByOvercomingLessThan * @_meters
 #ReachMoreEqualDistance* @OvercomeTheDistanceOf * @_meters
-
 #ScoreMoreEqual* @ScoreAtLeast * @points
-
 #BeInAdrenalineModeMoreEqual* @Spend * $_seconds @inAdrenalineMode
 
+		Элементы меню
+#YouWon @TheMonsterIsDefeated
+#YouDied @YouDied
 
-
-------------------------Слова--------------------------
-Символом @ обозначены ключи стандартных слов, которые необходимы для нормального функционирования игры.
-Симоволом $ обозначены ключи дополнительных слов, которые позволяют сделать перевод более гибким.
-Вы можете добавлять столько слов, сколько необходимо.
-Ключи с символами @ и $ обрабатываются одинаково. Это значит, что вы можете использовать для новых ключей
-как символ @, так и символ $, и добавлять в предложения любой из символов перед ключами:
-Предложение		$hello $friend		эквивалентно	@hello @friend,
-причем достаточно всего 1 раз определить ключи hello и friend.
+@TheMonsterIsDefeated Чудовище повержено.^Поздравляем!
+@YouDied Вы погибли.^Не желаете попробовать снова?
+@ToTheMainMenu В главное меню
+@TryAgain Попробовать снова
+@TheNextLevel Следующий уровень
 
 @Score Счет
 @Time Время
+
 @ScoreAtLeast Наберите не менее
 @points очков
 @CompleteIn Успейте за
 @seconds секунды
 $_seconds секунд
-@TheMonsterIsDefeated Чудовище повержено.\nПоздравляем!
-@ToTheMainMenu В главное меню
-@TryAgain Попробовать снова
-@TheNextLevel Следующий уровень
-@YouDied Вы погибли.\nНе желаете попробовать снова?
 @PickUp Подберите
 @DontPickUp Не подбирайте
 @ammo боеприпасы
@@ -93,7 +70,6 @@ $_accelerators ускорителей
 		Языки
 @Russian Русский
 @English Английский
-
 
 		Оружие
 @RustyPistol Ржавый пистолет
