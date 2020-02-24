@@ -4,15 +4,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class TranslatableText : MonoBehaviour
 {
-    protected Text textComponent;
+    [HideInInspector] public Text textComponent;
     protected List<string> outputText;
 
     protected void Start()
     {
         textComponent = GetComponent<Text>();
         outputText = new List<string>();
-        TranslateWords();
-        RefreshText();
+        OnLanguageChange();
         Translation.LanguageChange += OnLanguageChange;
     }
 

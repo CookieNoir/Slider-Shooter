@@ -5,28 +5,28 @@ using UnityEngine;
 public class SupplyBehaviourEditor : Editor
 {
     public SerializedProperty
-        typeProp,
-        addTypeProp,
-        modifierProp,
-        amountProp,
-        weaponProp;
+        typeProperty,
+        addTypeProperty,
+        modifierProperty,
+        amountProperty,
+        weaponProperty;
 
     void OnEnable()
     {
-        typeProp = serializedObject.FindProperty("type");
-        addTypeProp = serializedObject.FindProperty("addType");
-        modifierProp = serializedObject.FindProperty("modifier");
-        amountProp = serializedObject.FindProperty("amount");
-        weaponProp = serializedObject.FindProperty("weapon");
+        typeProperty = serializedObject.FindProperty("type");
+        addTypeProperty = serializedObject.FindProperty("addType");
+        modifierProperty = serializedObject.FindProperty("modifier");
+        amountProperty = serializedObject.FindProperty("amount");
+        weaponProperty = serializedObject.FindProperty("weapon");
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(typeProp, new GUIContent("Supply Type"));
+        EditorGUILayout.PropertyField(typeProperty, new GUIContent("Supply Type"));
 
-        SupplyBehaviour.SupplyTypes type = (SupplyBehaviour.SupplyTypes)typeProp.enumValueIndex;
+        SupplyBehaviour.SupplyTypes type = (SupplyBehaviour.SupplyTypes)typeProperty.enumValueIndex;
 
 
         switch (type)
@@ -34,18 +34,18 @@ public class SupplyBehaviourEditor : Editor
             case SupplyBehaviour.SupplyTypes.ammo:
                 {
 
-                    EditorGUILayout.PropertyField(addTypeProp, new GUIContent("Add Type"));
-                    SupplyBehaviour.AddTypes addType = (SupplyBehaviour.AddTypes)addTypeProp.enumValueIndex;
+                    EditorGUILayout.PropertyField(addTypeProperty, new GUIContent("Add Type"));
+                    SupplyBehaviour.AddTypes addType = (SupplyBehaviour.AddTypes)addTypeProperty.enumValueIndex;
                     switch (addType)
                     {
                         case SupplyBehaviour.AddTypes.Fixed:
                             {
-                                EditorGUILayout.PropertyField(amountProp, new GUIContent("Amount"));
+                                EditorGUILayout.PropertyField(amountProperty, new GUIContent("Amount"));
                                 break;
                             }
                         case SupplyBehaviour.AddTypes.Relative:
                             {
-                                EditorGUILayout.PropertyField(modifierProp, new GUIContent("Part"));
+                                EditorGUILayout.PropertyField(modifierProperty, new GUIContent("Part"));
                                 break;
                             }
                     }
@@ -54,12 +54,13 @@ public class SupplyBehaviourEditor : Editor
             case SupplyBehaviour.SupplyTypes.damage:
             case SupplyBehaviour.SupplyTypes.shootingSpeed:
                 {
-                    EditorGUILayout.PropertyField(modifierProp, new GUIContent("Modifier"));
+                    EditorGUILayout.PropertyField(modifierProperty, new GUIContent("Modifier"));
                     break;
                 }
             case SupplyBehaviour.SupplyTypes.weapon:
                 {
-                    EditorGUILayout.PropertyField(weaponProp, new GUIContent("Weapon Prefab"));
+                    EditorGUILayout.PropertyField(weaponProperty, new GUIContent("Weapon ID"));
+                    EditorGUILayout.PropertyField(amountProperty, new GUIContent("Start Ammo"));
                     break;
                 }
         }

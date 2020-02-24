@@ -57,20 +57,22 @@ public class GameChallenges : MonoBehaviour
     };
 
     //---------------------------------
-    [Header("Left Star Variables")]
+    [Header("Left Secondary Challenge")]
     public SecondaryChallenges challengeLeft;
+    public TranslatableSentence challengeLeftText;
     public float floatValueLeft;
     public int intValueLeft;
     public MaskableGraphic inGameStarIconLeft;
     public MaskableGraphic endGameStarIconLeft;
     //---------------------------------
-    [Header("Middle Star Variables")]
+    [Header("Primary Challenge")]
     public PrimaryChallenges challengeMiddle;
     public float floatValueMiddle;
     public MaskableGraphic endGameStarIconMiddle;
     //---------------------------------
-    [Header("Right Star Variables")]
+    [Header("Right Secondary Challenge")]
     public SecondaryChallenges challengeRight;
+    public TranslatableSentence challengeRightText;
     public float floatValueRight;
     public int intValueRight;
     public MaskableGraphic inGameStarIconRight;
@@ -421,5 +423,402 @@ public class GameChallenges : MonoBehaviour
 
         if (instance.earnedRight)
             instance.StartCoroutine(UIHelper.ColorChanger(instance.endGameStarIconRight, instance.colorEnabled));
+    }
+
+    private void OnValidate()
+    {
+        if (challengeLeftText)
+        {
+            switch (challengeLeft)
+            {
+                case SecondaryChallenges.dontTakeAmmo:
+                    {
+                        challengeLeftText.key = "DontTakeAmmo";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeAmmo";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontEmptyAmmo:
+                    {
+                        challengeLeftText.key = "DontEmptyAmmo";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontEmptyAmmo";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeAnyWeapon:
+                    {
+                        challengeLeftText.key = "DontTakeAnyWeapon";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeAnyWeapon";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeWeaponWithID:
+                    {
+                        challengeLeftText.key = "DontTakeWeaponWithId*";
+                        Player player = FindObjectOfType<Player>();
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* " + player.weapons[intValueLeft].weaponName;
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = player.weapons[intValueLeft].weaponName;
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(player.weapons[intValueLeft].weaponName));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeDamageModifier:
+                    {
+                        challengeLeftText.key = "DontTakeDamageModifier";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeDamageModifier";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeShootingSpeedModifier:
+                    {
+                        challengeLeftText.key = "DontTakeShootingSpeedModifier";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeShootingSpeedModifier";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeInjury:
+                    {
+                        challengeLeftText.key = "DontTakeInjury";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeInjury";
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualAmmo:
+                    {
+                        challengeLeftText.key = "TakeLessEqualAmmo*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeLessEqualAmmo* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualDamageModifier:
+                    {
+                        challengeLeftText.key = "TakeLessEqualDamageModifier*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeLessEqualDamageModifier* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualShootingSpeedModifier:
+                    {
+                        challengeLeftText.key = "TakeLessEqualShootingSpeedModifier*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeLessEqualShootingSpeedModifier* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualAmmo:
+                    {
+                        challengeLeftText.key = "TakeMoreEqualAmmo*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualAmmo* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualDamageModifier:
+                    {
+                        challengeLeftText.key = "TakeMoreEqualDamageModifier*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualDamageModifier* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualShootingSpeedModifier:
+                    {
+                        challengeLeftText.key = "TakeMoreEqualShootingSpeedModifier*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualShootingSpeedModifier* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.endWithTimeLessEqual:
+                    {
+                        challengeLeftText.key = "EndWithTimeLessEqual*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#EndWithTimeLessEqual* " + floatValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = floatValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueLeft.ToString()));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.endWithTimeMoreEqual:
+                    {
+                        challengeLeftText.key = "EndWithTimeMoreEqual*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#EndWithTimeMoreEqual* " + floatValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = floatValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.reachLessEqualDistance:
+                    {
+                        challengeLeftText.key = "ReachLessEqualDistance*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#ReachLessEqualDistance* " + floatValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = floatValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueLeft.ToString()));
+                        earnedLeft = true;
+                        break;
+                    }
+                case SecondaryChallenges.reachMoreEqualDistance:
+                    {
+                        challengeLeftText.key = "ReachMoreEqualDistance*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#ReachMoreEqualDistance* " + floatValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = floatValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.scoreMoreEqual:
+                    {
+                        challengeLeftText.key = "ScoreMoreEqual*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#ScoreMoreEqual* " + intValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = intValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+                case SecondaryChallenges.beInAdrenalineModeMoreEqual:
+                    {
+                        challengeLeftText.key = "BeInAdrenalineModeMoreEqual*";
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#BeInAdrenalineModeMoreEqual* " + floatValueLeft.ToString();
+                        if (challengeLeftText.dynamicWords.Count > 0)
+                            challengeLeftText.dynamicWords[0].value = floatValueLeft.ToString();
+                        else
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueLeft.ToString()));
+                        earnedLeft = false;
+                        break;
+                    }
+            }
+        }
+        if (challengeRightText)
+        {
+            switch (challengeRight)
+            {
+                case SecondaryChallenges.dontTakeAmmo:
+                    {
+                        challengeRightText.key = "DontTakeAmmo";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeAmmo";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontEmptyAmmo:
+                    {
+                        challengeRightText.key = "DontEmptyAmmo";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontEmptyAmmo";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeAnyWeapon:
+                    {
+                        challengeRightText.key = "DontTakeAnyWeapon";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeAnyWeapon";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeWeaponWithID:
+                    {
+                        challengeRightText.key = "DontTakeWeaponWithId*";
+                        Player player = FindObjectOfType<Player>();
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* " + player.weapons[intValueRight].weaponName;
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = player.weapons[intValueRight].weaponName;
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(player.weapons[intValueRight].weaponName));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeDamageModifier:
+                    {
+                        challengeRightText.key = "DontTakeDamageModifier";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeDamageModifier";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeShootingSpeedModifier:
+                    {
+                        challengeRightText.key = "DontTakeShootingSpeedModifier";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeShootingSpeedModifier";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.dontTakeInjury:
+                    {
+                        challengeRightText.key = "DontTakeInjury";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeInjury";
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualAmmo:
+                    {
+                        challengeRightText.key = "TakeLessEqualAmmo*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeLessEqualAmmo* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualDamageModifier:
+                    {
+                        challengeRightText.key = "TakeLessEqualDamageModifier*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeLessEqualDamageModifier* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeLessEqualShootingSpeedModifier:
+                    {
+                        challengeRightText.key = "TakeLessEqualShootingSpeedModifier*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeLessEqualShootingSpeedModifier* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualAmmo:
+                    {
+                        challengeRightText.key = "TakeMoreEqualAmmo*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualAmmo* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualDamageModifier:
+                    {
+                        challengeRightText.key = "TakeMoreEqualDamageModifier*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualDamageModifier* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.takeMoreEqualShootingSpeedModifier:
+                    {
+                        challengeRightText.key = "TakeMoreEqualShootingSpeedModifier*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#TakeMoreEqualShootingSpeedModifier* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.endWithTimeLessEqual:
+                    {
+                        challengeRightText.key = "EndWithTimeLessEqual*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#EndWithTimeLessEqual* " + floatValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = floatValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueRight.ToString()));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.endWithTimeMoreEqual:
+                    {
+                        challengeRightText.key = "EndWithTimeMoreEqual*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#EndWithTimeMoreEqual* " + floatValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = floatValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.reachLessEqualDistance:
+                    {
+                        challengeRightText.key = "ReachLessEqualDistance*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#ReachLessEqualDistance* " + floatValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = floatValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueRight.ToString()));
+                        earnedRight = true;
+                        break;
+                    }
+                case SecondaryChallenges.reachMoreEqualDistance:
+                    {
+                        challengeRightText.key = "ReachMoreEqualDistance*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#ReachMoreEqualDistance* " + floatValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = floatValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.scoreMoreEqual:
+                    {
+                        challengeRightText.key = "ScoreMoreEqual*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#ScoreMoreEqual* " + intValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = intValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(intValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+                case SecondaryChallenges.beInAdrenalineModeMoreEqual:
+                    {
+                        challengeRightText.key = "BeInAdrenalineModeMoreEqual*";
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#BeInAdrenalineModeMoreEqual* " + floatValueRight.ToString();
+                        if (challengeRightText.dynamicWords.Count > 0)
+                            challengeRightText.dynamicWords[0].value = floatValueRight.ToString();
+                        else
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(floatValueRight.ToString()));
+                        earnedRight = false;
+                        break;
+                    }
+            }
+        }
+        UpdateStars();
+    }
+
+    private void UpdateStars()
+    {
+        if (earnedLeft) inGameStarIconLeft.color = colorEnabled;
+        else inGameStarIconLeft.color = colorDisabled;
+        if (earnedRight) inGameStarIconRight.color = colorEnabled;
+        else inGameStarIconRight.color = colorDisabled;
     }
 }

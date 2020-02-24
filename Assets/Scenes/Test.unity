@@ -408,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40820fbe49952148a8314844f0860cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: YouDied
   dynamicWords: []
   allowEndLines: 1
@@ -878,7 +879,7 @@ MonoBehaviour:
     secondTile: {fileID: 296740924}
   - firstTile: {fileID: 6783458326801116255}
     secondTile: {fileID: 1451036315}
-  maxValue: 1000
+  maxZValue: 1000
   player: {fileID: 1619333240}
   enemy: {fileID: 917830734}
   cameraPos: {fileID: 1157184997}
@@ -908,15 +909,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2e06ac5bbb049488207f84def1c4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challengeLeft: 17
-  floatValueLeft: 0
+  challengeLeft: 18
+  challengeLeftText: {fileID: 1292372111}
+  floatValueLeft: 5
   intValueLeft: 1250
   inGameStarIconLeft: {fileID: 733216227}
   endGameStarIconLeft: {fileID: 2082355416}
   challengeMiddle: 0
   floatValueMiddle: 0
   endGameStarIconMiddle: {fileID: 453412640}
-  challengeRight: 13
+  challengeRight: 16
+  challengeRightText: {fileID: 745383056}
   floatValueRight: 80
   intValueRight: 0
   inGameStarIconRight: {fileID: 1785041748}
@@ -2360,6 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: TryAgain
 --- !u!1 &394220126
 GameObject:
@@ -2992,6 +2996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: TryAgain
 --- !u!1 &453412638
 GameObject:
@@ -3837,7 +3842,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1}
+  m_Size: {x: 0, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &526081576
 MonoBehaviour:
@@ -3852,7 +3857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 1
   type: 0
@@ -4401,6 +4406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: Time
 --- !u!1 &616558338
 GameObject:
@@ -5176,6 +5182,7 @@ GameObject:
   - component: {fileID: 745383053}
   - component: {fileID: 745383055}
   - component: {fileID: 745383054}
+  - component: {fileID: 745383056}
   m_Layer: 5
   m_Name: Star Right Text
   m_TagString: Untagged
@@ -5233,7 +5240,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.7
-  m_Text: "\u0423\u0441\u043F\u0435\u0439\u0442\u0435 \u0437\u0430 80 \u0441\u0435\u043A\u0443\u043D\u0434"
+  m_Text: '#ReachMoreEqualDistance* 80'
 --- !u!222 &745383055
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5242,6 +5249,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745383052}
   m_CullTransparentMesh: 0
+--- !u!114 &745383056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745383052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40820fbe49952148a8314844f0860cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
+  key: ReachMoreEqualDistance*
+  dynamicWords:
+  - value: 80
+    entries: 
+  allowEndLines: 0
 --- !u!1 &748096322
 GameObject:
   m_ObjectHideFlags: 0
@@ -5494,7 +5519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c72dc944f80a8a04f996bfd53ae5cc3a, type: 3}
   weaponName: RustyPistol
-  ammo: 0
+  ammo: 6
   maxAmmo: 12
   shootingCooldown: 0.7
   damage: 10
@@ -6811,6 +6836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40820fbe49952148a8314844f0860cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: YouWon
   dynamicWords: []
   allowEndLines: 1
@@ -7760,6 +7786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: ToTheMainMenu
 --- !u!1 &1272081992
 GameObject:
@@ -8006,6 +8033,7 @@ GameObject:
   - component: {fileID: 1292372108}
   - component: {fileID: 1292372110}
   - component: {fileID: 1292372109}
+  - component: {fileID: 1292372111}
   m_Layer: 5
   m_Name: Star Left Text
   m_TagString: Untagged
@@ -8063,8 +8091,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.7
-  m_Text: "\u041D\u0430\u0431\u0435\u0440\u0438\u0442\u0435 \u043D\u0435 \u043C\u0435\u043D\u0435\u0435
-    1250 \u043E\u0447\u043A\u043E\u0432"
+  m_Text: '#BeInAdrenalineModeMoreEqual* 5'
 --- !u!222 &1292372110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8073,6 +8100,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292372107}
   m_CullTransparentMesh: 0
+--- !u!114 &1292372111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292372107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40820fbe49952148a8314844f0860cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
+  key: BeInAdrenalineModeMoreEqual*
+  dynamicWords:
+  - value: 5
+    entries: 
+  allowEndLines: 0
 --- !u!1 &1313862963
 GameObject:
   m_ObjectHideFlags: 0
@@ -10449,7 +10494,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1}
+  m_Size: {x: 0, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &1605936170
 MonoBehaviour:
@@ -10464,7 +10509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 1
   type: 1
@@ -10558,7 +10603,7 @@ MonoBehaviour:
   offsetX: 0
   enemy: {fileID: 917830730}
   invulnerable: 0
-  healthPoints: 1
+  healthPoints: 500
   startAmmo: 0
   shootingDelay: 0.7
   hurtIndicator: {fileID: 1989951782}
@@ -11419,6 +11464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: Score
 --- !u!1 &1774110369
 GameObject:
@@ -11845,6 +11891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: ToTheMainMenu
 --- !u!1 &1785041746
 GameObject:
@@ -13253,6 +13300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1d9b2a5222cc641a8d0de24dbd4e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
   key: TheNextLevel
 --- !u!1 &2027658568
 GameObject:
@@ -13691,7 +13739,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1}
+  m_Size: {x: 0, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!114 &2110527068
 MonoBehaviour:
@@ -13706,7 +13754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 1
   type: 0

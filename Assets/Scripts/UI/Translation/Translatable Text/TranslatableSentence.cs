@@ -9,6 +9,11 @@ public class TranslatableSentence : TranslatableWord
     {
         public string value;
         public List<int> entries;
+        public DynamicWords(string newValue)
+        {
+            value = newValue;
+            entries = new List<int>();
+        }
     }
 
     public List<DynamicWords> dynamicWords;
@@ -17,7 +22,7 @@ public class TranslatableSentence : TranslatableWord
     protected override void TranslateWords()
     {
         outputText.Clear();
-        string  sentence = Translation.sentenceDictionary[key],
+        string sentence = Translation.sentenceDictionary[key],
                 output = string.Empty, wordKey;
         int index = 0, endIndex = 0, outputIndex = 0,
             length = sentence.Length, dynamicNumber, dynamicIndex = 0;
@@ -101,5 +106,14 @@ public class TranslatableSentence : TranslatableWord
         }
         if (allowEndLines) output = output.Replace('^', '\n');
         textComponent.text = output;
+    }
+
+    public void ChangeWords(int[] wordsId, string[] words)
+    {
+        for (int i = 0; i < wordsId.Length; ++i)
+        {
+            dynamicWords[wordsId[i]].value = words[i];
+        }
+        RefreshText();
     }
 }

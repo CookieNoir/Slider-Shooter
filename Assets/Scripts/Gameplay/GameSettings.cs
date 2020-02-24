@@ -41,7 +41,7 @@ public class GameSettings : MonoBehaviour
     public List<TileDouble> tiles;
 
     [Header("Global Moving")]
-    public int maxValue;
+    public int maxZValue;
     public Player player;
     public Transform enemy;
     public Transform cameraPos;
@@ -82,7 +82,7 @@ public class GameSettings : MonoBehaviour
         defaultOffsetX = setDefaultOffsetX;
         gameOver = false;
         lastTiles = new GameObject[3];
-        stepBack = new Vector3(0, 0, maxValue);
+        stepBack = new Vector3(0, 0, maxZValue);
     }
 
     private void ModifySpeed()
@@ -121,13 +121,13 @@ public class GameSettings : MonoBehaviour
             lastIndex = index;
             lastTileArrayIndex = (lastTileArrayIndex + 1) % 3;
         }
-        if (counter > maxValue)
+        if (counter > maxZValue)
         {
             for (int i = 0; i < 3; ++i) lastTiles[i].transform.position -= stepBack;
             player.transform.position -= stepBack;
             enemy.position -= stepBack;
             cameraPos.position -= stepBack;
-            counter -= maxValue;
+            counter -= maxZValue;
         }
     }
 
@@ -177,10 +177,10 @@ public class GameSettings : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(new Vector3(-defaultBorders + defaultOffsetX, 0, 0), new Vector3(-defaultBorders + defaultOffsetX, 0, maxValue));
-        Gizmos.DrawLine(new Vector3(defaultBorders + defaultOffsetX, 0, 0), new Vector3(defaultBorders + defaultOffsetX, 0, maxValue));
+        Gizmos.DrawLine(new Vector3(-defaultBorders + defaultOffsetX, 0, 0), new Vector3(-defaultBorders + defaultOffsetX, 0, maxZValue));
+        Gizmos.DrawLine(new Vector3(defaultBorders + defaultOffsetX, 0, 0), new Vector3(defaultBorders + defaultOffsetX, 0, maxZValue));
         Gizmos.DrawLine(new Vector3(defaultBorders + defaultOffsetX, 0, 0), new Vector3(-defaultBorders + defaultOffsetX, 0, 0));
-        Gizmos.DrawLine(new Vector3(-defaultBorders + defaultOffsetX, 0, maxValue), new Vector3(defaultBorders + defaultOffsetX, 0, maxValue));
+        Gizmos.DrawLine(new Vector3(-defaultBorders + defaultOffsetX, 0, maxZValue), new Vector3(defaultBorders + defaultOffsetX, 0, maxZValue));
     }
 
     private void OnValidate()

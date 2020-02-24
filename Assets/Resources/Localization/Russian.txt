@@ -16,8 +16,8 @@
 
 #EndWithTimeLessEqual* @CompleteIn * $_seconds
 #EndWithTimeMoreEqual* @HoldOutForMoreThan * $_seconds
-#ReachLessEqualDistance* @CompleteThelevelByOvercomingLessThan * @_meters
-#ReachMoreEqualDistance* @OvercomeTheDistanceOf * @_meters
+#ReachLessEqualDistance* @CompleteThelevelByOvercomingLessThan * @_units
+#ReachMoreEqualDistance* @OvercomeTheDistanceOf * @_units
 #ScoreMoreEqual* @ScoreAtLeast * @points
 #BeInAdrenalineModeMoreEqual* @Spend * $_seconds @inAdrenalineMode
 
@@ -65,6 +65,7 @@ $_accelerators ускорителей
 @DontEmptyTheAmmo Не опустошайте боезапас
 @OvercomeTheDistanceOf Преодолейте дистанцию
 @_meters метров
+@_units юнитов
 @CompleteThelevelByOvercomingLessThan Завершите уровень, преодолев менее
 
 		Языки

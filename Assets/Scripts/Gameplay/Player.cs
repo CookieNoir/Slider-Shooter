@@ -155,7 +155,9 @@ public class Player : RunningEntity
 
     public void PlayerPosition(float delta)
     {
-        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX * 60 * GameSettings.speed * borders, playerBody.transform.position.y, playerBody.transform.position.z);
+        playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX *
+            (1 + 60 * GameSettings.speed) // Модификатор скорости слайдинга
+            * borders, playerBody.transform.position.y, playerBody.transform.position.z);
         if (playerBody.transform.position.x > borders + offsetX) playerBody.transform.position = new Vector3(borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
         else if (playerBody.transform.position.x < -borders + offsetX) playerBody.transform.position = new Vector3(-borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
     }
@@ -570,6 +572,7 @@ public class Player : RunningEntity
                 currentWeapon = newWeapon;
                 weapons[currentWeapon].gameObject.SetActive(true);
                 weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+                ammo = 0;
                 FillAmmo(weapons[currentWeapon].ammo);
                 UpdateShootingSpeedText();
                 spent = -1;
@@ -605,6 +608,7 @@ public class Player : RunningEntity
                 currentWeapon = newWeapon;
                 weapons[currentWeapon].gameObject.SetActive(true);
                 weapons[currentWeapon].GetProperties(weaponIcon, weaponNameText, ref maxAmmo, ref shootingCooldown, ref damage, ref spentModifier);
+                ammo = 0;
                 FillAmmo(amount);
                 UpdateShootingSpeedText();
                 spent = -1;

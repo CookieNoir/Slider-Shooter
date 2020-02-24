@@ -46,7 +46,10 @@ public class SupplyBehaviour : MonoBehaviour
                 }
             case SupplyTypes.weapon:
                 {
-                    player.GiveNewWeapon(weapon);
+                    if (amount < 0)
+                        player.GiveNewWeapon(weapon);
+                    else
+                        player.GiveNewWeapon(weapon, amount);
                     break;
                 }
         }
