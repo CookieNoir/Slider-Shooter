@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+		_Color("Color", Color) = (1,1,1,1)
 		_Amplitude("Waves Amplitude", Float) = 0.2
 		_Frequency("Waves Frequency", Float) = 0.2
 		_Speed("Waves Speed", Float) = 0.2
@@ -38,6 +39,7 @@
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+			float4 _Color;
 
 			float _Amplitude;
 			float _Frequency;
@@ -59,7 +61,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv)*_Color;
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;

@@ -89,6 +89,7 @@
     <None Include="Assets\Shaders\Gradient UI\(2)Vertical.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Vertical 1 Color.shader" />
     <None Include="Assets\Shaders\Unlit Alpha.shader" />
+    <None Include="Assets\Shaders\CelShader.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal 1 Color.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Horizontal.shader" />

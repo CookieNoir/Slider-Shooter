@@ -4,7 +4,7 @@ public class SupplyBehaviour : MonoBehaviour
 {
     public enum SupplyTypes { ammo, damage, shootingSpeed, weapon };
     public SupplyTypes type;
-    public enum AddTypes {Fixed, Relative};
+    public enum AddTypes { Fixed, Relative };
     public AddTypes addType;
     public float modifier; // для типов: damage, shootingSpeed
 

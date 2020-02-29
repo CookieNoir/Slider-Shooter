@@ -74,3 +74,4 @@ $_accelerators ускорителей
 
 		Оружие
 @RustyPistol Ржавый пистолет
+@Rifle Винтовка

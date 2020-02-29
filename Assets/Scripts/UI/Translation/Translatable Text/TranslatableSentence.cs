@@ -79,6 +79,10 @@ public class TranslatableSentence : TranslatableWord
         {
             outputText.Add(output);
         }
+        foreach (DynamicWords dynamicWord in dynamicWords)
+        {
+            if (dynamicWord.value[0] == '@') dynamicWord.value = Translation.wordDictionary[dynamicWord.value.Substring(1)];
+        }
     }
 
     protected override void RefreshText()
@@ -112,7 +116,10 @@ public class TranslatableSentence : TranslatableWord
     {
         for (int i = 0; i < wordsId.Length; ++i)
         {
-            dynamicWords[wordsId[i]].value = words[i];
+            if (words[i][0] == '@')
+                dynamicWords[wordsId[i]].value = Translation.wordDictionary[words[i].Substring(1)];
+            else
+                dynamicWords[wordsId[i]].value = words[i];
         }
         RefreshText();
     }

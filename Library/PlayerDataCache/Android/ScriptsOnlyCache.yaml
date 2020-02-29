@@ -78,37 +78,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10282}
     - Class: 114
-      Script: {instanceID: 10564}
+      Script: {instanceID: 10566}
     - Class: 114
-      Script: {instanceID: 10584}
+      Script: {instanceID: 10586}
     - Class: 114
-      Script: {instanceID: 10788}
+      Script: {instanceID: 10790}
     - Class: 114
-      Script: {instanceID: 10846}
+      Script: {instanceID: 10848}
     - Class: 114
-      Script: {instanceID: 10954}
+      Script: {instanceID: 10956}
     - Class: 114
-      Script: {instanceID: 10984}
+      Script: {instanceID: 10986}
     - Class: 114
-      Script: {instanceID: 11004}
+      Script: {instanceID: 11006}
     - Class: 114
-      Script: {instanceID: 11060}
+      Script: {instanceID: 11062}
     - Class: 114
-      Script: {instanceID: 11108}
+      Script: {instanceID: 11110}
     - Class: 114
-      Script: {instanceID: 11142}
+      Script: {instanceID: 11144}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 11326}
+      Script: {instanceID: 11328}
     - Class: 114
-      Script: {instanceID: 11346}
+      Script: {instanceID: 11348}
     - Class: 114
-      Script: {instanceID: 11354}
+      Script: {instanceID: 11356}
     - Class: 114
-      Script: {instanceID: 11438}
+      Script: {instanceID: 11440}
     - Class: 114
-      Script: {instanceID: 11470}
+      Script: {instanceID: 11472}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -122,8 +122,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 258
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -302,7 +300,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 5932de1317503cf33bf1d83811ac9a9f
+      Hash: 395c78b7b08154493826fbce78544003
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameSettings
@@ -374,7 +372,7 @@ ScriptsOnlyBuild:
     className: Player
   - hash:
       serializedVersion: 2
-      Hash: 25dcc492f392dd7b2811ee7c00858461
+      Hash: 446b74ab4e7174b703e1d86f19caebac
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TileProperties
@@ -410,7 +408,7 @@ ScriptsOnlyBuild:
     className: RunningEntity
   - hash:
       serializedVersion: 2
-      Hash: e3c87f714236ce75d08d23ff2fe75793
+      Hash: 5edfe6ab3f138bd6128c468a87d473c0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TranslatableWords
@@ -434,7 +432,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 6859fc72b0d19e051273f301ded9ac27
+      Hash: 6e3ae7d6cf37a52830296dab35858477
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TranslatableWord
@@ -500,7 +498,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 51ac2d687046cf1228783f9fa3d021f0
+      Hash: 5617aa0497cb4c7bef42852b2c6708ab
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TranslatableSentence
@@ -524,7 +522,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: ebba7e81798d02434cf47a178099b803
+      Hash: 3723cbd97b010dbb3b9648cf58a30592
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameChallenges
@@ -542,7 +540,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 57d65f8e424c0e912c4c2c928ba21702
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TranslatableText

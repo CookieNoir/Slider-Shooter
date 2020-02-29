@@ -456,11 +456,11 @@ public class GameChallenges : MonoBehaviour
                     {
                         challengeLeftText.key = "DontTakeWeaponWithId*";
                         Player player = FindObjectOfType<Player>();
-                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* " + player.weapons[intValueLeft].weaponName;
+                        challengeLeftText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* @" + player.weapons[intValueLeft].weaponName;
                         if (challengeLeftText.dynamicWords.Count > 0)
-                            challengeLeftText.dynamicWords[0].value = player.weapons[intValueLeft].weaponName;
+                            challengeLeftText.dynamicWords[0].value = '@' + player.weapons[intValueLeft].weaponName;
                         else
-                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords(player.weapons[intValueLeft].weaponName));
+                            challengeLeftText.dynamicWords.Add(new TranslatableSentence.DynamicWords('@' + player.weapons[intValueLeft].weaponName));
                         earnedLeft = true;
                         break;
                     }
@@ -648,11 +648,11 @@ public class GameChallenges : MonoBehaviour
                     {
                         challengeRightText.key = "DontTakeWeaponWithId*";
                         Player player = FindObjectOfType<Player>();
-                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* " + player.weapons[intValueRight].weaponName;
+                        challengeRightText.gameObject.GetComponent<Text>().text = "#DontTakeWeaponWithId* @" + player.weapons[intValueRight].weaponName;
                         if (challengeRightText.dynamicWords.Count > 0)
-                            challengeRightText.dynamicWords[0].value = player.weapons[intValueRight].weaponName;
+                            challengeRightText.dynamicWords[0].value = '@' + player.weapons[intValueRight].weaponName;
                         else
-                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords(player.weapons[intValueRight].weaponName));
+                            challengeRightText.dynamicWords.Add(new TranslatableSentence.DynamicWords('@' + player.weapons[intValueRight].weaponName));
                         earnedRight = true;
                         break;
                     }

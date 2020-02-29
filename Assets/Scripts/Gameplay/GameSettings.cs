@@ -39,6 +39,7 @@ public class GameSettings : MonoBehaviour
     [Header("Tiles")]
     public TilesUpdater tilesUpdater;
     public List<TileDouble> tiles;
+    public int startTileIndex; // Если не равен -1, то выбирается тайл с заданным индексом в роли первого, иначе - произвольный 
 
     [Header("Global Moving")]
     public int maxZValue;
@@ -83,6 +84,8 @@ public class GameSettings : MonoBehaviour
         gameOver = false;
         lastTiles = new GameObject[3];
         stepBack = new Vector3(0, 0, maxZValue);
+
+        if (startTileIndex != -1) SetTileWithIndex(startTileIndex);
     }
 
     private void ModifySpeed()
@@ -93,33 +96,17 @@ public class GameSettings : MonoBehaviour
     private void Update()
     {
         ModifySpeed();
-        SetTiles();
+        SetNextTile();
     }
 
-    public void SetTiles()
+    public void SetNextTile()
     {
         if (player && player.transform.position.z > counter)
         {
             int index = Random.Range(0, tiles.Count);
             if (index == lastIndex) index = (index + 1) % tiles.Count;
             if (lastTiles[lastTileArrayIndex]) lastTiles[lastTileArrayIndex].SetActive(false);
-            if (tiles[index].IsFirst())
-            {
-                tiles[index].firstTile.SetActive(true);
-                tiles[index].firstTile.GetComponent<TileProperties>().SetTile(counter + offset);
-                counter += tiles[index].firstTile.GetComponent<TileProperties>().length;
-                lastTiles[lastTileArrayIndex] = tiles[index].firstTile;
-            }
-            else
-            {
-                tiles[index].secondTile.SetActive(true);
-                tiles[index].secondTile.GetComponent<TileProperties>().SetTile(counter + offset);
-                counter += tiles[index].secondTile.GetComponent<TileProperties>().length;
-                lastTiles[lastTileArrayIndex] = tiles[index].secondTile;
-            }
-            tiles[index].NotFirst();
-            lastIndex = index;
-            lastTileArrayIndex = (lastTileArrayIndex + 1) % 3;
+            SetTileWithIndex(index);
         }
         if (counter > maxZValue)
         {
@@ -129,6 +116,27 @@ public class GameSettings : MonoBehaviour
             cameraPos.position -= stepBack;
             counter -= maxZValue;
         }
+    }
+
+    private void SetTileWithIndex(int index)
+    {
+        if (tiles[index].IsFirst())
+        {
+            tiles[index].firstTile.SetActive(true);
+            tiles[index].firstTile.GetComponent<TileProperties>().SetTile(counter + offset);
+            counter += tiles[index].firstTile.GetComponent<TileProperties>().length;
+            lastTiles[lastTileArrayIndex] = tiles[index].firstTile;
+        }
+        else
+        {
+            tiles[index].secondTile.SetActive(true);
+            tiles[index].secondTile.GetComponent<TileProperties>().SetTile(counter + offset);
+            counter += tiles[index].secondTile.GetComponent<TileProperties>().length;
+            lastTiles[lastTileArrayIndex] = tiles[index].secondTile;
+        }
+        tiles[index].NotFirst();
+        lastIndex = index;
+        lastTileArrayIndex = (lastTileArrayIndex + 1) % 3;
     }
 
     public static void GameResult(bool won)
@@ -158,6 +166,7 @@ public class GameSettings : MonoBehaviour
         {
             if (tilesUpdater.tiles.GetChild(i).gameObject.activeSelf == true)
             {
+                tilesUpdater.tiles.GetChild(i).GetComponent<TileProperties>().number = i;
                 tiles.Add(new TileDouble(tilesUpdater.tiles.GetChild(i).gameObject, tilesUpdater.tilesClones.GetChild(i).gameObject));
                 tilesUpdater.tiles.GetChild(i).gameObject.SetActive(false);
             }
