@@ -66,6 +66,7 @@
     <Compile Include="Assets\Editor\Scripts\GameSettingsEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\SupplyBehaviourEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\TilesUpdaterEditor.cs" />
+    <Compile Include="Assets\Editor\Scripts\VDEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

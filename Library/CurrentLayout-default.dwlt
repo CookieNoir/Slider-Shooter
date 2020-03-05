@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 510}
+  m_MinSize: {x: 950, y: 394}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 767
-  m_MinSize: {x: 683, y: 460}
-  m_MaxSize: {x: 12008, y: 8044}
+  m_MinSize: {x: 679, y: 344}
+  m_MaxSize: {x: 12004, y: 8044}
   vertical: 0
-  controlID: 43849
+  controlID: 58
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1048
     height: 767
-  m_MinSize: {x: 406, y: 460}
-  m_MaxSize: {x: 8006, y: 8044}
+  m_MinSize: {x: 404, y: 344}
+  m_MaxSize: {x: 8004, y: 8044}
   vertical: 1
-  controlID: 43850
+  controlID: 59
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -161,10 +161,10 @@ MonoBehaviour:
     y: 0
     width: 1048
     height: 495
-  m_MinSize: {x: 406, y: 222}
-  m_MaxSize: {x: 8006, y: 4022}
+  m_MinSize: {x: 404, y: 222}
+  m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 43851
+  controlID: 60
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -184,8 +184,8 @@ MonoBehaviour:
     y: 0
     width: 297
     height: 495
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -238,15 +238,15 @@ MonoBehaviour:
     y: 495
     width: 1048
     height: 272
-  m_MinSize: {x: 262, y: 238}
+  m_MinSize: {x: 102, y: 122}
   m_MaxSize: {x: 4002, y: 4022}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 2
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -266,8 +266,8 @@ MonoBehaviour:
     y: 0
     width: 392
     height: 767
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -323,7 +323,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -384,23 +384,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: cc5bffff045cffff9a5cffff828cffff58fbfffffe3500008a36000092360000
+      m_SelectedIDs: def6ffff
+      m_LastClickedID: -2338
+      m_ExpandedIDs: 6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Voronoi Diagram (3)
+        m_OriginalName: Voronoi Diagram (3)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -2556
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.3300953, y: 1.7700644, z: 2.7000732}
+    m_Target: {x: -27.27539, y: 0.66622925, z: 2.6748047}
     speed: 2
-    m_Value: {x: -0.3300953, y: 1.7700644, z: 2.7000732}
+    m_Value: {x: -27.27539, y: 0.66622925, z: 2.6748047}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -469,25 +469,25 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
+      m_Target: 0
       speed: 2
-      m_Value: 1
+      m_Value: 0
     zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.36758348, y: -0.22354557, z: 0.091548525, w: -0.8981114}
+    m_Target: {x: -0.008965851, y: -0.086886816, z: -0.0007820124, w: 0.996178}
     speed: 2
-    m_Value: {x: -0.36756963, y: -0.22353715, z: 0.091545075, w: -0.89807755}
+    m_Value: {x: -0.008965848, y: -0.086886786, z: -0.0007820121, w: 0.9961776}
   m_Size:
-    m_Target: 14.306101
+    m_Target: 4.5434413
     speed: 2
-    m_Value: 14.306101
+    m_Value: 4.5434413
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.48
@@ -536,7 +536,7 @@ MonoBehaviour:
     height: 476
   m_ViewDataDictionary: {fileID: 0}
   m_PosLeft: {x: 0, y: 0}
-  m_PosRight: {x: 0, y: 180}
+  m_PosRight: {x: 0, y: 0}
   m_Scope: 1
   m_SplitterFlex: 0
 --- !u!114 &16
@@ -578,20 +578,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts/Voronoi Diagram
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts/Voronoi Diagram
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Workshop\Slider-Shooter
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: c62f0000
-    m_LastClickedID: 12230
-    m_ExpandedIDs: 000000002a2d0000902d0000122f00006030000000ca9a3b
+    m_SelectedIDs: d22d0000
+    m_LastClickedID: 11730
+    m_ExpandedIDs: 00000000282d0000902d00000e2f00005e30000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -619,7 +619,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002a2d0000902d0000122f00006030000000ca9a3b
+    m_ExpandedIDs: 00000000282d0000902d00000e2f00005e300000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -644,8 +644,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: dc87ffff
-    m_LastClickedInstanceID: -30756
+    m_SelectedInstanceIDs: def6ffff
+    m_LastClickedInstanceID: -2338
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300001a2c00005a340000ba380000b83b000034390000a6010000386b000000000000
     m_RenameOverlay:
@@ -663,7 +663,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 9}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -728,7 +728,7 @@ MonoBehaviour:
     height: 253
   m_ViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 43741
+    ID: 98
     splitterInitialOffset: 117
     currentActiveSplitter: -1
     realSizes: 6400000089000000

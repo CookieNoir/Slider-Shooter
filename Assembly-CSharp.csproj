@@ -83,6 +83,10 @@
     <Compile Include="Assets\Scripts\UI\Translation\Translation.cs" />
     <Compile Include="Assets\Scripts\UI\UIHelper.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\VDTest.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparer.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Mathf.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\VoronoiDiagram.cs" />
     <None Include="Assets\Resources\Localization\Russian.txt" />
     <None Include="Assets\Shaders\Vertex Mask 3 tex.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />
