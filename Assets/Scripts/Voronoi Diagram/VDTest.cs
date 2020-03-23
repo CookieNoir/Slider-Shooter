@@ -5,13 +5,12 @@ public class VDTest : MonoBehaviour
     public Vector2[] points;
     public Vector2 border1;
     public Vector2 border2;
-    public int loopLimit;
     private VoronoiDiagram voronoiDiagram;
     private bool created = false;
 
     public void CreateVoronoiDiagram()
     {
-        voronoiDiagram = new VoronoiDiagram(points, border1, border2, loopLimit);
+        voronoiDiagram = new VoronoiDiagram(points, border1, border2);
         created = true;
     }
 

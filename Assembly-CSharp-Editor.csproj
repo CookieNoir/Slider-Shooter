@@ -67,6 +67,7 @@
     <Compile Include="Assets\Editor\Scripts\SupplyBehaviourEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\TilesUpdaterEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\VDEditor.cs" />
+    <Compile Include="Assets\Editor\Scripts\VoronoiWallEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

@@ -1,13 +1,10 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Vector2Comparer : IComparer
+public class Vector2Comparer : IComparer<Vector2>
 {
-    public int Compare(object x, object y)
+    public int Compare(Vector2 left, Vector2 right)
     {
-        Vector2 left = (Vector2)x;
-        Vector2 right = (Vector2)y;
-
         if (left.x < right.x) return -1;
         else if (left.x > right.x) return 1;
         else

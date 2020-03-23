@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Gameplay\SupplyBehaviour.cs" />
     <Compile Include="Assets\Scripts\Gameplay\TileProperties.cs" />
     <Compile Include="Assets\Scripts\Gameplay\WeaponBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Obj Exporter\ObjExporter.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableSentence.cs" />
@@ -84,9 +85,16 @@
     <Compile Include="Assets\Scripts\UI\UIHelper.cs" />
     <Compile Include="Assets\Scripts\UI\UiMovement.cs" />
     <Compile Include="Assets\Scripts\Voronoi Diagram\VDTest.cs" />
-    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparer.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecX.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecY.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncX.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncY.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\Vector2Comparer.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Comparers\Vector2RadialComparer.cs" />
     <Compile Include="Assets\Scripts\Voronoi Diagram\Vector2Mathf.cs" />
     <Compile Include="Assets\Scripts\Voronoi Diagram\VoronoiDiagram.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\VoronoiWall.cs" />
+    <Compile Include="Assets\Scripts\Voronoi Diagram\VoronoiWallHandler.cs" />
     <None Include="Assets\Resources\Localization\Russian.txt" />
     <None Include="Assets\Shaders\Vertex Mask 3 tex.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
-public class VoronoiDiagram
+public class VoronoiDiagram : Vector2Mathf
 {
     [Serializable]
     public class VoronoiEdge
@@ -12,8 +12,8 @@ public class VoronoiDiagram
         public Vector2 point2;
         public int leftCell;
         public int rightCell;
-        public List<int> point1connections;
-        public List<int> point2connections;
+        public List<VoronoiEdge> point1connections;
+        public List<VoronoiEdge> point2connections;
 
         public VoronoiEdge(Vector2 p1, Vector2 p2, int lc, int rc)
         {
@@ -21,25 +21,25 @@ public class VoronoiDiagram
             point2 = p2;
             leftCell = lc;
             rightCell = rc;
-            point1connections = new List<int>();
-            point2connections = new List<int>();
+            point1connections = new List<VoronoiEdge>();
+            point2connections = new List<VoronoiEdge>();
         }
     }
     [Serializable]
     public class VoronoiCell
     {
         public Vector2 center;
-        public List<int> edges;
+        public List<VoronoiEdge> edges;
 
         public VoronoiCell(Vector2 point)
         {
             center = point;
-            edges = new List<int>();
+            edges = new List<VoronoiEdge>();
         }
     }
-
     public List<VoronoiCell> cells;
     public List<VoronoiEdge> edges;
+    public List<VoronoiEdge> shortEdges;
 
     // Границы диаграммы (значения не могут быть за пределами рамки)
     public Vector2 lowerLeftCorner;
@@ -47,21 +47,44 @@ public class VoronoiDiagram
     public Vector2 upperLeftCorner;
     public Vector2 upperRightCorner;
 
-    // Индексы верхней и нижней точек диаграммы
-    public int topIndex;
-    public int botIndex;
+    [Serializable]
+    public class BoundIntersection
+    {
+        public Vector2 point;
+        public VoronoiEdge edge;
+        public bool isPoint1;
 
-    private int loopLimit;
+        public BoundIntersection(Vector2 newPoint, VoronoiEdge newEdge)
+        {
+            point = newPoint;
+            edge = newEdge;
+            if (point == edge.point1) isPoint1 = true;
+            else isPoint1 = false;
+        }
+    }
+    // Пересечения с границами. Могут использоваться в алгоритмах, использующих диаграмму
+    public List<BoundIntersection> intersectionsUp;
+    public List<BoundIntersection> intersectionsRight;
+    public List<BoundIntersection> intersectionsDown;
+    public List<BoundIntersection> intersectionsLeft;
 
-    public VoronoiDiagram(Vector2[] points, Vector2 point1, Vector2 point2, int LoopLimit)
+    public VoronoiDiagram(Vector2[] points, Vector2 point1, Vector2 point2)
     {
         // 1.Сортировка массива вершин
-        IComparer comparer = new Vector2Comparer();
+        IComparer<Vector2> comparer = new Vector2Comparer();
         Array.Sort(points, comparer);
 
         // 2.Образование элементарных подмножеств
         cells = new List<VoronoiCell>();
         edges = new List<VoronoiEdge>();
+        shortEdges = new List<VoronoiEdge>();
+
+        intersectionsUp = new List<BoundIntersection>();
+        intersectionsRight = new List<BoundIntersection>();
+        intersectionsDown = new List<BoundIntersection>();
+        intersectionsLeft = new List<BoundIntersection>();
+
+        if (points.Length < 1) return;
 
         for (int i = 0; i < points.Length; ++i)
             cells.Add(new VoronoiCell(points[i]));
@@ -69,13 +92,14 @@ public class VoronoiDiagram
         // 3. Установка границ
         SetBounds(point1, point2);
 
-        // 4.Построение диаграммы методом "Разделяй и властвуй"
+        // 4. Построение диаграммы методом "Разделяй и властвуй"
         int c = cells.Count / 2;
-        int top = -1, bot = -1;
-        loopLimit = LoopLimit;
-        Voronoi_DivideAndConquer_Recursive(0, c, cells.Count, ref top, ref bot);
-        topIndex = top;
-        botIndex = bot;
+        int top = -1;
+        Voronoi_DivideAndConquer_Recursive(0, c, cells.Count, ref top, true);
+        //RemoveShortEdges();
+        // 5. Вписывание диаграммы в установленные границы
+        FitInBounds();
+        Debug.Log("Diagram for " + cells.Count + " points completed.");
     }
 
     private void SetBounds(Vector2 point1, Vector2 point2)
@@ -111,305 +135,790 @@ public class VoronoiDiagram
         }
     }
 
-    private void Voronoi_DivideAndConquer_Recursive(int startIndex, int middleIndex, int endIndex, ref int top, ref int bot)
+    private void Voronoi_DivideAndConquer_case3(int startIndex, ref int middleIndex, int endIndex)
+    {
+        int top2, bot2;
+        if (IsFirstHigher(cells[middleIndex].center, cells[middleIndex + 1].center, false))
+        {
+            top2 = middleIndex;
+            bot2 = middleIndex + 1;
+        }
+        else
+        {
+            top2 = middleIndex + 1;
+            bot2 = middleIndex;
+        }
+        Vector2
+            point1 = (cells[startIndex].center + cells[top2].center) / 2f,
+            point2 = cells[top2].center - cells[startIndex].center,
+            point3 = (cells[bot2].center + cells[top2].center) / 2f,
+            point4 = cells[top2].center - cells[bot2].center,
+            intersection = Vector2.zero;
+        point2.y *= -1; Swap(ref point2.x, ref point2.y);
+        point2 += point1;
+        point4.y *= -1; Swap(ref point4.x, ref point4.y);
+        point4 += point3;
+        if (StraightLineIntersect(point1, point2, point3, point4, ref intersection))
+        {
+            if (intersection.x > cells[middleIndex].center.x) middleIndex++;
+        }
+    }
+
+    private void Voronoi_DivideAndConquer_Recursive(int startIndex, int middleIndex, int endIndex, ref int top, bool isLeft)
     // Диапазоны: [startIndex, middleIndex)
     //            [middleIndex, endIndex)
     {
         if (endIndex - startIndex <= 1)
         {
             top = startIndex;
-            bot = startIndex;
             return;
         }
-
+        if (endIndex - startIndex == 3)
+        {
+            if ((cells[middleIndex].center.y > cells[startIndex].center.y) != (cells[middleIndex].center.y > cells[middleIndex + 1].center.y))
+            {
+                Voronoi_DivideAndConquer_case3(startIndex, ref middleIndex, endIndex);
+            }
+        }
         // Построение диаграмм для двух подмножеств
         int c1 = startIndex + (middleIndex - startIndex) / 2,
             c2 = middleIndex + (endIndex - middleIndex) / 2,
-        top1 = -1, bot1 = -1, // Индексы верхней и нижней ячеек для первого подмножества
-        top2 = -1, bot2 = -1; // Индексы верхней и нижней ячеек для второго подмножества
-        Voronoi_DivideAndConquer_Recursive(startIndex, c1, middleIndex, ref top1, ref bot1);
-        Voronoi_DivideAndConquer_Recursive(middleIndex, c2, endIndex, ref top2, ref bot2);
-
+        top1 = -1, top2 = -1;
+        Voronoi_DivideAndConquer_Recursive(startIndex, c1, middleIndex, ref top1, true);
+        Voronoi_DivideAndConquer_Recursive(middleIndex, c2, endIndex, ref top2, false);
         // Объединение подмножеств
         int leftIndex = top1, rightIndex = top2;
 
-        Vector2 lineDir = cells[rightIndex].center - cells[leftIndex].center;
+        Vector2 direction = cells[rightIndex].center - cells[leftIndex].center;
         Vector2 midPoint = (cells[rightIndex].center + cells[leftIndex].center) / 2f;
         // Получение нормали к прямой
-        lineDir.y *= -1;
-        Vector2Mathf.Swap(ref lineDir.x, ref lineDir.y);
-        if (lineDir.y < 0) lineDir *= -1;
-        float cos = lineDir.x / lineDir.magnitude;
-        lineDir += midPoint;
+        direction.y *= -1;
+        Swap(ref direction.x, ref direction.y);
+        if (direction.y < 0) direction *= -1;
+        float cos = direction.x / direction.magnitude;
+        Vector2 dirPoint = direction + midPoint;
 
         Vector2 intersection = midPoint;
         Vector2 upperPoint = midPoint;
         Vector2 lowerPoint = midPoint;
 
         // Поиск верхней и нижей точек луча
-        if (cos <= -1 + Vector2Mathf.EPS || cos >= 1 - Vector2Mathf.EPS)
+        if (cos <= -1 + EPS || cos >= 1 - EPS)
         {
-            Vector2Mathf.straightLineIntersect(midPoint, lineDir, lowerLeftCorner, upperLeftCorner, ref upperPoint);
-            Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerRightCorner, upperRightCorner, ref lowerPoint);
+            StraightLineIntersect(midPoint, dirPoint, lowerLeftCorner, upperLeftCorner, ref upperPoint);
+            StraightLineIntersect(upperPoint, dirPoint, lowerRightCorner, upperRightCorner, ref lowerPoint);
         }
         else
         {
             // Поиск верхней точки
-            Vector2Mathf.straightLineIntersect(midPoint, lineDir, upperLeftCorner, upperRightCorner, ref upperPoint);
-            if (cos >= 0)
-                Vector2Mathf.straightLineIntersect(midPoint, lineDir, lowerRightCorner, upperRightCorner, ref intersection);
+            StraightLineIntersect(midPoint, dirPoint, upperLeftCorner, upperRightCorner, ref upperPoint);
+            /*if (cos >= 0)
+                StraightLineIntersect(midPoint, dirPoint, lowerRightCorner, upperRightCorner, ref intersection);
             else
-                Vector2Mathf.straightLineIntersect(midPoint, lineDir, lowerLeftCorner, upperLeftCorner, ref intersection);
+                StraightLineIntersect(midPoint, dirPoint, lowerLeftCorner, upperLeftCorner, ref intersection);
 
-            if (Vector2Mathf.SqrMagnitude(intersection - midPoint) < Vector2Mathf.SqrMagnitude(upperPoint - midPoint))
+            if (SqrMagnitude(intersection - midPoint) < SqrMagnitude(upperPoint - midPoint))
             {
                 upperPoint = intersection;
-            }
+            }*/
 
             // Поиск нижней точки
-            Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerLeftCorner, lowerRightCorner, ref lowerPoint);
+            StraightLineIntersect(upperPoint, dirPoint, lowerLeftCorner, lowerRightCorner, ref lowerPoint);
+            /*
             if (cos >= 0)
-                Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerLeftCorner, upperLeftCorner, ref intersection);
+                StraightLineIntersect(upperPoint, dirPoint, lowerLeftCorner, upperLeftCorner, ref intersection);
             else
-                Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerRightCorner, upperRightCorner, ref intersection);
+                StraightLineIntersect(upperPoint, dirPoint, lowerRightCorner, upperRightCorner, ref intersection);
 
-            if (Vector2Mathf.SqrMagnitude(intersection - upperPoint) < Vector2Mathf.SqrMagnitude(lowerPoint - upperPoint))
+            if (SqrMagnitude(intersection - upperPoint) < SqrMagnitude(lowerPoint - upperPoint))
             {
                 lowerPoint = intersection;
-            }
+            }*/
         }
 
         // Список индексов ребер - кандидатов на удаление
-        List<int> quarantine = new List<int>();
+        List<VoronoiEdge> quarantine = new List<VoronoiEdge>();
 
-        // Индекс предыдущего ребра
-        int prev = -1;
-        int intersect1 = -1, intersect2 = -1;
         bool fromLeft = false;
-        int intersectionIndex = -1;
         midPoint = lowerPoint;
-        
+
         VoronoiEdge newEdge = null;
-        int newEdgeIndex = -1;
+        VoronoiEdge prevEdge = null;
+        VoronoiEdge intersectedEdge = null;
+        VoronoiEdge prevIntersectedEdge = null;
         VoronoiEdge quarantineEdge = null;
-        int quarantineEdgeIndex = -1;
+        List<VoronoiEdge> stuckSolver = new List<VoronoiEdge>();
 
-
-        int loopCount = 0;
-        while (loopCount < loopLimit && (leftIndex != bot1 || rightIndex != bot2))
+        while (true)
         {
             // Просмотр всех отрезков, принадлежащих ячейкам, поиск ближайшей к верхней точки пересечения
-            for (int i = 0; i < cells[leftIndex].edges.Count; ++i)
+            foreach (VoronoiEdge edge in cells[leftIndex].edges)
             {
-                if (cells[leftIndex].edges[i] != intersect1 && cells[leftIndex].edges[i] != intersect2)
-                    if (Vector2Mathf.intersect(upperPoint, lowerPoint, edges[cells[leftIndex].edges[i]].point1, edges[cells[leftIndex].edges[i]].point2, ref intersection))
+                if (edge != prevEdge && edge != prevIntersectedEdge && !stuckSolver.Contains(edge))
+                {
+                    if (UniversalIntersect(upperPoint, lowerPoint, MainEdgeType(prevEdge), edge.point1, edge.point2, EdgeType(edge), ref intersection))
                     {
-                        if (Vector2Mathf.SqrMagnitude(intersection - upperPoint) < Vector2Mathf.SqrMagnitude(midPoint - upperPoint))
+                        if (SqrMagnitude(upperPoint - intersection) < SqrMagnitude(upperPoint - midPoint))
                         {
                             midPoint = intersection;
-                            intersectionIndex = cells[leftIndex].edges[i];
+                            intersectedEdge = edge;
                             fromLeft = true;
                         }
                     }
+                }
             }
-            for (int i = 0; i < cells[rightIndex].edges.Count; ++i)
+            foreach (VoronoiEdge edge in cells[rightIndex].edges)
             {
-                if (cells[rightIndex].edges[i] != intersect1 && cells[rightIndex].edges[i] != intersect2)
-                    if (Vector2Mathf.intersect(upperPoint, lowerPoint, edges[cells[rightIndex].edges[i]].point1, edges[cells[rightIndex].edges[i]].point2, ref intersection))
+                if (edge != prevEdge && edge != prevIntersectedEdge && !stuckSolver.Contains(edge))
+                {
+                    if (UniversalIntersect(upperPoint, lowerPoint, MainEdgeType(prevEdge), edge.point1, edge.point2, EdgeType(edge), ref intersection))
                     {
-                        if (Vector2Mathf.SqrMagnitude(intersection - upperPoint) < Vector2Mathf.SqrMagnitude(midPoint - upperPoint))
+                        if (SqrMagnitude(upperPoint - intersection) < SqrMagnitude(upperPoint - midPoint))
+                        {
                             midPoint = intersection;
-                        intersectionIndex = cells[rightIndex].edges[i];
-                        fromLeft = false;
+                            intersectedEdge = edge;
+                            fromLeft = false;
+
+                        }
                     }
+                }
             }
+
+            if (intersectedEdge == null) break;
             // Создание ребра
             newEdge = new VoronoiEdge(upperPoint, midPoint, leftIndex, rightIndex);
             edges.Add(newEdge);
-            newEdgeIndex = edges.IndexOf(newEdge);
-            cells[leftIndex].edges.Add(newEdgeIndex);
-            cells[rightIndex].edges.Add(newEdgeIndex);
+            cells[leftIndex].edges.Add(newEdge);
+            cells[rightIndex].edges.Add(newEdge);
 
             // Создание связи с предыдущим ребром
-            if (prev != -1) connectEdges(prev, newEdgeIndex);
-
-            if (intersectionIndex == -1) break;
-            // Разбиение пересеченного отрезка
-
-            if (fromLeft)
+            if (prevEdge != null && prevEdge != newEdge) ConnectEdges(prevEdge, newEdge);
+            else
             {
-                if (Vector2Mathf.SqrMagnitude((midPoint + edges[intersectionIndex].point1) / 2f - cells[leftIndex].center) <
-                    Vector2Mathf.SqrMagnitude((midPoint + edges[intersectionIndex].point1) / 2f - cells[rightIndex].center))
-                {
-                    // Добавление лишней части отрезка в список на удаление
-                    quarantineEdge = new VoronoiEdge(midPoint, edges[intersectionIndex].point2, -1, -1);
-                    foreach (int index in edges[intersectionIndex].point2connections)
-                        quarantineEdge.point2connections.Add(index);
+                if (newEdge.point2.y > upperRightCorner.y)
+                    newEdge.point1 = midPoint + direction;
+            }
 
-                    edges[intersectionIndex].point2 = midPoint;
-                    edges[intersectionIndex].point2connections.Clear();
-                    edges[intersectionIndex].point2connections.Add(newEdgeIndex);
-                }
-                else
-                {
-                    // Добавление лишней части отрезка в список на удаление
-                    quarantineEdge = new VoronoiEdge(edges[intersectionIndex].point1, midPoint, -1, -1);
-                    foreach (int index in edges[intersectionIndex].point1connections)
-                        quarantineEdge.point1connections.Add(index);
 
-                    edges[intersectionIndex].point1 = midPoint;
-                    edges[intersectionIndex].point1connections.Clear();
-                    edges[intersectionIndex].point1connections.Add(newEdgeIndex);
-                }
+            // Разбиение пересеченного отрезка
+            switch (EdgeType(intersectedEdge))
+            {
+                case 0:
+                    {
+                        if (((intersectedEdge.point1.x < midPoint.x) == (intersectedEdge.point2.x < midPoint.x)) &&
+                           ((intersectedEdge.point1.y < midPoint.y) == (intersectedEdge.point2.y < midPoint.y)))
+                        {
+                            if (SqrMagnitude(midPoint - intersectedEdge.point1) < SqrMagnitude(midPoint - intersectedEdge.point2))
+                            {
+                                intersectedEdge.point1 = midPoint;
+                                intersectedEdge.point1connections.Add(newEdge);
+                            }
+                            else
+                            {
+                                intersectedEdge.point2 = midPoint;
+                                intersectedEdge.point2connections.Add(newEdge);
+                            }
+                        }
+                        else
+                        {
+                            if (fromLeft)
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[leftIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[rightIndex].center))
+                                {
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                            }
+                            else
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[rightIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[leftIndex].center))
+                                {
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (((intersectedEdge.point1.x < midPoint.x) == (intersectedEdge.point2.x < midPoint.x)) &&
+                           ((intersectedEdge.point1.y < midPoint.y) == (intersectedEdge.point2.y < midPoint.y)))
+                        {
+                            intersectedEdge.point2 = midPoint;
+                            intersectedEdge.point2connections.Add(newEdge);
+                        }
+                        else
+                        {
+                            if (fromLeft)
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[leftIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[rightIndex].center))
+                                {
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    // Добавление лишней части отрезка в список на удаление
+                                    quarantineEdge = new VoronoiEdge(intersectedEdge.point1, midPoint, -1, -1);
+                                    foreach (VoronoiEdge index in intersectedEdge.point1connections)
+                                        quarantineEdge.point1connections.Add(index);
+                                    ChangeConnections(intersectedEdge, quarantineEdge, true);
+
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Clear();
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                            }
+                            else
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[rightIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[leftIndex].center))
+                                {
+                                    // Добавление лишней части отрезка в список на удаление
+                                    quarantineEdge = new VoronoiEdge(intersectedEdge.point1, midPoint, -1, -1);
+                                    foreach (VoronoiEdge index in intersectedEdge.point1connections)
+                                        quarantineEdge.point1connections.Add(index);
+                                    ChangeConnections(intersectedEdge, quarantineEdge, true);
+
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Clear();
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (((intersectedEdge.point1.x < midPoint.x) == (intersectedEdge.point2.x < midPoint.x)) &&
+                           ((intersectedEdge.point1.y < midPoint.y) == (intersectedEdge.point2.y < midPoint.y)))
+                        {
+                            intersectedEdge.point1 = midPoint;
+                            intersectedEdge.point1connections.Add(newEdge);
+                        }
+                        else
+                        {
+                            if (fromLeft)
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[leftIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[rightIndex].center))
+                                {
+                                    // Добавление лишней части отрезка в список на удаление
+                                    quarantineEdge = new VoronoiEdge(midPoint, intersectedEdge.point2, -1, -1);
+                                    foreach (VoronoiEdge index in intersectedEdge.point2connections)
+                                        quarantineEdge.point2connections.Add(index);
+                                    ChangeConnections(intersectedEdge, quarantineEdge, false);
+
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Clear();
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                            }
+                            else
+                            {
+                                if (SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[rightIndex].center) <
+                                    SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[leftIndex].center))
+                                {
+                                    intersectedEdge.point1 = midPoint;
+                                    intersectedEdge.point1connections.Add(newEdge);
+                                }
+                                else
+                                {
+                                    // Добавление лишней части отрезка в список на удаление
+                                    quarantineEdge = new VoronoiEdge(midPoint, intersectedEdge.point2, -1, -1);
+                                    foreach (VoronoiEdge index in intersectedEdge.point2connections)
+                                        quarantineEdge.point2connections.Add(index);
+                                    ChangeConnections(intersectedEdge, quarantineEdge, false);
+
+                                    intersectedEdge.point2 = midPoint;
+                                    intersectedEdge.point2connections.Clear();
+                                    intersectedEdge.point2connections.Add(newEdge);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if (fromLeft)
+                        {
+                            if (SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[leftIndex].center) <
+                                SqrMagnitude((midPoint + intersectedEdge.point1) / 2f - cells[rightIndex].center))
+                            {
+                                // Добавление лишней части отрезка в список на удаление
+                                quarantineEdge = new VoronoiEdge(midPoint, intersectedEdge.point2, -1, -1);
+                                foreach (VoronoiEdge index in intersectedEdge.point2connections)
+                                    quarantineEdge.point2connections.Add(index);
+                                ChangeConnections(intersectedEdge, quarantineEdge, false);
+
+                                intersectedEdge.point2 = midPoint;
+                                intersectedEdge.point2connections.Clear();
+                                intersectedEdge.point2connections.Add(newEdge);
+                            }
+                            else
+                            {
+                                // Добавление лишней части отрезка в список на удаление
+                                quarantineEdge = new VoronoiEdge(intersectedEdge.point1, midPoint, -1, -1);
+                                foreach (VoronoiEdge index in intersectedEdge.point1connections)
+                                    quarantineEdge.point1connections.Add(index);
+                                ChangeConnections(intersectedEdge, quarantineEdge, true);
+
+                                intersectedEdge.point1 = midPoint;
+                                intersectedEdge.point1connections.Clear();
+                                intersectedEdge.point1connections.Add(newEdge);
+                            }
+                        }
+                        else
+                        {
+                            if (SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[rightIndex].center) <
+                                SqrMagnitude((midPoint + intersectedEdge.point2) / 2f - cells[leftIndex].center))
+                            {
+                                // Добавление лишней части отрезка в список на удаление
+                                quarantineEdge = new VoronoiEdge(intersectedEdge.point1, midPoint, -1, -1);
+                                foreach (VoronoiEdge index in intersectedEdge.point1connections)
+                                    quarantineEdge.point1connections.Add(index);
+                                ChangeConnections(intersectedEdge, quarantineEdge, true);
+
+                                intersectedEdge.point1 = midPoint;
+                                intersectedEdge.point1connections.Clear();
+                                intersectedEdge.point1connections.Add(newEdge);
+                            }
+                            else
+                            {
+                                // Добавление лишней части отрезка в список на удаление
+                                quarantineEdge = new VoronoiEdge(midPoint, intersectedEdge.point2, -1, -1);
+                                foreach (VoronoiEdge index in intersectedEdge.point2connections)
+                                    quarantineEdge.point2connections.Add(index);
+                                ChangeConnections(intersectedEdge, quarantineEdge, false);
+
+                                intersectedEdge.point2 = midPoint;
+                                intersectedEdge.point2connections.Clear();
+                                intersectedEdge.point2connections.Add(newEdge);
+                            }
+                        }
+                        break;
+                    }
+            }
+
+            if (quarantineEdge != null) quarantine.Add(quarantineEdge);
+
+            newEdge.point2connections.Add(intersectedEdge);
+            if (prevEdge != null && SqrMagnitude(upperPoint - midPoint) < EPSEXT)
+            {
+                stuckSolver.Add(prevEdge);
+                stuckSolver.Add(prevIntersectedEdge);
+                shortEdges.Add(newEdge);
             }
             else
             {
-                if (Vector2Mathf.SqrMagnitude((midPoint + edges[intersectionIndex].point2) / 2f - cells[rightIndex].center) <
-                    Vector2Mathf.SqrMagnitude((midPoint + edges[intersectionIndex].point2) / 2f - cells[leftIndex].center))
-                {
-                    // Добавление лишней части отрезка в список на удаление
-                    quarantineEdge = new VoronoiEdge(edges[intersectionIndex].point1, midPoint, -1, -1);
-                    foreach (int index in edges[intersectionIndex].point1connections)
-                        quarantineEdge.point1connections.Add(index);
-
-                    edges[intersectionIndex].point1 = midPoint;
-                    edges[intersectionIndex].point1connections.Clear();
-                    edges[intersectionIndex].point1connections.Add(newEdgeIndex);
-                }
-                else
-                {
-                    // Добавление лишней части отрезка в список на удаление
-                    quarantineEdge = new VoronoiEdge(midPoint, edges[intersectionIndex].point2, -1, -1);
-                    foreach (int index in edges[intersectionIndex].point2connections)
-                        quarantineEdge.point2connections.Add(index);                  
-
-                    edges[intersectionIndex].point2 = midPoint;
-                    edges[intersectionIndex].point2connections.Clear();
-                    edges[intersectionIndex].point2connections.Add(newEdgeIndex);
-                }
+                if (stuckSolver.Count > 0) stuckSolver.Clear();
             }
-            edges.Add(quarantineEdge);
-            quarantineEdgeIndex = edges.IndexOf(quarantineEdge);
-            quarantine.Add(quarantineEdgeIndex);
-
-            edges[newEdgeIndex].point2connections.Add(intersectionIndex);
-
-            intersect1 = intersectionIndex; intersect2 = quarantineEdgeIndex;
-
+            prevEdge = newEdge;
+            prevIntersectedEdge = intersectedEdge;
             // перейти на смежную ячейку
             if (fromLeft)
             {
-                if (edges[intersectionIndex].leftCell == leftIndex)
-                    leftIndex = edges[intersectionIndex].rightCell;
+                if (intersectedEdge.leftCell == leftIndex)
+                    leftIndex = intersectedEdge.rightCell;
                 else
-                    leftIndex = edges[intersectionIndex].leftCell;
+                    leftIndex = intersectedEdge.leftCell;
             }
             else
             {
-                if (edges[intersectionIndex].leftCell == rightIndex)
-                    rightIndex = edges[intersectionIndex].rightCell;
+                if (intersectedEdge.leftCell == rightIndex)
+                    rightIndex = intersectedEdge.rightCell;
                 else
-                    rightIndex = edges[intersectionIndex].leftCell;
+                    rightIndex = intersectedEdge.leftCell;
             }
 
-            prev = newEdgeIndex;
             // Поиск перпендикуляра к новой прямой
             upperPoint = midPoint;
-            lineDir = cells[rightIndex].center - cells[leftIndex].center;
-            lineDir.y *= -1;
-            Vector2Mathf.Swap(ref lineDir.x, ref lineDir.y);
-            if (lineDir.y < 0) lineDir *= -1;
-            cos = lineDir.x / lineDir.magnitude;
-            lineDir += upperPoint;
+            direction = cells[rightIndex].center - cells[leftIndex].center;
+            direction.y *= -1;
+            Swap(ref direction.x, ref direction.y);
+            if (direction.y < 0) direction *= -1;
+            cos = direction.x / direction.magnitude;
+            direction += upperPoint;
 
-            if (cos <= -1 + Vector2Mathf.EPS || cos >= 1 - Vector2Mathf.EPS)
+            if (cos <= -1 + EPS || cos >= 1 - EPS)
             {
-                Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerRightCorner, upperRightCorner, ref lowerPoint);
+                StraightLineIntersect(upperPoint, direction, lowerRightCorner, upperRightCorner, ref lowerPoint);
             }
             else
             {
                 // Поиск нижней точки
-                Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerLeftCorner, lowerRightCorner, ref lowerPoint);
-                if (cos >= 0)
-                    Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerLeftCorner, upperLeftCorner, ref intersection);
+                StraightLineIntersect(upperPoint, direction, lowerLeftCorner, lowerRightCorner, ref lowerPoint);
+                /*if (cos >= 0)
+                    StraightLineIntersect(upperPoint, direction, lowerLeftCorner, upperLeftCorner, ref intersection);
                 else
-                    Vector2Mathf.straightLineIntersect(upperPoint, lineDir, lowerRightCorner, upperRightCorner, ref intersection);
+                    StraightLineIntersect(upperPoint, direction, lowerRightCorner, upperRightCorner, ref intersection);
 
-                if (Vector2Mathf.SqrMagnitude(intersection - upperPoint) < Vector2Mathf.SqrMagnitude(lowerPoint - upperPoint))
+                if (SqrMagnitude(intersection - upperPoint) < SqrMagnitude(lowerPoint - upperPoint))
                 {
                     lowerPoint = intersection;
-                }
+                }*/
             }
-            intersectionIndex = -1;
+            intersectedEdge = null;
+            quarantineEdge = null;
+            //midPoint.x = float.PositiveInfinity;
+            //midPoint.y = float.NegativeInfinity;
             midPoint = lowerPoint;
-            loopCount++;
-            Debug.Log(leftIndex + " " + rightIndex);
         } // Конец While
-        if (loopCount >= loopLimit) Debug.Log("ПИЗДЕЦ");
+
         // Завершение ломаной
         newEdge = new VoronoiEdge(upperPoint, lowerPoint, leftIndex, rightIndex);
         edges.Add(newEdge);
-        newEdgeIndex = edges.IndexOf(newEdge);
-        cells[leftIndex].edges.Add(newEdgeIndex);
-        cells[rightIndex].edges.Add(newEdgeIndex);
+        cells[leftIndex].edges.Add(newEdge);
+        cells[rightIndex].edges.Add(newEdge);
 
-        if (prev != -1) connectEdges(prev, newEdgeIndex);
+        if (prevEdge != null) ConnectEdges(prevEdge, newEdge);
 
         // Удаление лишних ребер
 
-        //removeEdges(ref quarantine);
+        RemoveEdges(ref quarantine);
 
         // Замена верхнего и нижнего индексов
-        if (Vector2Mathf.isFirstHigher(cells[top1].center, cells[top2].center)) top = top1;
+        if (IsFirstHigher(cells[top1].center, cells[top2].center, isLeft)) top = top1;
         else top = top2;
-        if (Vector2Mathf.isFirstHigher(cells[bot1].center, cells[bot2].center)) bot = bot2;
-        else bot = bot1;
     }
 
-    private void connectEdges(int edgeIndex, int indexToConnect)
+    protected void ConnectEdges(VoronoiEdge edgeIndex, VoronoiEdge indexToConnect)
     {
-        foreach (int connection in edges[edgeIndex].point2connections)
+        foreach (VoronoiEdge connection in edgeIndex.point2connections)
         {
-            if (edges[connection].point1 == edges[edgeIndex].point2)
-                edges[connection].point1connections.Add(indexToConnect);
+            if (connection.point1 == edgeIndex.point2)
+                connection.point1connections.Add(indexToConnect);
             else
-                edges[connection].point2connections.Add(indexToConnect);
-            edges[indexToConnect].point1connections.Add(connection);
+                connection.point2connections.Add(indexToConnect);
+            indexToConnect.point1connections.Add(connection);
         }
-        edges[edgeIndex].point2connections.Add(indexToConnect);
-        edges[indexToConnect].point1connections.Add(edgeIndex);
+        edgeIndex.point2connections.Add(indexToConnect);
+        indexToConnect.point1connections.Add(edgeIndex);
     }
 
-    private void removeEdges(ref List<int> list)
+    protected void ChangeConnections(VoronoiEdge edgeIndex, VoronoiEdge indexToConnect, bool point1)
+    {
+        if (point1)
+        {
+            foreach (VoronoiEdge connection in edgeIndex.point1connections)
+            {
+                if (connection.point1 == edgeIndex.point1)
+                {
+                    connection.point1connections.Remove(edgeIndex);
+                    connection.point1connections.Add(indexToConnect);
+                }
+                else
+                {
+                    connection.point2connections.Remove(edgeIndex);
+                    connection.point2connections.Add(indexToConnect);
+                }
+            }
+        }
+        else
+        {
+            foreach (VoronoiEdge connection in edgeIndex.point2connections)
+            {
+                if (connection.point1 == edgeIndex.point2)
+                {
+                    connection.point1connections.Remove(edgeIndex);
+                    connection.point1connections.Add(indexToConnect);
+                }
+                else
+                {
+                    connection.point2connections.Remove(edgeIndex);
+                    connection.point2connections.Add(indexToConnect);
+                }
+            }
+        }
+    }
+
+    protected void RemoveEdges(ref List<VoronoiEdge> list)
     {
         int count = list.Count;
         for (int i = 0; i < count; ++i)
         {
-            watchEdge(list[i], ref list);
+            WatchEdge(list[i], ref list);
         }
 
-        foreach (int removeIndex in list)
+        foreach (VoronoiEdge edge in list)
         {
-            edges.RemoveAt(removeIndex);
+            if (edge.leftCell != -1)
+            {
+                cells[edge.leftCell].edges.Remove(edge);
+                cells[edge.rightCell].edges.Remove(edge);
+            }
+            //Debug.Log("Removed: " + edges.IndexOf(edge));
+            edges.Remove(edge);
         }
     }
 
-    private void watchEdge(int watchIndex, ref List<int> list)
+    protected void WatchEdge(VoronoiEdge watchIndex, ref List<VoronoiEdge> list)
     {
-        foreach (int j in edges[watchIndex].point1connections)
+        foreach (VoronoiEdge j in watchIndex.point1connections)
         {
             if (!list.Contains(j))
             {
                 list.Add(j);
-                watchEdge(j, ref list);
+                WatchEdge(j, ref list);
             }
         }
-        foreach (int j in edges[watchIndex].point2connections)
+        foreach (VoronoiEdge j in watchIndex.point2connections)
         {
             if (!list.Contains(j))
             {
                 list.Add(j);
-                watchEdge(j, ref list);
+                WatchEdge(j, ref list);
+            }
+        }
+    }
+
+    protected int EdgeType(VoronoiEdge edge)
+    {
+        int result = 0;
+        if (edge.point1connections.Count > 0) result += 1;
+        if (edge.point2connections.Count > 0) result += 2;
+        return result;
+    }
+
+    private int MainEdgeType(VoronoiEdge prev)
+    {
+        if (prev != null) return 1;
+        else return 0;
+    }
+
+    protected bool InsideBounds(Vector2 point)
+    {
+        return point.x >= lowerLeftCorner.x - EPS && point.x <= upperRightCorner.x + EPS &&
+               point.y >= lowerLeftCorner.y - EPS && point.y <= upperRightCorner.y + EPS;
+    }
+
+    private void FitInBounds()
+    {
+        List<VoronoiEdge> toRemove = new List<VoronoiEdge>();
+        Vector2
+            intersectionUp = Vector2.negativeInfinity,
+            intersectionRight = Vector2.negativeInfinity,
+            intersectionDown = Vector2.negativeInfinity,
+            intersectionLeft = Vector2.negativeInfinity,
+            nearestPoint;
+        int crossResult;
+        float sqrMag;
+        foreach (VoronoiEdge edge in edges)
+        {
+            crossResult = CrossBounds(edge, ref intersectionUp, ref intersectionRight, ref intersectionDown, ref intersectionLeft);
+            if (!InsideBounds(edge.point1) && !InsideBounds(edge.point2) && crossResult == 0)
+            {
+                RemoveConnections(edge);
+                toRemove.Add(edge);
+            }
+            else
+            {
+                if (!InsideBounds(edge.point1))
+                {
+                    RemoveConnectionsParticular(edge, true);
+                    edge.point1connections.Clear();
+                    nearestPoint = Vector2.negativeInfinity;
+                    sqrMag = float.PositiveInfinity;
+                    if (crossResult % 2 == 1 && SqrMagnitude(edge.point1 - intersectionUp) < sqrMag)
+                    {
+                        nearestPoint = intersectionUp;
+                        sqrMag = SqrMagnitude(edge.point1 - nearestPoint);
+                    }
+                    if ((crossResult % 4) / 2 == 1 && SqrMagnitude(edge.point1 - intersectionRight) < sqrMag)
+                    {
+                        nearestPoint = intersectionRight;
+                        sqrMag = SqrMagnitude(edge.point1 - nearestPoint);
+                    }
+                    if ((crossResult % 8) / 4 == 1 && SqrMagnitude(edge.point1 - intersectionDown) < sqrMag)
+                    {
+                        nearestPoint = intersectionDown;
+                        sqrMag = SqrMagnitude(edge.point1 - nearestPoint);
+                    }
+                    if (crossResult / 8 == 1 && SqrMagnitude(edge.point1 - intersectionLeft) < sqrMag)
+                    {
+                        nearestPoint = intersectionLeft;
+                        sqrMag = SqrMagnitude(edge.point1 - nearestPoint);
+                    }
+                    edge.point1 = nearestPoint;
+                }
+                if (!InsideBounds(edge.point2))
+                {
+                    RemoveConnectionsParticular(edge, false);
+                    edge.point2connections.Clear();
+                    nearestPoint = Vector2.negativeInfinity;
+                    sqrMag = float.PositiveInfinity;
+                    if (crossResult % 2 == 1 && SqrMagnitude(edge.point2 - intersectionUp) < sqrMag)
+                    {
+                        nearestPoint = intersectionUp;
+                        sqrMag = SqrMagnitude(edge.point2 - nearestPoint);
+                    }
+                    if ((crossResult % 4) / 2 == 1 && SqrMagnitude(edge.point2 - intersectionRight) < sqrMag)
+                    {
+                        nearestPoint = intersectionRight;
+                        sqrMag = SqrMagnitude(edge.point2 - nearestPoint);
+                    }
+                    if ((crossResult % 8) / 4 == 1 && SqrMagnitude(edge.point2 - intersectionDown) < sqrMag)
+                    {
+                        nearestPoint = intersectionDown;
+                        sqrMag = SqrMagnitude(edge.point2 - nearestPoint);
+                    }
+                    if (crossResult / 8 == 1 && SqrMagnitude(edge.point2 - intersectionLeft) < sqrMag)
+                    {
+                        nearestPoint = intersectionLeft;
+                        sqrMag = SqrMagnitude(edge.point2 - nearestPoint);
+                    }
+                    edge.point2 = nearestPoint;
+                }
+            }
+            if (crossResult > 0)
+            {
+                if (crossResult % 2 == 1)
+                {
+                    if (Between(upperLeftCorner.x, upperRightCorner.x, edge.point1.x) && Between(upperLeftCorner.y, upperRightCorner.y, edge.point1.y))
+                    {
+                        intersectionsUp.Add(new BoundIntersection(edge.point1, edge));
+                    }
+                    if (Between(upperLeftCorner.x, upperRightCorner.x, edge.point2.x) && Between(upperLeftCorner.y, upperRightCorner.y, edge.point2.y))
+                    {
+                        intersectionsUp.Add(new BoundIntersection(edge.point2, edge));
+                    }
+                }
+                if ((crossResult % 4) / 2 == 1)
+                {
+                    if (Between(upperRightCorner.x, lowerRightCorner.x, edge.point1.x) && Between(upperRightCorner.y, lowerRightCorner.y, edge.point1.y))
+                    {
+                        intersectionsRight.Add(new BoundIntersection(edge.point1, edge));
+                    }
+                    if (Between(upperRightCorner.x, lowerRightCorner.x, edge.point2.x) && Between(upperRightCorner.y, lowerRightCorner.y, edge.point2.y))
+                    {
+                        intersectionsRight.Add(new BoundIntersection(edge.point2, edge));
+                    }
+                }
+                if ((crossResult % 8) / 4 == 1)
+                {
+                    if (Between(lowerRightCorner.x, lowerLeftCorner.x, edge.point1.x) && Between(lowerRightCorner.y, lowerLeftCorner.y, edge.point1.y))
+                    {
+                        intersectionsDown.Add(new BoundIntersection(edge.point1, edge));
+                    }
+                    if (Between(lowerRightCorner.x, lowerLeftCorner.x, edge.point2.x) && Between(lowerRightCorner.y, lowerLeftCorner.y, edge.point2.y))
+                    {
+                        intersectionsDown.Add(new BoundIntersection(edge.point2, edge));
+                    }
+                }
+                if (crossResult / 8 == 1)
+                {
+                    if (Between(lowerLeftCorner.x, upperLeftCorner.x, edge.point1.x) && Between(lowerLeftCorner.y, upperLeftCorner.y, edge.point1.y))
+                    {
+                        intersectionsLeft.Add(new BoundIntersection(edge.point1, edge));
+                    }
+                    if (Between(lowerLeftCorner.x, upperLeftCorner.x, edge.point2.x) && Between(lowerLeftCorner.y, upperLeftCorner.y, edge.point2.y))
+                    {
+                        intersectionsLeft.Add(new BoundIntersection(edge.point2, edge));
+                    }
+                }
+            }
+        }
+
+        foreach (VoronoiEdge edge in toRemove)
+        {
+            cells[edge.leftCell].edges.Remove(edge);
+            cells[edge.rightCell].edges.Remove(edge);
+            edges.Remove(edge);
+        }
+    }
+
+    protected int CrossBounds(VoronoiEdge edge, ref Vector2 intersectionUp, ref Vector2 intersectionRight, ref Vector2 intersectionDown, ref Vector2 intersectionLeft)
+    {
+        bool a = UniversalIntersect(edge.point1, edge.point2, EdgeType(edge), upperLeftCorner, upperRightCorner, 3, ref intersectionUp);
+        bool b = UniversalIntersect(edge.point1, edge.point2, EdgeType(edge), upperRightCorner, lowerRightCorner, 3, ref intersectionRight);
+        bool c = UniversalIntersect(edge.point1, edge.point2, EdgeType(edge), lowerRightCorner, lowerLeftCorner, 3, ref intersectionDown);
+        bool d = UniversalIntersect(edge.point1, edge.point2, EdgeType(edge), lowerLeftCorner, upperLeftCorner, 3, ref intersectionLeft);
+        int result = 0;
+        if (a) result += 1;
+        if (b) result += 2;
+        if (c) result += 4;
+        if (d) result += 8;
+        return result;
+    }
+
+    protected void RemoveConnections(VoronoiEdge edge)
+    {
+        foreach (VoronoiEdge connection in edge.point1connections)
+        {
+            if (connection.point1 == edge.point1)
+            {
+                connection.point1connections.Remove(edge);
+            }
+            else
+            {
+                connection.point2connections.Remove(edge);
+            }
+        }
+        foreach (VoronoiEdge connection in edge.point2connections)
+        {
+            if (connection.point1 == edge.point2)
+            {
+                connection.point1connections.Remove(edge);
+            }
+            else
+            {
+                connection.point2connections.Remove(edge);
+            }
+        }
+    }
+
+    protected void RemoveConnectionsParticular(VoronoiEdge edge, bool point1)
+    {
+        if (point1)
+        {
+            foreach (VoronoiEdge connection in edge.point1connections)
+            {
+                if (connection.point1 == edge.point1)
+                {
+                    connection.point1connections.Remove(edge);
+                }
+                else
+                {
+                    connection.point2connections.Remove(edge);
+                }
+            }
+        }
+        else
+        {
+            foreach (VoronoiEdge connection in edge.point2connections)
+            {
+                if (connection.point1 == edge.point2)
+                {
+                    connection.point1connections.Remove(edge);
+                }
+                else
+                {
+                    connection.point2connections.Remove(edge);
+                }
             }
         }
     }

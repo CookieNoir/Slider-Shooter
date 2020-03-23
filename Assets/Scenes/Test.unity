@@ -556,6 +556,86 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64286707}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &66526187
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1829591215}
+    m_Modifications:
+    - target: {fileID: 9118911355529486578, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall Part
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 128318243448003577, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 37e0c640540e8bd46a2edaf60532df37, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1b70d0c40df13f40a5976412bcc34e3, type: 3}
+--- !u!4 &66526188 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 66526187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &71902971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1354,154 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145102579}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &149017234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149017236}
+  - component: {fileID: 149017235}
+  m_Layer: 0
+  m_Name: 'Voronoi Diagram 3 extra '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &149017235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149017234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.04, y: -0.93}
+  - {x: 0.6, y: -0.4}
+  - {x: 1.75, y: -0.18}
+  border1: {x: 2, y: 2}
+  border2: {x: -1, y: -1}
+--- !u!4 &149017236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149017234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &161665246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161665248}
+  - component: {fileID: 161665247}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 3 extra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &161665247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161665246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.44, y: 0}
+  - {x: 0.6, y: -0.4}
+  - {x: 1.77, y: -0.9}
+  border1: {x: 2, y: 2}
+  border2: {x: -1, y: -1}
+--- !u!4 &161665248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161665246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &185433286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 185433288}
+  - component: {fileID: 185433287}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &185433287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185433286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.36, y: 1.3}
+  - {x: 0.92, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 2.38, y: 0.14}
+  border1: {x: 3, y: 3}
+  border2: {x: -2, y: -2}
+--- !u!4 &185433288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185433286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223091729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,7 +1805,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &266883708
 MonoBehaviour:
@@ -1592,7 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -2508,7 +2736,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &396628217
 MonoBehaviour:
@@ -2523,7 +2751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -2954,7 +3182,7 @@ GameObject:
   - component: {fileID: 425353870}
   - component: {fileID: 425353869}
   m_Layer: 0
-  m_Name: Voronoi Diagram (1)
+  m_Name: Voronoi Diagram 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2977,7 +3205,6 @@ MonoBehaviour:
   - {x: 1.77, y: -0.9}
   border1: {x: 2, y: 2}
   border2: {x: -1, y: -1}
-  loopLimit: 100
 --- !u!4 &425353870
 Transform:
   m_ObjectHideFlags: 0
@@ -3496,7 +3723,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &526081576
 MonoBehaviour:
@@ -3511,7 +3738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -3889,6 +4116,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 0}
   key: Time
+--- !u!1001 &617890175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1829591215}
+    m_Modifications:
+    - target: {fileID: 9118911355529486578, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall Part
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 128318243448003577, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 58a4859e0b4b7c54aafab9b54e5c2366, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1b70d0c40df13f40a5976412bcc34e3, type: 3}
+--- !u!4 &617890176 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 617890175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &627721360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,7 +4207,7 @@ GameObject:
   - component: {fileID: 627721362}
   - component: {fileID: 627721361}
   m_Layer: 0
-  m_Name: Voronoi Diagram
+  m_Name: Voronoi Diagram 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3923,7 +4230,6 @@ MonoBehaviour:
   - {x: 0.6, y: -0.4}
   border1: {x: 2, y: 2}
   border2: {x: -1, y: -1}
-  loopLimit: 100
 --- !u!4 &627721362
 Transform:
   m_ObjectHideFlags: 0
@@ -4335,6 +4641,71 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50.000004, y: -102.019005, z: 0}
+--- !u!1 &721865441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721865443}
+  - component: {fileID: 721865442}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 19
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721865442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721865441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -0.24, y: 1.71}
+  - {x: 0.03, y: -1.39}
+  - {x: 0.14, y: -0.03}
+  - {x: 0.28, y: -1}
+  - {x: 0.36, y: 1.3}
+  - {x: 0.95, y: -1.65}
+  - {x: 0.97, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 1.58, y: -1.41}
+  - {x: 1.61, y: 1.62}
+  - {x: 1.98, y: -0.84}
+  - {x: 2.14, y: 0.29}
+  - {x: 2.34, y: -1.15}
+  - {x: 2.44, y: 0.86}
+  - {x: 2.77, y: -0.14}
+  - {x: 3.27, y: -0.51}
+  - {x: 3.3, y: -1.27}
+  - {x: 3.61, y: 1.38}
+  - {x: 3.75, y: -0.54}
+  border1: {x: 4, y: 2}
+  border2: {x: -0.5, y: -2}
+--- !u!4 &721865443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721865441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722165173
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,6 +5404,104 @@ MonoBehaviour:
   damage: 10
   spentModifier: 0.2
   fireRenderer: {fileID: 82531161}
+--- !u!1 &789613808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789613810}
+  - component: {fileID: 789613809}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &789613809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789613808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.36, y: 1.3}
+  - {x: 0.63, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  border1: {x: 3, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &789613810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789613808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &794540729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 794540731}
+  - component: {fileID: 794540730}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 3 extra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &794540730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794540729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -0.24, y: 0.27}
+  - {x: 0.6, y: -0.4}
+  - {x: 1.75, y: -0.56}
+  border1: {x: 2, y: 2}
+  border2: {x: -1, y: -1}
+--- !u!4 &794540731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794540729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802441433
 GameObject:
   m_ObjectHideFlags: 0
@@ -5138,6 +5607,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802441433}
   m_Mesh: {fileID: -6409579831647372598, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &820542883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820542885}
+  - component: {fileID: 820542884}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &820542884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820542883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.36, y: 1.3}
+  - {x: 0.56, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 1.61, y: 1.62}
+  - {x: 2.14, y: 0.29}
+  - {x: 2.8, y: 1.38}
+  - {x: 2.87, y: -0.51}
+  border1: {x: 3.26, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &820542885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820542883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &841364689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,6 +5789,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841364689}
   m_Mesh: {fileID: 841550936571776484, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &846070045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846070047}
+  - component: {fileID: 846070046}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &846070046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846070045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -1, y: -1}
+  - {x: -1, y: 1}
+  - {x: 1, y: -1}
+  border1: {x: 2, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &846070047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846070045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849634554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5719,6 +6290,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906858380}
   m_Mesh: {fileID: -6748798779234794853, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &907456240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 907456242}
+  - component: {fileID: 907456241}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &907456241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907456240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -1, y: -1}
+  - {x: -1, y: 1}
+  - {x: 0.69, y: 1}
+  - {x: 1, y: -1}
+  border1: {x: 2, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &907456242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907456240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &910198986
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,6 +7309,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024310043}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1026206703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1026206705}
+  - component: {fileID: 1026206704}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1026206704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026206703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.36, y: 1.3}
+  - {x: 0.63, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 1.61, y: 1.62}
+  - {x: 2.14, y: 0.29}
+  - {x: 2.8, y: 1.38}
+  - {x: 2.87, y: -0.51}
+  border1: {x: 3.52, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &1026206705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026206703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1053625285
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,6 +7676,136 @@ MonoBehaviour:
   key: YouWon
   dynamicWords: []
   allowEndLines: 1
+--- !u!1 &1064952236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1064952238}
+  - component: {fileID: 1064952237}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1064952237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064952236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -1, y: 0}
+  - {x: 0, y: -1}
+  - {x: 0, y: 1}
+  - {x: 1, y: 0}
+  border1: {x: 2, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &1064952238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064952236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1068455944
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1829591215}
+    m_Modifications:
+    - target: {fileID: 9118911355529486578, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall Part
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 128318243448003577, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 2688c7656dc49924a9c9f270e6522a90, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1b70d0c40df13f40a5976412bcc34e3, type: 3}
+--- !u!4 &1068455945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1068455944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1069726969
 GameObject:
   m_ObjectHideFlags: 0
@@ -7491,7 +8295,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1.5}
+  m_Size: {x: 2.5, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.75}
 --- !u!4 &1112342291
 Transform:
@@ -7851,7 +8655,7 @@ GameObject:
   - component: {fileID: 1191004123}
   - component: {fileID: 1191004122}
   m_Layer: 0
-  m_Name: Voronoi Diagram (2)
+  m_Name: Voronoi Diagram 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7870,14 +8674,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points:
-  - {x: -0.56, y: 0.66}
-  - {x: 0, y: 0}
-  - {x: 0.6, y: -0.4}
-  - {x: 1.28, y: 1.53}
-  - {x: 1.77, y: -0.9}
-  border1: {x: 2, y: 2}
-  border2: {x: -1, y: -1}
-  loopLimit: 100
+  - {x: -0.79, y: 1.38}
+  - {x: -0.42, y: -0.51}
+  - {x: -0.06, y: 0.29}
+  - {x: 0.36, y: 1.3}
+  - {x: 0.92, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 2.21, y: 1.2}
+  border1: {x: 3, y: 2}
+  border2: {x: -1, y: -2}
 --- !u!4 &1191004123
 Transform:
   m_ObjectHideFlags: 0
@@ -8979,7 +9784,7 @@ GameObject:
   - component: {fileID: 1297370827}
   - component: {fileID: 1297370826}
   m_Layer: 0
-  m_Name: Voronoi Diagram (3)
+  m_Name: Voronoi Diagram 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9001,9 +9806,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0.6, y: -0.4}
   - {x: 1.77, y: -0.9}
-  border1: {x: 2, y: 2}
+  border1: {x: 4, y: 5}
   border2: {x: -1, y: -1}
-  loopLimit: 100
 --- !u!4 &1297370827
 Transform:
   m_ObjectHideFlags: 0
@@ -9266,6 +10070,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334167418}
   m_CullTransparentMesh: 0
+--- !u!1 &1335855422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1335855424}
+  - component: {fileID: 1335855423}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1335855423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335855422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 1.61, y: 1.62}
+  - {x: 2.14, y: 0.29}
+  - {x: 2.8, y: 1.38}
+  - {x: 2.87, y: -0.51}
+  border1: {x: 3.13, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &1335855424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335855422}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1337417305
 GameObject:
   m_ObjectHideFlags: 0
@@ -9956,6 +10810,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384913590}
   m_Mesh: {fileID: -8305299875054176051, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &1399359455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399359457}
+  - component: {fileID: 1399359456}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 16
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1399359456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399359455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.03, y: -1.39}
+  - {x: 0.14, y: -0.03}
+  - {x: 0.28, y: -1}
+  - {x: 0.36, y: 1.3}
+  - {x: 0.97, y: 0.57}
+  - {x: 1.17, y: -0.42}
+  - {x: 1.58, y: -1.41}
+  - {x: 1.61, y: 1.62}
+  - {x: 1.98, y: -0.84}
+  - {x: 2.14, y: 0.29}
+  - {x: 2.34, y: -1.7}
+  - {x: 2.44, y: 0.86}
+  - {x: 2.8, y: 1.38}
+  - {x: 2.87, y: -0.51}
+  - {x: 3.3, y: -1.27}
+  - {x: 3.75, y: 0.46}
+  border1: {x: 4, y: 2}
+  border2: {x: -0.5, y: -2}
+--- !u!4 &1399359457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399359455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1408361814
 GameObject:
   m_ObjectHideFlags: 0
@@ -10091,7 +11007,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &1412324553
 MonoBehaviour:
@@ -10106,7 +11022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -10122,7 +11038,7 @@ GameObject:
   - component: {fileID: 1425681281}
   - component: {fileID: 1425681280}
   m_Layer: 0
-  m_Name: Voronoi Diagram (4)
+  m_Name: Voronoi Diagram 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10146,7 +11062,6 @@ MonoBehaviour:
   - {x: 1.77, y: -0.9}
   border1: {x: 2, y: 2}
   border2: {x: -1, y: -1}
-  loopLimit: 100
 --- !u!4 &1425681281
 Transform:
   m_ObjectHideFlags: 0
@@ -13059,6 +13974,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824485345}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1829591213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829591215}
+  - component: {fileID: 1829591214}
+  m_Layer: 0
+  m_Name: Voronoi Wall 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1829591214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829591213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a336db75480444d88128ceb791de58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -0.11, y: -0.24}
+  - {x: 0.31, y: 0.39}
+  - {x: 1.2, y: 0.12}
+  - {x: 1.69, y: -0.01}
+  depth: 1
+  border1: {x: 2.02, y: 0.55}
+  border2: {x: -0.39, y: -0.39}
+  partPrefab: {fileID: 9118911355529486578, guid: a1b70d0c40df13f40a5976412bcc34e3,
+    type: 3}
+--- !u!4 &1829591215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829591213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 66526188}
+  - {fileID: 617890176}
+  - {fileID: 1068455945}
+  - {fileID: 2039602739}
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1833922015
 GameObject:
   m_ObjectHideFlags: 0
@@ -13750,6 +14722,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890312876}
   m_Mesh: {fileID: -8971091586918162516, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &1897456351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1897456353}
+  - component: {fileID: 1897456352}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1897456352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897456351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -1.75, y: 1.5}
+  - {x: -1.5, y: 1.75}
+  - {x: 0, y: -1.61}
+  - {x: 1.03, y: 1.9}
+  border1: {x: 2, y: 2}
+  border2: {x: -2, y: -2}
+--- !u!4 &1897456353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897456351}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1903819298
 GameObject:
   m_ObjectHideFlags: 0
@@ -14223,6 +15245,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964631011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1989187463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1989187465}
+  - component: {fileID: 1989187464}
+  m_Layer: 0
+  m_Name: 'Voronoi Diagram 3 extra '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1989187464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989187463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0.19, y: -0.34}
+  - {x: 0.77, y: 0.35}
+  - {x: 1.74, y: 1.01}
+  border1: {x: 4, y: 2}
+  border2: {x: -1, y: -6}
+--- !u!4 &1989187465
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989187463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1989951779
 GameObject:
   m_ObjectHideFlags: 0
@@ -14340,6 +15411,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989951779}
   m_CullTransparentMesh: 0
+--- !u!1 &2018235656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2018235658}
+  - component: {fileID: 2018235657}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2018235657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018235656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: -0.79, y: 1.38}
+  - {x: -0.42, y: -0.51}
+  - {x: -0.06, y: 0.29}
+  - {x: 0.36, y: 1.3}
+  - {x: 0.92, y: 0.57}
+  border1: {x: 2, y: 2}
+  border2: {x: -1.2, y: -1}
+--- !u!4 &2018235658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018235656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2018954203
 GameObject:
   m_ObjectHideFlags: 0
@@ -14611,6 +15733,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038742386}
   m_CullTransparentMesh: 0
+--- !u!1001 &2039602738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1829591215}
+    m_Modifications:
+    - target: {fileID: 9118911355529486578, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall Part
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 128318243448003577, guid: a1b70d0c40df13f40a5976412bcc34e3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: cb40a5c579ead3b42892928093a65fca, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1b70d0c40df13f40a5976412bcc34e3, type: 3}
+--- !u!4 &2039602739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1005006922297774649, guid: a1b70d0c40df13f40a5976412bcc34e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2039602738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2045785367
 GameObject:
   m_ObjectHideFlags: 0
@@ -15078,6 +16280,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057541551}
   m_Mesh: {fileID: 9027179415635318087, guid: 912dd89b3d4cc3f4791839f52461d7e1, type: 3}
+--- !u!1 &2067330427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2067330429}
+  - component: {fileID: 2067330428}
+  m_Layer: 0
+  m_Name: Voronoi Diagram 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2067330428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067330427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83deabeb83588774d865b2cf98ac3204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 1.77, y: -0.9}
+  - {x: 2.59, y: -0.4}
+  - {x: 3.15, y: 0}
+  border1: {x: 4, y: 5}
+  border2: {x: -1, y: -1}
+--- !u!4 &2067330429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067330427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068875215
 GameObject:
   m_ObjectHideFlags: 0
