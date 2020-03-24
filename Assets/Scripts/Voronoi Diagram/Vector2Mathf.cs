@@ -160,4 +160,31 @@ public class Vector2Mathf
             else return false;
         }
     }
+
+    public static Vector2 LineNormal(Vector2 point1, Vector2 point2, Vector2 origin)
+    {
+        Vector2 midPoint = (point1 + point2) / 2;
+        Vector2 direction = point2 - point1;
+        direction.y *= -1;
+        Swap(ref direction.x, ref direction.y);
+        Vector2 originDirection = origin - midPoint;
+        float cos = (direction.x * originDirection.x + direction.y * originDirection.y) / (direction.magnitude * originDirection.magnitude);
+        if (cos > 0) direction *= -1;
+        return direction;
+    }
+
+    public static Vector3 LineNormal(Vector3 point1, Vector3 point2, Vector3 origin)
+    {
+        Vector3 midPoint = (point1 + point2) / 2;
+        Vector3 direction = point2 - point1;
+        direction.y *= -1;
+        Swap(ref direction.x, ref direction.y);
+        Vector3 originDirection = origin - midPoint;
+        float cos = (direction.x * originDirection.x + direction.y * originDirection.y) /
+            (Mathf.Sqrt(direction.x * direction.x + direction.y * direction.y) *
+            Mathf.Sqrt(originDirection.x * originDirection.x + originDirection.y * originDirection.y));
+        if (cos > 0) direction *= -1;
+        direction.z = 0;
+        return direction;
+    }
 }

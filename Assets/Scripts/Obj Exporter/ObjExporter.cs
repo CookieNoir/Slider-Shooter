@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
 using System.IO;
 using System.Text;
 
@@ -159,5 +158,63 @@ public class ObjExporter : ScriptableObject
         {
             sw.Write(s);
         }
+    }
+
+    static string processTransform(Transform t)
+    {
+        StringBuilder meshString = new StringBuilder();
+
+        meshString.Append("#" + t.name
+                        + "\n#-------"
+                        + "\n");
+
+        meshString.Append("o ").Append(t.name).Append("\n");
+
+        MeshFilter mf = t.GetComponent<MeshFilter>();
+        if (mf)
+        {
+            meshString.Append(ObjExporterScript.MeshToString(mf, t));
+        }
+
+        return meshString.ToString();
+    }
+
+    public static void DoExport(GameObject[] selections)
+    {
+        if (selections.Length == 0)
+        {
+            Debug.Log("Didn't Export Any Meshes; Nothing was selected!");
+            return;
+        }
+
+        string meshName = selections[0].name;
+        string fileName = EditorUtility.SaveFilePanel("Export .obj file", "", meshName, "obj");
+
+        ObjExporterScript.Start();
+
+        StringBuilder meshString = new StringBuilder();
+
+        meshString.Append("#" + meshName + ".obj"
+                            + "\n#" + System.DateTime.Now.ToLongDateString()
+                            + "\n#" + System.DateTime.Now.ToLongTimeString()
+                            + "\n#-------"
+                            + "\n\n");
+
+        foreach (GameObject go in selections)
+        {
+            Transform t = go.transform;
+            Vector3 originalPosition = t.position;
+            t.position = Vector3.zero;
+
+            meshString.Append(processTransform(t));
+
+            WriteToFile(meshString.ToString(), fileName);
+
+            t.position = originalPosition;
+        }
+
+        ObjExporterScript.End();
+
+        Debug.Log("Exported Mesh: " + fileName);
     }
 }
