@@ -10,14 +10,18 @@ public class UiMovement : MonoBehaviour
     public bool fillEntireScreen = false;
     //---------------------------------
     public enum lines { Top, Right, Local_Center, Bottom_Right, Top_Right };
-    public enum functions { Linear, Square, Cubic };
+    public enum functions { Linear, Square, Cubic, SmoothStep, SquareRoot, SquareNegativePlusOneXY };
     private delegate float movingFunc(float value);
     [Header("Translation")]
     public lines line;
     public functions function;
     public float stepSize;
+    public float translationDuration = 1f;
+    public bool inversedInterpolation = true;
+    public bool timeScaleIndependent = true;
 
     private bool moved = false; // If moved, makes a step back
+    private float translationDurationInversed;
     private Vector2 defaultPosition;
     private Vector2 newPosition;
     private Vector2 bias;
@@ -31,6 +35,7 @@ public class UiMovement : MonoBehaviour
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         }
+        translationDurationInversed = 1f / translationDuration;
         defaultPosition = GetComponent<RectTransform>().anchoredPosition;
         switch (line)
         {
@@ -65,57 +70,92 @@ public class UiMovement : MonoBehaviour
         {
             case functions.Linear:
                 {
-                    movingFunction = Linear;
+                    movingFunction = SimpleFunctions.Linear;
                     break;
                 }
             case functions.Square:
                 {
-                    movingFunction = Square;
+                    movingFunction = SimpleFunctions.Square;
                     break;
                 }
             case functions.Cubic:
                 {
-                    movingFunction = Cubic;
+                    movingFunction = SimpleFunctions.Cubic;
+                    break;
+                }
+            case functions.SmoothStep:
+                {
+                    movingFunction = SimpleFunctions.SmoothStep;
+                    break;
+                }
+            case functions.SquareRoot:
+                {
+                    movingFunction = SimpleFunctions.SquareRoot;
+                    break;
+                }
+            case functions.SquareNegativePlusOneXY:
+                {
+                    movingFunction = SimpleFunctions.SquareNegativePlusOneXY;
                     break;
                 }
         }
         activeMovement = SmoothMove(newPosition, defaultPosition, movingFunction);
     }
 
-    private float Linear(float f)
-    {
-        return f;
-    }
-    private float Square(float f)
-    {
-        return f * f;
-    }
-    private float Cubic(float f)
-    {
-        return f * f * f;
-    }
-
     public void Translate()
     {
         StopCoroutine(activeMovement);
         if (!moved)
-            {
+        {
             activeMovement = SmoothMove(GetComponent<RectTransform>().anchoredPosition, newPosition, movingFunction);
-            }
+        }
         else
-            {
+        {
             activeMovement = SmoothMove(GetComponent<RectTransform>().anchoredPosition, defaultPosition, movingFunction);
-            }
+        }
         StartCoroutine(activeMovement);
         moved = !moved;
     }
 
     private IEnumerator SmoothMove(Vector2 startPosition, Vector2 endPosition, movingFunc func)
     {
-        for (float f = 1; f > 0; f -= 0.03125f)
+        if (timeScaleIndependent)
         {
-            GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(endPosition, startPosition, func(f));
-            yield return new WaitForSecondsRealtime(0.03125f);
+            if (inversedInterpolation)
+            {
+                for (float f = translationDuration; f > 0; f -= 0.03125f) // 32 calls per second
+                {
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(endPosition, startPosition, func(f * translationDurationInversed));
+                    yield return new WaitForSecondsRealtime(0.03125f);
+                }
+            }
+            else
+            {
+                for (float f = 0; f < translationDuration; f += 0.03125f)
+                {
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startPosition, endPosition, func(f * translationDurationInversed));
+                    yield return new WaitForSecondsRealtime(0.03125f);
+                }
+            }
+        }
+        else
+        {
+            if (inversedInterpolation)
+            {
+                for (float f = translationDuration; f > 0; f -= Time.deltaTime)
+                {
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(endPosition, startPosition, func(f * translationDurationInversed));
+                    yield return null;
+                }
+            }
+            else
+            {
+                for (float f = 0; f < translationDuration; f += Time.deltaTime)
+                {
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startPosition, endPosition, func(f * translationDurationInversed));
+                    yield return null;
+                }
+            }
         }
         GetComponent<RectTransform>().anchoredPosition = endPosition;
     }
@@ -150,7 +190,7 @@ public class UiMovement : MonoBehaviour
                     break;
                 }
         }
-        Gizmos.color = new Color(0,1,1,1);
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(bias.x*transform.lossyScale.x,bias.y * transform.lossyScale.y, 0));
+        Gizmos.color = new Color(0, 1, 1, 1);
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(bias.x * transform.lossyScale.x, bias.y * transform.lossyScale.y, 0));
     }
 }

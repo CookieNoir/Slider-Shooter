@@ -16,13 +16,11 @@ public class WeaponBehaviour : MonoBehaviour
     private int turn = 0;
     private IEnumerator firing;
     private float alpha;
-    private float step;
 
     private void Start()
     {
         if (ammo < 0) ammo = 0;
         firing = Firing();
-        step = 15f / Application.targetFrameRate;
     }
 
     public void GetProperties(Image Icon, Text WeaponName, ref int MaxAmmo, ref float ShootingCooldown, ref int Damage, ref float SpentModifier)
@@ -47,7 +45,7 @@ public class WeaponBehaviour : MonoBehaviour
         turn++;
         StopCoroutine(firing);
         fireRenderer.gameObject.SetActive(true);
-        alpha = 1;
+        alpha = 1f;
         fireRenderer.material.SetFloat("_Alpha", alpha);
         firing = Firing();
         StartCoroutine(firing);
@@ -57,9 +55,9 @@ public class WeaponBehaviour : MonoBehaviour
     {
         while (alpha > 0)
         {
-            alpha -= step;
-            fireRenderer.material.SetFloat("_Alpha", alpha);
             yield return null;
+            alpha -= Time.deltaTime * 15;
+            fireRenderer.material.SetFloat("_Alpha", alpha);
         }
         fireRenderer.gameObject.SetActive(false);
     }

@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Obj Exporter\ObjExporter.cs" />
     <Compile Include="Assets\Scripts\UI\AlphaChanger.cs" />
     <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\UI\SimpleFunctions.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableSentence.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableText.cs" />
     <Compile Include="Assets\Scripts\UI\Translation\Translatable Text\TranslatableWord.cs" />

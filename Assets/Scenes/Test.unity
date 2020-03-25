@@ -1974,6 +1974,9 @@ MonoBehaviour:
   line: 1
   function: 1
   stepSize: 1500
+  translationDuration: 1
+  inversedInterpolation: 1
+  timeScaleIndependent: 1
 --- !u!114 &282620187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,6 +2644,9 @@ MonoBehaviour:
   line: 0
   function: 1
   stepSize: -300
+  translationDuration: 1
+  inversedInterpolation: 1
+  timeScaleIndependent: 1
 --- !u!1 &405334647
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,6 +4520,9 @@ MonoBehaviour:
   line: 0
   function: 1
   stepSize: 300
+  translationDuration: 1
+  inversedInterpolation: 1
+  timeScaleIndependent: 1
 --- !u!1 &733216225
 GameObject:
   m_ObjectHideFlags: 0
@@ -7604,7 +7613,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 1, z: 1.5}
+  m_Size: {x: 2.5, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.75}
 --- !u!4 &1112342291
 Transform:
@@ -9925,8 +9934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04af9f0e6e05def4b95e488e455ca618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowerSteps: 60
-  higherSteps: 180
+  decreasingDuration: 3
+  increasingDuration: 3
   lowerAlpha: 0
   higherAlpha: 0.8
   increase: 0
@@ -9948,6 +9957,9 @@ MonoBehaviour:
   line: 0
   function: 0
   stepSize: 0
+  translationDuration: 1
+  inversedInterpolation: 1
+  timeScaleIndependent: 1
 --- !u!114 &1367225529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11959,6 +11971,9 @@ MonoBehaviour:
   line: 1
   function: 1
   stepSize: -1500
+  translationDuration: 1
+  inversedInterpolation: 1
+  timeScaleIndependent: 1
 --- !u!1 &1697439863
 GameObject:
   m_ObjectHideFlags: 0
