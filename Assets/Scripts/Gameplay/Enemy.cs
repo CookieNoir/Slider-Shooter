@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 [AddComponentMenu("Gameplay/Enemy")]
 public class Enemy : RunningEntity
 {
     public Transform player;
-    public bool alive = true;
+    public float playerDistance = 3.5f;
+    [HideInInspector] public bool alive = true;
 
     void Update()
     {

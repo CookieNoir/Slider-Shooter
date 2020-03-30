@@ -81,7 +81,6 @@ public class VoronoiWall : VoronoiDiagram
         List<Vector2> frontVertices = new List<Vector2>();
         List<Vector2Radial> radialVertices = new List<Vector2Radial>();
         float offsetZ = depth / 2; int index = 0, pos;
-        Vector3 normal;
         if (!AssetDatabase.IsValidFolder("Assets\\Temp")) AssetDatabase.CreateFolder("Assets", "Temp");
         GameObject[] selections = new GameObject[cells.Count];
         foreach (VoronoiCell cell in cells)

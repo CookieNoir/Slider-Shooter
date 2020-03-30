@@ -61,6 +61,7 @@ public class GameSettings : MonoBehaviour
     private static GameSettings instance;
     private static IEnumerator dark;
     private static IEnumerator hurtIndicatorColor;
+    private static IEnumerator hurtIndicatorOnDying;
 
     private void Awake()
     {
@@ -90,7 +91,7 @@ public class GameSettings : MonoBehaviour
 
     private void ModifySpeed()
     {
-        if (modifySpeed) { speed += 0.00001f * speedFramerateModifier; }
+        if (modifySpeed) { speed += 0.01f * Time.deltaTime; }
     }
 
     private void Update()
@@ -144,13 +145,14 @@ public class GameSettings : MonoBehaviour
         if (won)
         {
             winWindow.Translate();
+            GameChallenges.VisualizeStarsAtTheEnd();
         }
         else
         {
+            instance.StopCoroutine(hurtIndicatorOnDying);
             loseWindow.Translate();      
         }
         gameOver = true;
-        GameChallenges.VisualizeStarsAtTheEnd();
         instance.StopCoroutine(dark);
         dark = darkScreen.ChangeAlpha();
         instance.StartCoroutine(dark);
@@ -175,9 +177,11 @@ public class GameSettings : MonoBehaviour
 
     public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor, Color baseColor)
     {
-        instance.StartCoroutine(UIHelper.ColorChanger(component, targetColor));
+        hurtIndicatorOnDying = UIHelper.ColorChanger(component, targetColor);
+        instance.StartCoroutine(hurtIndicatorOnDying);
         hurtIndicatorColor = UIHelper.ColorChanger(component, baseColor);
     }
+
     public static void ChangeHurtIndicator(MaskableGraphic component, Color targetColor)
     {
         hurtIndicatorColor = UIHelper.ColorChanger(component, targetColor);

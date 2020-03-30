@@ -29,7 +29,8 @@ public class Player : RunningEntity
     private int takenInjuries = 0; // количество ранений, полученных за игру
     private int takenWeapons = 0; // количество подобранных оружий за игру
     private float distance = 0; // пройденная игроком дистанция
-    private int adrenalineTicksSpent = 0; // число кадров, проведенных в режима Адреналина
+    private float adrenalineTimeSpent = 0; // число кадров, проведенных в режима Адреналина
+    private Vector3 speedReducer;
     //---------------------------------
     [Header("Slider")] // блок переменных, отвечающих за перемещение персонажа при помощи механики слайдера
     [Range(0f, 20)]
@@ -44,7 +45,7 @@ public class Player : RunningEntity
     private float lastX;
     //---------------------------------
     [Header("Enemy")] // блок переменных, связанных с врагом и его параметрами
-    public GameObject enemy; // ГО врага
+    public Enemy enemy; // ГО врага
     public bool invulnerable = false; // флаг, отвечающий за бессмертие врага: если поднят, то игрок получает только очки, иначе враг получает урон 
     public int healthPoints; // начальное число единиц здоровья врага
 
@@ -98,13 +99,13 @@ public class Player : RunningEntity
         float modifiedSpeed = speed;
         if (stabbedTicks > 0)
         {
-            modifiedSpeed -= 0.008f; stabbedTicks--;
+            modifiedSpeed -= speedReducer.x; stabbedTicks--;
         }
         if (ammo > 0)
         {
             if (!slider)
             {
-                modifiedSpeed -= 0.008f;
+                modifiedSpeed -= speedReducer.x;
                 shootingTicks++;
             }
             else if (shootingTicks > 0)
@@ -112,15 +113,15 @@ public class Player : RunningEntity
                 RecalculateReservedDamage();
                 if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.024f; shootingTicks -= 3;
+                    modifiedSpeed += speedReducer.z; shootingTicks -= 3;
                 }
                 else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.016f; shootingTicks -= 2;
+                    modifiedSpeed += speedReducer.y; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.008f; shootingTicks--;
+                    modifiedSpeed += speedReducer.x; shootingTicks--;
                 }
             }
         }
@@ -131,32 +132,32 @@ public class Player : RunningEntity
                 RecalculateReservedDamage();
                 if (shootingTicks > 60)
                 {
-                    modifiedSpeed += 0.024f; shootingTicks -= 3;
+                    modifiedSpeed += speedReducer.z; shootingTicks -= 3;
                 }
                 else if (shootingTicks > 30)
                 {
-                    modifiedSpeed += 0.016f; shootingTicks -= 2;
+                    modifiedSpeed += speedReducer.y; shootingTicks -= 2;
                 }
                 else
                 {
-                    modifiedSpeed += 0.008f; shootingTicks--;
+                    modifiedSpeed += speedReducer.x; shootingTicks--;
                 }
             }
         }
         if (adrenalineTicks > 0)
         {
-            modifiedSpeed += 0.016f;
+            modifiedSpeed += speedReducer.y;
             adrenalineTicks--;
-            adrenalineTicksSpent++;
-            GameChallenges.HandleEvent(GameChallenges.EventTypes.changedAdrenalineTime, adrenalineTicksSpent);
+            adrenalineTimeSpent+=Time.deltaTime;
+            GameChallenges.HandleEvent(GameChallenges.EventTypes.changedAdrenalineTime, adrenalineTimeSpent);
         }
-        return modifiedSpeed;
+        return modifiedSpeed * Time.deltaTime;
     }
 
     public void PlayerPosition(float delta)
     {
         playerBody.transform.position = new Vector3(playerBody.transform.position.x + delta / sizeX *
-            (1 + 60 * GameSettings.speed) // Модификатор скорости слайдинга
+            (1 + 2 * GameSettings.speed) // Модификатор скорости слайдинга
             * borders, playerBody.transform.position.y, playerBody.transform.position.z);
         if (playerBody.transform.position.x > borders + offsetX) playerBody.transform.position = new Vector3(borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
         else if (playerBody.transform.position.x < -borders + offsetX) playerBody.transform.position = new Vector3(-borders + offsetX, playerBody.transform.position.y, playerBody.transform.position.z);
@@ -178,6 +179,8 @@ public class Player : RunningEntity
             UpdateHealthBar();
             healthBarHandler.Translate();
         }
+
+        speedReducer = new Vector3(GameSettings.speed * 0.3f, GameSettings.speed * 0.6f, GameSettings.speed * 0.9f);
     }
 
     private void Shooting()
@@ -223,7 +226,7 @@ public class Player : RunningEntity
 
     private IEnumerator MonsterDying()
     {
-        enemy.GetComponent<Enemy>().Dying();
+        enemy.Dying();
         alive = false;
         if (!invulnerable) healthBarHandler.Translate();
         if (gotWeapon) playerInterface.Translate();
@@ -231,18 +234,18 @@ public class Player : RunningEntity
         yield return new WaitForSeconds(2f);
         //launch win animation
         GameChallenges.HandleEvent(GameChallenges.EventTypes.enemyKilled);
-        Destroy(enemy);
+        Destroy(enemy.gameObject);
         Destroy(this);
     }
 
     private void GameOver()
     {
-        enemy.GetComponent<Enemy>().Lost();
+        enemy.Lost();
         if (!invulnerable) healthBarHandler.Translate();
         if (gotWeapon) playerInterface.Translate();
         GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
         //launch win animation
-        Destroy(enemy);
+        Destroy(enemy.gameObject);
         Destroy(this);
     }
 
@@ -408,18 +411,19 @@ public class Player : RunningEntity
     public void Dying()
     {
         Destroy(GetComponent<Rigidbody>());
+        StopCoroutine(colorChanger);
+        StopCoroutine(stabCycle);
         if (alive)
         {
             if (!invulnerable) healthBarHandler.Translate();
             if (gotWeapon) playerInterface.Translate();
-            StopCoroutine(colorChanger);
             GameSettings.ChangeHurtIndicator(hurtIndicator, colors[11], colors[8]);
         }
         else
         {
             GameSettings.ChangeHurtIndicator(hurtIndicator, colors[8]);
             GameChallenges.HandleEvent(GameChallenges.EventTypes.enemyKilled);
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
         // dying animation
         Destroy(this);

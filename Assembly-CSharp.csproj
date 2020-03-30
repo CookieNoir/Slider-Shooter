@@ -108,6 +108,7 @@
     <None Include="Assets\Shaders\Gradient UI\(2)Diagonal.shader" />
     <None Include="Assets\Shaders\CelShader.shader" />
     <None Include="Assets\Shaders\Unlit Alpha.shader" />
+    <None Include="Assets\Shaders\Arrowhead\Arrowhead 2 Textures Shader.shader" />
     <None Include="Assets\Shaders\Gradient UI\(2)Vertical.shader" />
     <None Include="Assets\Shaders\Unlit Colored.shader" />
     <Reference Include="Unity.Timeline.Editor">

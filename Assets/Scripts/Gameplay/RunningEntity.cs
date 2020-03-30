@@ -6,7 +6,7 @@ public class RunningEntity : MonoBehaviour
 
     protected virtual float ModifiedSpeed(float speed)
     {
-        return speed;
+        return speed * Time.deltaTime;
     }
 
     protected virtual void MakeStep()

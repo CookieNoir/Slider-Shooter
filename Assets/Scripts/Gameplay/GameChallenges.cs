@@ -303,11 +303,11 @@ public class GameChallenges : MonoBehaviour
                 {
                     if (instance.challengeLeft == SecondaryChallenges.beInAdrenalineModeMoreEqual)
                     {
-                        instance.earnedLeft = (value >= (int)Mathf.Floor(instance.floatValueLeft * Application.targetFrameRate));
+                        instance.earnedLeft = (value >= instance.floatValueLeft);
                     }
                     if (instance.challengeRight == SecondaryChallenges.beInAdrenalineModeMoreEqual)
                     {
-                        instance.earnedRight = (value >= (int)Mathf.Floor(instance.floatValueRight * Application.targetFrameRate));
+                        instance.earnedRight = (value >= instance.floatValueRight);
                     }
                     break;
                 }
