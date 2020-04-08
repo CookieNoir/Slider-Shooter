@@ -64,9 +64,21 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\Scripts\GameChallengesEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\GameSettingsEditor.cs" />
+    <Compile Include="Assets\Editor\Scripts\Obj Exporter\ObjExporter.cs" />
     <Compile Include="Assets\Editor\Scripts\SupplyBehaviourEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\TilesUpdaterEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\VDEditor.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\VDTest.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecX.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecY.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncX.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncY.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\Vector2Comparer.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Comparers\Vector2RadialComparer.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\Vector2Mathf.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\VoronoiDiagram.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\VoronoiWall.cs" />
+    <Compile Include="Assets\Editor\Scripts\Voronoi Diagram\VoronoiWallHandler.cs" />
     <Compile Include="Assets\Editor\Scripts\VoronoiWallEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Workshop/Slider-Shooter/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
@@ -289,6 +301,9 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Android.Extensions">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
