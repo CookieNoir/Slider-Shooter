@@ -112,10 +112,14 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 767
-  m_MinSize: {x: 679, y: 492}
+  m_MinSize: {x: 779, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
+<<<<<<< HEAD
+  controlID: 68
+=======
   controlID: 61
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +141,14 @@ MonoBehaviour:
     y: 0
     width: 1118
     height: 767
-  m_MinSize: {x: 403, y: 492}
+  m_MinSize: {x: 503, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
+<<<<<<< HEAD
+  controlID: 69
+=======
   controlID: 62
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,10 +170,14 @@ MonoBehaviour:
     y: 0
     width: 1118
     height: 496
-  m_MinSize: {x: 403, y: 221}
+  m_MinSize: {x: 503, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
+<<<<<<< HEAD
+  controlID: 70
+=======
   controlID: 63
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -202,7 +214,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: ProjectSettingsWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -211,14 +223,14 @@ MonoBehaviour:
     y: 0
     width: 786
     height: 496
-  m_MinSize: {x: 202, y: 221}
+  m_MinSize: {x: 302, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 14}
   - {fileID: 12}
   - {fileID: 15}
-  m_Selected: 0
+  m_Selected: 2
   m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
@@ -344,18 +356,30 @@ MonoBehaviour:
       y: 21
       width: 784
       height: 454
+<<<<<<< HEAD
+    m_Scale: {x: 0.2199074, y: 0.2199074}
+    m_Translation: {x: 392, y: 227}
+=======
     m_Scale: {x: 0.26972875, y: 0.26972875}
     m_Translation: {x: 392, y: 229.66054}
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
+      x: -1782.5685
+      y: -1032.2527
+      width: 3565.137
+      height: 2064.5054
+=======
       x: -1453.3119
       y: -851.44995
       width: 2906.6238
       height: 1683.1725
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
     m_MinimalGUI: 1
   m_defaultScale: 0.2199074
   m_LastWindowPixelSize: {x: 784, y: 475}
@@ -395,7 +419,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: f23c0000
       m_LastClickedID: 0
+<<<<<<< HEAD
+      m_ExpandedIDs: 70fbffff
+=======
       m_ExpandedIDs: 9efaffff5efbffff
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -505,11 +533,19 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
+<<<<<<< HEAD
+    m_Value: {x: -0.59815454, y: -0.018755712, z: 0.01400287, w: -0.8010427}
+=======
     m_Value: {x: 0.7071068, y: 0.0000000025211282, z: -0.0000000012629361, w: 0.7071068}
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
   m_Size:
     m_Target: 8.067007
     speed: 2
+<<<<<<< HEAD
+    m_Value: 4.345257
+=======
     m_Value: 8.447127
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -644,7 +680,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
+    m_ExpandedIDs: 00000000da3c0000dc3c0000de3c0000e03c0000e23c0000
+=======
     m_ExpandedIDs: 00000000d03c0000d23c0000d43c0000
+>>>>>>> parent of 29b0326... v0.037(WebGL version)
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
