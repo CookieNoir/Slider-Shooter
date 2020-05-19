@@ -2,16 +2,18 @@
 [AddComponentMenu("Gameplay/Enemy")]
 public class Enemy : RunningEntity
 {
-    public Transform player;
-    public float playerDistance = 3.5f;
+    public Player player;
+    public Transform target;
+    public float distance = 1f;
     [HideInInspector] public bool alive = true;
 
     void Update()
     {
         if (alive)
         {
+            CheckDistance();
             MakeStep();
-            transform.position = new Vector3(Mathf.Lerp(transform.position.x, player.position.x, 0.1f), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, target.position.x, 0.1f), transform.position.y, transform.position.z);
         }
         else
         {
@@ -23,11 +25,11 @@ public class Enemy : RunningEntity
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void CheckDistance()
     {
-        if (collision.collider.tag == "Player")
+        if (target.position.z - transform.position.z < distance)
         {
-            if (collision.gameObject.GetComponent<Player>()) collision.gameObject.GetComponent<Player>().Dying();
+            if (player) player.Dying();
             GameSettings.GameResult(false);
             // анимация поедания
             Destroy(this);
@@ -35,11 +37,15 @@ public class Enemy : RunningEntity
     }
 
     private void OnTriggerEnter(Collider other)
-    {/*
+    {
         if (other.tag == "Obstacle")
         {
-
-        }*/
+            DestructableWall wall = other.gameObject.GetComponent<DestructableWall>();
+            if (wall)
+            {
+                wall.Change(transform.position);
+            }
+        }
     }
 
     public void Dying()

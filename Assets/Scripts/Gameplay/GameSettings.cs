@@ -57,7 +57,6 @@ public class GameSettings : MonoBehaviour
     private int lastTileArrayIndex = 0;
     private GameObject[] lastTiles;
     private Vector3 stepBack;
-    private float speedFramerateModifier;
     private static GameSettings instance;
     private static IEnumerator dark;
     private static IEnumerator hurtIndicatorColor;
@@ -65,13 +64,11 @@ public class GameSettings : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
         instance = this as GameSettings;
     }
 
     private void Start()
     {
-        speedFramerateModifier = 60f / Application.targetFrameRate;
         winWindow = GameObject.FindWithTag("Win Window").GetComponent<UiMovement>();
         loseWindow = GameObject.FindWithTag("Lose Window").GetComponent<UiMovement>();
         darkScreen = GameObject.FindWithTag("Dark Screen").GetComponent<AlphaChanger>();

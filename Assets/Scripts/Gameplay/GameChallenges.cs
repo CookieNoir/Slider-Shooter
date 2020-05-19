@@ -49,7 +49,7 @@ public class GameChallenges : MonoBehaviour
 
         changedTime,                //float
         changedScore,               //int
-        changedAdrenalineTime,      //int(Ticks Spent)
+        changedAdrenalineTime,      //int(Time Spent in float)
         changedDistance,            //float
 
         emptyAmmo,                  //bool

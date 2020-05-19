@@ -12,9 +12,9 @@ public class Player : RunningEntity
     private int currentWeapon = -1;
     private bool gotWeapon = false; // влияет на отображение интерфейса
 
-    private int stabbedTicks = 0;
-    private int adrenalineTicks = 0;
-    private int shootingTicks = 0;
+    private float stabbedTime = 0;
+    private float adrenalineTime = 0;
+    private float shootingTime = 0;
     private float scoreModifier;
     private IEnumerator stabCycle;
     // блок переменных, которые будут записаны
@@ -70,7 +70,7 @@ public class Player : RunningEntity
     private bool ready = false;
     private int reservedDamage;
     private int reservedDamageCap;
-    private int ticksCap;
+    private float shootingTimeCap;
     //---------------------------------
     [Header("UI")]
     public MaskableGraphic hurtIndicator; // изменяет прозрачность элемента, отрисовывающего ранения персонажа
@@ -97,57 +97,57 @@ public class Player : RunningEntity
     protected override float ModifiedSpeed(float speed)
     {
         float modifiedSpeed = speed;
-        if (stabbedTicks > 0)
+        if (stabbedTime > 0)
         {
-            modifiedSpeed -= speedReducer.x; stabbedTicks--;
+            modifiedSpeed -= speedReducer.x; stabbedTime-=Time.deltaTime;
         }
         if (ammo > 0)
         {
             if (!slider)
             {
                 modifiedSpeed -= speedReducer.x;
-                shootingTicks++;
+                shootingTime+=Time.deltaTime;
             }
-            else if (shootingTicks > 0)
+            else if (shootingTime > 0)
             {
                 RecalculateReservedDamage();
-                if (shootingTicks > 60)
+                if (shootingTime > 1f)
                 {
-                    modifiedSpeed += speedReducer.z; shootingTicks -= 3;
+                    modifiedSpeed += speedReducer.z; shootingTime -= 3*Time.deltaTime;
                 }
-                else if (shootingTicks > 30)
+                else if (shootingTime > 0.5f)
                 {
-                    modifiedSpeed += speedReducer.y; shootingTicks -= 2;
+                    modifiedSpeed += speedReducer.y; shootingTime -= 2 * Time.deltaTime;
                 }
                 else
                 {
-                    modifiedSpeed += speedReducer.x; shootingTicks--;
+                    modifiedSpeed += speedReducer.x; shootingTime-= Time.deltaTime;
                 }
             }
         }
         else
         {
-            if (shootingTicks > 0)
+            if (shootingTime > 0)
             {
                 RecalculateReservedDamage();
-                if (shootingTicks > 60)
+                if (shootingTime > 1f)
                 {
-                    modifiedSpeed += speedReducer.z; shootingTicks -= 3;
+                    modifiedSpeed += speedReducer.z; shootingTime -= 3 * Time.deltaTime;
                 }
-                else if (shootingTicks > 30)
+                else if (shootingTime > 0.5f)
                 {
-                    modifiedSpeed += speedReducer.y; shootingTicks -= 2;
+                    modifiedSpeed += speedReducer.y; shootingTime -= 2 * Time.deltaTime;
                 }
                 else
                 {
-                    modifiedSpeed += speedReducer.x; shootingTicks--;
+                    modifiedSpeed += speedReducer.x; shootingTime-= Time.deltaTime;
                 }
             }
         }
-        if (adrenalineTicks > 0)
+        if (adrenalineTime > 0)
         {
             modifiedSpeed += speedReducer.y;
-            adrenalineTicks--;
+            adrenalineTime-=Time.deltaTime;
             adrenalineTimeSpent+=Time.deltaTime;
             GameChallenges.HandleEvent(GameChallenges.EventTypes.changedAdrenalineTime, adrenalineTimeSpent);
         }
@@ -270,14 +270,14 @@ public class Player : RunningEntity
             reservedDamageCap = reservedDamage + (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
         else
             reservedDamageCap = (int)Mathf.Floor(damage * damageModifier * (spent + 1) * spentModifier);
-        ticksCap = shootingTicks;
+        shootingTimeCap = shootingTime;
         spent = -1;
         scoreModifier = 1f;
     }
 
     private void RecalculateReservedDamage()
     {
-        reservedDamage = (int)Mathf.Floor(((float)shootingTicks / ticksCap) * reservedDamageCap);
+        reservedDamage = (int)Mathf.Floor((shootingTime / shootingTimeCap) * reservedDamageCap);
         UpdateDamageText();
     }
 
@@ -351,7 +351,7 @@ public class Player : RunningEntity
 
     public void Stabbing()
     {
-        stabbedTicks = Application.targetFrameRate / 2 * 6;
+        stabbedTime = 3f;
         StopCoroutine(stabCycle);
         stabCycle = StabCycle();
         StartCoroutine(stabCycle);
@@ -364,13 +364,13 @@ public class Player : RunningEntity
         StopCoroutine(colorChanger);
         colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[9]);
         StartCoroutine(colorChanger);
-        while (stabbedTicks > 0)
+        while (stabbedTime > 0)
             yield return null;
-        adrenalineTicks = Application.targetFrameRate / 2 * 3;
+        adrenalineTime = 1.5f;
         StopCoroutine(colorChanger);
         colorChanger = UIHelper.ColorChanger(hurtIndicator, colors[10]);
         StartCoroutine(colorChanger);
-        while (adrenalineTicks > 0)
+        while (adrenalineTime > 0)
             yield return null;
 
         StopCoroutine(colorChanger);
@@ -387,7 +387,7 @@ public class Player : RunningEntity
         }
         else if (other.tag == "Half Obstacle")
         {
-            if (stabbedTicks > 0)
+            if (stabbedTime > 0)
             {
                 Debug.Log("Im dead");
                 Dying();
@@ -474,7 +474,7 @@ public class Player : RunningEntity
     {
         if (spent < 0)
         {
-            if (shootingTicks <= 1 || reservedDamage <= 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
+            if (shootingTime <= 0 || reservedDamage <= 0) damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString();
             else damageText.text = ((int)(Mathf.Floor(damage * damageModifier))).ToString() + "<color=#ff8636ff> + " + reservedDamage.ToString() + "</color>";
         }
         else

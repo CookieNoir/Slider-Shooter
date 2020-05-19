@@ -14,6 +14,7 @@ TagManager:
   - Tiles
   - Tiles Clones
   - Dark Screen
+  - Wall Part
   layers:
   - Default
   - TransparentFX

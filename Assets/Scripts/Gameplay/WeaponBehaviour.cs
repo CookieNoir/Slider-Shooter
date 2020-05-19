@@ -35,7 +35,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     public void Fire()
     {
-        switch (turn) // Расчитано на 4 кадра; если понадобится больше, расширю
+        switch (turn) // Расcчитано на 4 кадра
         {
             case 0: fireRenderer.material.mainTextureOffset = new Vector2(0, 0); break;
             case 1: fireRenderer.material.mainTextureOffset = new Vector2(0.5f, 0); break;

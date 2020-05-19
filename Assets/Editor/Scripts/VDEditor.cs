@@ -1,12 +1,12 @@
 ﻿using UnityEditor;
 using UnityEngine;
-[CustomEditor(typeof(VDTest))]
+[CustomEditor(typeof(VoronoiDiagramHandler))]
 public class VDEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        VDTest vd = (VDTest)target;
+        VoronoiDiagramHandler vd = (VoronoiDiagramHandler)target;
         if (GUILayout.Button("Create diagram"))
         {
             vd.CreateVoronoiDiagram();
