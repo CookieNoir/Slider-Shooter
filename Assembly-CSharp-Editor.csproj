@@ -62,12 +62,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\Obj Exporter\ObjExporter.cs" />
     <Compile Include="Assets\Editor\Scripts\GameChallengesEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\GameSettingsEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\SupplyBehaviourEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\TilesUpdaterEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\VDEditor.cs" />
     <Compile Include="Assets\Editor\Scripts\VoronoiWallEditor.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecX.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecY.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncX.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncY.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\Vector2Comparer.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Comparers\Vector2RadialComparer.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\Vector2Mathf.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\VoronoiDiagram.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\VoronoiDiagramHandler.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\VoronoiWall.cs" />
+    <Compile Include="Assets\Editor\Voronoi Diagram\VoronoiWallHandler.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.12f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

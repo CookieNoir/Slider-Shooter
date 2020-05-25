@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Vector2Mathf">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQAAIABGAAAAAAECDAAABAQAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Mathf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoronoiDiagram">
+    <Position X="3.75" Y="0.5" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="VoronoiDiagram.VoronoiEdge">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Editor\Voronoi Diagram\VoronoiDiagram.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="VoronoiDiagram.VoronoiCell">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Editor\Voronoi Diagram\VoronoiDiagram.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="VoronoiDiagram.BoundIntersection">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Editor\Voronoi Diagram\VoronoiDiagram.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAggCAAIAACAABEASQAAAKAhEgIAAIEAAQIEAAACA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\VoronoiDiagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoronoiDiagramHandler">
+    <Position X="0.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAIAAAAAAAAIAgAABAAAAAAAAAAEMAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\VoronoiDiagramHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoronoiWall">
+    <Position X="7.75" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="VoronoiWall.Vector2Radial">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Editor\Voronoi Diagram\VoronoiWall.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\VoronoiWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoronoiWallHandler">
+    <Position X="11" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAGAAAIAABAAAAAIAAAABAAAAAAAAAAEMAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\VoronoiWallHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoundIntersectionDecX">
+    <Position X="7.75" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecX.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoundIntersectionDecY">
+    <Position X="7.75" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionDecY.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoundIntersectionIncX">
+    <Position X="7.75" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncX.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BoundIntersectionIncY">
+    <Position X="7.75" Y="11" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\BoundIntersectionIncY.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Vector2Comparer">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\Vector2Comparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Vector2RadialComparer">
+    <Position X="7.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Voronoi Diagram\Vector2Comparers\Vector2RadialComparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VDEditor">
+    <Position X="0.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Scripts\VDEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VoronoiWallEditor">
+    <Position X="11" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Scripts\VoronoiWallEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjExporterScript">
+    <Position X="14.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAEAACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Obj Exporter\ObjExporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjExporter">
+    <Position X="14.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAUAAAEAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Obj Exporter\ObjExporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameChallengesEditor">
+    <Position X="0.5" Y="14.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAEACAAQAQIAFABDQEAAAEAAAAAAEAABAAACII=</HashCode>
+      <FileName>Assets\Editor\Scripts\GameChallengesEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSettingsEditor">
+    <Position X="4.75" Y="14.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Scripts\GameSettingsEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SupplyBehaviourEditor">
+    <Position X="4.75" Y="17.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAQAAAAAAAACgAAAAAAAAAAAAAACAAACAA=</HashCode>
+      <FileName>Assets\Editor\Scripts\SupplyBehaviourEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TilesUpdaterEditor">
+    <Position X="4.75" Y="16.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Editor\Scripts\TilesUpdaterEditor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

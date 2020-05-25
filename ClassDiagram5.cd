@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="CameraBehaviour">
+    <Position X="0.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAIAIAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\CameraBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BorderChanger">
+    <Position X="6" Y="13" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BorderChanger.Types">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\BorderChanger.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAECAAAAAIAAACAAEMAAAAAAAEBAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\BorderChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy">
+    <Position X="6" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAAAAAIAAAAAAABEAAAEABQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameChallenges">
+    <Position X="9.25" Y="3.25" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="GameChallenges.PrimaryChallenges">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\GameChallenges.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="GameChallenges.SecondaryChallenges">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\GameChallenges.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="GameChallenges.EventTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\GameChallenges.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAKACAFAAAEAAIAAEEEQACACACRAAEAAACFIgAACIEA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\GameChallenges.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameSettings">
+    <Position X="12.75" Y="3.25" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GameSettings.TileDouble">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\GameSettings.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AISEAAAABCACGAAAACEJFAAAA4BQgQETARAAzAiAQMI=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\GameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="2.75" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>JSfSyQRBAToixcqQGCkrgEAqBEjJEEmI5FCEeAA1gA8=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RunningEntity">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAgAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\RunningEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SupplyBehaviour">
+    <Position X="6" Y="6.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="SupplyBehaviour.SupplyTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\SupplyBehaviour.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="SupplyBehaviour.AddTypes">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Gameplay\SupplyBehaviour.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAEIAAAAAAAAAAAEAAAAAAACAABgAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\SupplyBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TileProperties">
+    <Position X="12.75" Y="15" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ABEAQAAAAAIAUAAABEQAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\TileProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponBehaviour">
+    <Position X="0.5" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAACAAAACAAgAIAAAAAgAAAEAAEABAAAQAwAAChAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\WeaponBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicObstacle">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\DynamicObstacles\DynamicObstacle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DestructableWall">
+    <Position X="11.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQCBAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Gameplay\DynamicObstacles\DestructableWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UiMovement">
+    <Position X="0.5" Y="24" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="UiMovement.lines">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\UiMovement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="UiMovement.functions">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\UiMovement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="UiMovement.movingFunc">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\UiMovement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAEAgAAEACIEABEAAgAAAEACAAAIAIEAAAAEAQAiAUA=</HashCode>
+      <FileName>Assets\Scripts\UI\UiMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIHelper">
+    <Position X="3.75" Y="27.75" Width="3" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="UIHelper.function">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\UIHelper.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\UIHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleFunctions">
+    <Position X="3.75" Y="30.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAgAAAAAAAAAEAAAAAAAAAAAAAAAAAgAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\UI\SimpleFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneChanger">
+    <Position X="3.75" Y="32.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Scripts\UI\SceneChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AlphaChanger">
+    <Position X="3.75" Y="24" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAABAAAAQEAAAAAAAIIAAAQAAAAQCIAAAAAMA=</HashCode>
+      <FileName>Assets\Scripts\UI\AlphaChanger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation">
+    <Position X="13" Y="23.75" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Translation.OnLanguageChange" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\Translation\Translation.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAwARABAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\UI\Translation\Translation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TranslatableWord">
+    <Position X="10" Y="28.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAgAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Translation\Translatable Text\TranslatableWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TranslatableText">
+    <Position X="10" Y="23.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAACABAAAAAAAAAEAAAAAAAgAAAAAAAABQAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Translation\Translatable Text\TranslatableText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TranslatableWords">
+    <Position X="12.75" Y="28.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Translation\Translatable Text\TranslatableWords.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TranslatableSentence">
+    <Position X="10" Y="31.25" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="TranslatableSentence.DynamicWords">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\UI\Translation\Translatable Text\TranslatableSentence.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAAACAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAABCAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\Translation\Translatable Text\TranslatableSentence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TilesUpdater">
+    <Position X="12.75" Y="18.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgIEIAAAAAAAABAAgAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Custom Editor\TilesUpdater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

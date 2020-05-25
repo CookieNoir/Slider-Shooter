@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - AlphaChanger
     - BorderChanger
     - CameraBehaviour
+    - DestructableWall
     - DynamicObstacle
     - Enemy
     - GameChallenges
@@ -18,9 +19,12 @@ ScriptsOnlyBuild:
     - Translation
     - UiMovement
     - WeaponBehaviour
+    Unity.Rider.Editor.dll:
+    - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -53,6 +57,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
     - Class: 81
@@ -62,58 +68,62 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9696}
+      Script: {instanceID: 11186}
     - Class: 114
-      Script: {instanceID: 9780}
+      Script: {instanceID: 11278}
     - Class: 114
-      Script: {instanceID: 9856}
+      Script: {instanceID: 11354}
     - Class: 114
-      Script: {instanceID: 9896}
+      Script: {instanceID: 11396}
     - Class: 114
-      Script: {instanceID: 9936}
+      Script: {instanceID: 11436}
     - Class: 114
-      Script: {instanceID: 10018}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 10256}
+      Script: {instanceID: 11774}
     - Class: 114
-      Script: {instanceID: 10282}
+      Script: {instanceID: 11800}
     - Class: 114
-      Script: {instanceID: 10566}
+      Script: {instanceID: 12126}
     - Class: 114
-      Script: {instanceID: 10586}
+      Script: {instanceID: 12144}
     - Class: 114
-      Script: {instanceID: 10790}
+      Script: {instanceID: 12364}
     - Class: 114
-      Script: {instanceID: 10848}
+      Script: {instanceID: 12374}
     - Class: 114
-      Script: {instanceID: 10956}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 10986}
+      Script: {instanceID: 12542}
     - Class: 114
-      Script: {instanceID: 11006}
+      Script: {instanceID: 12578}
     - Class: 114
-      Script: {instanceID: 11062}
+      Script: {instanceID: 12610}
     - Class: 114
-      Script: {instanceID: 11110}
+      Script: {instanceID: 12672}
     - Class: 114
-      Script: {instanceID: 11144}
+      Script: {instanceID: 12726}
     - Class: 114
-      Script: {instanceID: 11180}
+      Script: {instanceID: 12760}
     - Class: 114
-      Script: {instanceID: 11328}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 11348}
+      Script: {instanceID: 12948}
     - Class: 114
-      Script: {instanceID: 11356}
+      Script: {instanceID: 12972}
     - Class: 114
-      Script: {instanceID: 11440}
+      Script: {instanceID: 12980}
     - Class: 114
-      Script: {instanceID: 11472}
+      Script: {instanceID: 13066}
+    - Class: 114
+      Script: {instanceID: 13106}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -132,7 +142,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 3c08375166df118bd1801438fc36b92f
+      Hash: c42672c997f8be6b1aa86a927ebea785
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
@@ -174,7 +184,7 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: 72712369a7c681ad84fc255a5ec0b333
+      Hash: aeb62f729c52c814dec86c47dcac1471
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Text
@@ -198,7 +208,7 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 8e0313c6f5e2ce35991fec2d64f8eaab
+      Hash: 89f9a1b4c64db9559e39f4a2e3bfaadd
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Image
@@ -276,7 +286,7 @@ ScriptsOnlyBuild:
     className: RectMask2D
   - hash:
       serializedVersion: 2
-      Hash: 4e9333594897a1fb8b136ad2eae996c7
+      Hash: d941ab6dd93d37ffdf2277f2ea2375a0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
@@ -366,7 +376,7 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
-      Hash: 25284435f7e73ffbce6f874df08c222b
+      Hash: 92e73e2330c3aca6ce39fb4077797e33
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -390,7 +400,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: feb9a5a121d15fa3654d4e50a5233045
+      Hash: f84d945e5e1ca985698660fc26e9657f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
@@ -414,10 +424,16 @@ ScriptsOnlyBuild:
     className: TranslatableWords
   - hash:
       serializedVersion: 2
-      Hash: f29f9891ca42035fc5db07a5f3e70c92
+      Hash: fc33b716a0607787f3e8abb877936254
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DestructableWall
   - hash:
       serializedVersion: 2
       Hash: 783f593b9380cf72d0f7ebfd4a0d4bcd
@@ -480,19 +496,19 @@ ScriptsOnlyBuild:
     className: DynamicObstacle
   - hash:
       serializedVersion: 2
-      Hash: d4bb290bab67123b6a3bde4751b163f7
+      Hash: f4365593a67e4bd7b271826ac13c4446
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraBehaviour
   - hash:
       serializedVersion: 2
-      Hash: 4109935acd09ac4b8beebd9118918df9
+      Hash: 0f0225021353f53da9d2ca2c01863262
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UiMovement
   - hash:
       serializedVersion: 2
-      Hash: 3b760e6526e13f7504f59e210145899a
+      Hash: 8001a5f7502aab37e42206da015e6914
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
@@ -552,7 +568,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 62d55ab149aa7dc4a987d78249a018ab
+      Hash: d5fae6510266a35a73362cf419185e84
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AlphaChanger
@@ -570,7 +586,7 @@ ScriptsOnlyBuild:
     className: Translation
   - hash:
       serializedVersion: 2
-      Hash: df434544c9f7b33d1cc7e635b180d279
+      Hash: 21d73eda81c18eacd2c91ad5dfaf2e32
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshPro
@@ -612,7 +628,13 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 20eeaeae829475b5e354d1f626c51a2b
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.TestRunner.dll
+    namespaceName: UnityEngine.TestRunner.Utils
+    className: TestRunCallbackListener
+  - hash:
+      serializedVersion: 2
+      Hash: 4ef0f7d42cdb13479386e1f049c315aa
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner
     className: PlaymodeTestsController
@@ -661,4 +683,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/Test.unity
-  playerPath: "D:/\u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0438/slider.apk"
+  playerPath: C:/Workshop/slider-shooter.apk

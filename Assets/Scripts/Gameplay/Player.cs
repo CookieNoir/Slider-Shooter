@@ -99,21 +99,21 @@ public class Player : RunningEntity
         float modifiedSpeed = speed;
         if (stabbedTime > 0)
         {
-            modifiedSpeed -= speedReducer.x; stabbedTime-=Time.deltaTime;
+            modifiedSpeed -= speedReducer.x; stabbedTime -= Time.deltaTime;
         }
         if (ammo > 0)
         {
             if (!slider)
             {
                 modifiedSpeed -= speedReducer.x;
-                shootingTime+=Time.deltaTime;
+                shootingTime += Time.deltaTime;
             }
             else if (shootingTime > 0)
             {
                 RecalculateReservedDamage();
                 if (shootingTime > 1f)
                 {
-                    modifiedSpeed += speedReducer.z; shootingTime -= 3*Time.deltaTime;
+                    modifiedSpeed += speedReducer.z; shootingTime -= 3 * Time.deltaTime;
                 }
                 else if (shootingTime > 0.5f)
                 {
@@ -121,7 +121,7 @@ public class Player : RunningEntity
                 }
                 else
                 {
-                    modifiedSpeed += speedReducer.x; shootingTime-= Time.deltaTime;
+                    modifiedSpeed += speedReducer.x; shootingTime -= Time.deltaTime;
                 }
             }
         }
@@ -140,15 +140,15 @@ public class Player : RunningEntity
                 }
                 else
                 {
-                    modifiedSpeed += speedReducer.x; shootingTime-= Time.deltaTime;
+                    modifiedSpeed += speedReducer.x; shootingTime -= Time.deltaTime;
                 }
             }
         }
         if (adrenalineTime > 0)
         {
             modifiedSpeed += speedReducer.y;
-            adrenalineTime-=Time.deltaTime;
-            adrenalineTimeSpent+=Time.deltaTime;
+            adrenalineTime -= Time.deltaTime;
+            adrenalineTimeSpent += Time.deltaTime;
             GameChallenges.HandleEvent(GameChallenges.EventTypes.changedAdrenalineTime, adrenalineTimeSpent);
         }
         return modifiedSpeed * Time.deltaTime;
@@ -455,7 +455,7 @@ public class Player : RunningEntity
         else
             difference = 0;
         UpdateAmmoText();
-        takenAmmo+=amount - difference;
+        takenAmmo += amount - difference;
         GameChallenges.HandleEvent(GameChallenges.EventTypes.tookAmmo, takenAmmo);
     }
 
@@ -595,7 +595,7 @@ public class Player : RunningEntity
         }
         else
         {
-            FillAmmo(maxAmmo/2);
+            FillAmmo(maxAmmo / 2);
         }
     }
 

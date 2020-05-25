@@ -49,7 +49,7 @@ public class DestructableWall : DynamicObstacle
         blocksAlive = BlocksAlive();
         StartCoroutine(blocksAlive);
     }
-
+    
     public void Change(Vector3 position)
     {
         Change();

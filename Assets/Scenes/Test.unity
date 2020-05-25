@@ -3604,7 +3604,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &396628217
 MonoBehaviour:
@@ -3619,7 +3619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -4508,7 +4508,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &526081576
 MonoBehaviour:
@@ -4523,7 +4523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -5865,7 +5865,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &749200111
 MonoBehaviour:
@@ -5880,7 +5880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -9753,7 +9753,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 2}
+  m_Size: {x: 0, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &1192270303
 MonoBehaviour:
@@ -9768,7 +9768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setDefault: 1
-  borders: 1.25
+  borders: 0
   offsetX: 0
   length: 2
   type: 3
@@ -12980,7 +12980,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1.5}
+  m_Size: {x: 0, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.75}
 --- !u!1 &1503436685
 GameObject:
@@ -14071,7 +14071,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1, z: 1.5}
+  m_Size: {x: 0, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0.75}
 --- !u!4 &1642298169
 Transform:
